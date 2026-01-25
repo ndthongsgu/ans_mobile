@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:ans_mobile/l10n/app_localizations.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as ll;
 import 'package:geolocator/geolocator.dart';
@@ -40,7 +41,7 @@ class _MapPageState extends State<MapPage> {
     if (!serviceEnabled) {
       // Prompt user to enable location services
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Vui lòng bật vị trí để sử dụng tính năng bản đồ.')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.permissionEnableMsg)));
       }
       return;
     }
@@ -50,17 +51,10 @@ class _MapPageState extends State<MapPage> {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Quyền vị trí bị từ chối.')));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.permissionDeniedMsg)));
         }
         return;
       }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Quyền vị trí bị chặn vĩnh viễn. Hãy mở cài đặt để cấp phép.')));
-      }
-      return;
     }
 
     try {
@@ -78,7 +72,7 @@ class _MapPageState extends State<MapPage> {
       });
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Lỗi lấy vị trí: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.locationErrorPrefix(e.toString()))));
       }
     }
   }
@@ -100,7 +94,7 @@ class _MapPageState extends State<MapPage> {
         point: ll.LatLng(poi.latitude, poi.longitude),
         builder: (ctx) => GestureDetector(
           onTap: () => _openPoi(context, poi),
-          child: const Icon(Icons.location_on, color: Colors.deepPurple, size: 36),
+          child: Icon(Icons.location_on, color: Theme.of(ctx).colorScheme.primary, size: 36),
         ),
       );
     }).toList();
@@ -112,36 +106,42 @@ class _MapPageState extends State<MapPage> {
               width: 40,
               height: 40,
               point: _userPos!,
-              builder: (ctx) => const Icon(Icons.my_location, color: Colors.blueAccent, size: 28),
+              builder: (ctx) => Icon(Icons.my_location, color: Theme.of(ctx).colorScheme.secondary, size: 28),
             )
           ];
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bản đồ'),
+        title: Text(AppLocalizations.of(context)!.mapTitle),
       ),
       drawer: Drawer(
         child: ListView(
           children: [
-            const DrawerHeader(child: Text('ANS — Menu')),
+            DrawerHeader(
+              decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(AppLocalizations.of(context)!.menuTitle, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary, fontSize: 18, fontWeight: FontWeight.bold)),
+              ),
+            ),
             ListTile(
-              leading: const Icon(Icons.list),
-              title: const Text('Danh sách POI'),
+              leading: Icon(Icons.list, color: Theme.of(context).colorScheme.onPrimary),
+              title: Text(AppLocalizations.of(context)!.poiListTitle, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
               onTap: () => Navigator.of(context).pushNamed('/poi_list'),
             ),
             ListTile(
-              leading: const Icon(Icons.headset),
-              title: const Text('Trạng thái thuyết minh'),
+              leading: Icon(Icons.headset, color: Theme.of(context).colorScheme.onPrimary),
+              title: Text(AppLocalizations.of(context)!.narrationStatusTitle, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
               onTap: () => Navigator.of(context).pushNamed('/status'),
             ),
             ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Cài đặt'),
+              leading: Icon(Icons.settings, color: Theme.of(context).colorScheme.onPrimary),
+              title: Text(AppLocalizations.of(context)!.settingsTitle, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
               onTap: () => Navigator.of(context).pushNamed('/settings'),
             ),
             ListTile(
-              leading: const Icon(Icons.bar_chart),
-              title: const Text('Thống kê cá nhân'),
+              leading: Icon(Icons.bar_chart, color: Theme.of(context).colorScheme.onPrimary),
+              title: Text(AppLocalizations.of(context)!.statsTitle, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
               onTap: () => Navigator.of(context).pushNamed('/stats'),
             ),
           ],
@@ -165,6 +165,8 @@ class _MapPageState extends State<MapPage> {
                     options: MapOptions(
                       center: center,
                       zoom: 16,
+                      minZoom: 3.0,
+                      maxZoom: 18.0,
                     ),
                     children: [
                       TileLayer(
@@ -179,24 +181,25 @@ class _MapPageState extends State<MapPage> {
                     top: 8,
                     right: 8,
                     child: FloatingActionButton.small(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
                       onPressed: () {
                         if (_userPos == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Chưa có vị trí hiện tại. Bấm để yêu cầu quyền vị trí.')));
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.noUserPositionMsg)));
                           _initLocation();
                           return;
                         }
                         controller.moveToLatLng(_userPos!);
                       },
-                      child: const Icon(Icons.my_location),
+                      child: Icon(Icons.my_location, color: Theme.of(context).colorScheme.onSecondary),
                     ),
                   )
                 ],
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
-            child: Align(alignment: Alignment.centerLeft, child: Text('Gần đây', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Align(alignment: Alignment.centerLeft, child: Text(AppLocalizations.of(context)!.recentLabel, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
           ),
           Expanded(
             child: ListView.builder(
@@ -210,8 +213,9 @@ class _MapPageState extends State<MapPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () => Navigator.of(context).pushNamed('/poi_list'),
-        child: const Icon(Icons.list),
+        child: Icon(Icons.list, color: Theme.of(context).colorScheme.onSecondary),
       ),
     );
   }

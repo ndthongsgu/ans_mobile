@@ -1,0 +1,52 @@
+{
+  "@@locale": "vi",
+  "appTitle": "Street Food Go",
+  "menuTitle": "Street Food Go — Menu",
+  "mapTitle": "Bản đồ",
+  "poiListTitle": "Danh sách POI",
+  "settingsTitle": "Cài đặt",
+  "statsTitle": "Thống kê cá nhân",
+  "narrationStatusTitle": "Trạng thái thuyết minh",
+  "recentLabel": "Gần đây",
+  "versionLabel": "Phiên bản",
+  "playNow": "Phát ngay",
+  "backToMap": "Quay lại bản đồ",
+  "locationInfo": "Thông tin vị trí:",
+  "noNarration": "Hiện không có thuyết minh nào đang chạy.",
+  "stop": "Dừng",
+  "pause": "Tạm dừng",
+  "resume": "Tiếp tục",
+  "autoPlayTitle": "Tự động phát khi đến điểm tham quan",
+  "allowNotificationsTitle": "Cho phép thông báo",
+  "splashSubtitle": "Phát audio khi đến khu vực điểm tham quan",
+  "permissionEnableMsg": "Vui lòng bật vị trí để sử dụng tính năng bản đồ.",
+  "permissionDeniedMsg": "Quyền vị trí bị từ chối.",
+  "permissionDeniedForeverMsg": "Quyền vị trí bị chặn vĩnh viễn. Hãy mở cài đặt để cấp phép.",
+  "locationErrorPrefix": "Lỗi lấy vị trí: {error}",
+  "@locationErrorPrefix": {
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "noUserPositionMsg": "Chưa có vị trí hiện tại. Bấm để yêu cầu quyền vị trí.",
+  "suggestionsLabel": "Gợi ý:",
+  "suggestion_keep_gps": "- Duy trì GPS để nhận thuyết minh tự động",
+  "visitedCountLabel": "Số POI đã ghé: {count}",
+  "@visitedCountLabel": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "totalListenLabel": "Tổng thời gian nghe: {minutes} phút",
+  "@totalListenLabel": {
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "languageLabel": "Ngôn ngữ",
+  "language_system": "Mặc định hệ thống",
+  "language_en_label": "English",
+  "language_vi_label": "Tiếng Việt",
+  "language_zh_label": "中文",
+  "language_ko_label": "한국어"
+}

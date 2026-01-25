@@ -1,0 +1,52 @@
+{
+  "@@locale": "ko",
+  "appTitle": "Street Food Go",
+  "menuTitle": "Street Food Go — 메뉴",
+  "mapTitle": "지도",
+  "poiListTitle": "POI 목록",
+  "settingsTitle": "설정",
+  "statsTitle": "개인 통계",
+  "narrationStatusTitle": "내레이션 상태",
+  "recentLabel": "근처",
+  "versionLabel": "버전",
+  "playNow": "지금 재생",
+  "backToMap": "지도으로 돌아가기",
+  "locationInfo": "위치 정보:",
+  "noNarration": "현재 실행 중인 내레이션이 없습니다.",
+  "stop": "중지",
+  "pause": "일시 정지",
+  "resume": "다시 재생",
+  "autoPlayTitle": "POI 도착 시 자동 재생",
+  "allowNotificationsTitle": "알림 허용",
+  "splashSubtitle": "POI 영역에 들어가면 오디오 재생",
+  "permissionEnableMsg": "지도를 사용하려면 위치 서비스를 활성화하세요.",
+  "permissionDeniedMsg": "위치 권한이 거부되었습니다.",
+  "permissionDeniedForeverMsg": "위치 권한이 영구적으로 거부되었습니다. 설정에서 권한을 부여하세요.",
+  "locationErrorPrefix": "위치 가져오기 오류: {error}",
+  "@locationErrorPrefix": {
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "noUserPositionMsg": "현재 위치가 없습니다. 권한을 요청하려면 탭하세요.",
+  "suggestionsLabel": "권장 사항:",
+  "suggestion_keep_gps": "- 자동 내레이션을 받으려면 GPS를 켜두세요",
+  "visitedCountLabel": "방문한 POI 수: {count}",
+  "@visitedCountLabel": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "totalListenLabel": "총 청취 시간: {minutes} 분",
+  "@totalListenLabel": {
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "languageLabel": "언어",
+  "language_system": "시스템 기본값",
+  "language_en_label": "English",
+  "language_vi_label": "Tiếng Việt",
+  "language_zh_label": "中文",
+  "language_ko_label": "한국어"
+}

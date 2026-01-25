@@ -8,12 +8,19 @@ class PoiCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Card(
+      color: colorScheme.surface,
       child: ListTile(
-        leading: const Icon(Icons.place),
-        title: Text(poi.name),
-        subtitle: Text(poi.description, maxLines: 2, overflow: TextOverflow.ellipsis),
-        trailing: const Icon(Icons.chevron_right),
+        leading: Icon(Icons.place, color: colorScheme.onSurface),
+        title: Text(poi.name, style: TextStyle(color: colorScheme.onSurface)),
+        subtitle: Text(
+          poi.description,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(color: colorScheme.onSurface.withOpacity(0.75)),
+        ),
+        trailing: Icon(Icons.chevron_right, color: colorScheme.onSurface),
         onTap: onTap,
       ),
     );

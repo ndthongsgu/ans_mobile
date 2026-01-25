@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ans_mobile/l10n/app_localizations.dart';
 import '../../core/services/geo_audio_manager.dart';
 
 class StatsPage extends StatefulWidget {
@@ -28,19 +29,19 @@ class _StatsPageState extends State<StatsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Thống kê cá nhân')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.statsTitle)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Số POI đã ghé: ${manager.visitedCount}', style: const TextStyle(fontSize: 18)),
+            Text(AppLocalizations.of(context)!.visitedCountLabel(manager.visitedCount), style: const TextStyle(fontSize: 18)),
             const SizedBox(height: 12),
-            Text('Tổng thời gian nghe: ${manager.totalListen.inMinutes} phút', style: const TextStyle(fontSize: 16)),
+            Text(AppLocalizations.of(context)!.totalListenLabel(manager.totalListen.inMinutes), style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 18),
-            const Text('Gợi ý:', style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.suggestionsLabel, style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 6),
-            const Text('- Duy trì GPS để nhận thuyết minh tự động')
+            Text(AppLocalizations.of(context)!.suggestion_keep_gps)
           ],
         ),
       ),

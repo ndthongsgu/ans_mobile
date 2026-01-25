@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ans_mobile/l10n/app_localizations.dart';
 import '../../data/models/poi.dart';
 import '../../core/services/geo_audio_manager.dart';
 
@@ -26,18 +27,18 @@ class PoiDetailPage extends StatelessWidget {
                 ElevatedButton.icon(
                   onPressed: () => manager.enterPoi(poi),
                   icon: const Icon(Icons.play_arrow),
-                  label: const Text('Phát ngay'),
+                  label: Text(AppLocalizations.of(context)!.playNow),
                 ),
                 const SizedBox(width: 12),
                 OutlinedButton.icon(
                   onPressed: () => Navigator.of(context).pop(),
                   icon: const Icon(Icons.map),
-                  label: const Text('Quay lại bản đồ'),
+                  label: Text(AppLocalizations.of(context)!.backToMap),
                 )
               ],
             ),
             const SizedBox(height: 24),
-            const Text('Thông tin vị trí:', style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.locationInfo, style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 6),
             Text('Lat: ${poi.latitude} — Lng: ${poi.longitude}'),
           ],

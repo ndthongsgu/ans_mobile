@@ -1,0 +1,47 @@
+{
+  "@@locale": "en",
+  "appTitle": "Street Food Go",
+  "menuTitle": "Street Food Go — Menu",
+  "mapTitle": "Map",
+  "poiListTitle": "POI list",
+  "settingsTitle": "Settings",
+  "statsTitle": "Personal stats",
+  "narrationStatusTitle": "Narration status",
+  "recentLabel": "Recent",
+  "versionLabel": "Version",
+  "playNow": "Play now",
+  "backToMap": "Back to map",
+  "locationInfo": "Location information:",
+  "noNarration": "No narration is running.",
+  "stop": "Stop",
+  "pause": "Pause",
+  "resume": "Resume",
+  "autoPlayTitle": "Auto play when arriving at POI",
+  "allowNotificationsTitle": "Allow notifications",
+  "splashSubtitle": "Play audio when you enter a POI area",
+  "permissionEnableMsg": "Please enable location services to use the map.",
+  "permissionDeniedMsg": "Location permission denied.",
+  "permissionDeniedForeverMsg": "Location permission is permanently denied. Open settings to grant permission.",
+  "locationErrorPrefix": "Error getting location: {error}",
+  "noUserPositionMsg": "No current location available. Tap to request permission.",
+  "suggestionsLabel": "Suggestions:",
+  "suggestion_keep_gps": "- Keep GPS on to receive automatic narration",
+  "visitedCountLabel": "Visited POIs: {count}",
+  "@visitedCountLabel": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "totalListenLabel": "Total listening time: {minutes} minutes",
+  "@totalListenLabel": {
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "languageLabel": "Language",
+  "language_system": "System default",
+  "language_en_label": "English",
+  "language_vi_label": "Tiếng Việt",
+  "language_zh_label": "中文",
+  "language_ko_label": "한국어"
+}

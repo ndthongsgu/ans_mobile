@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ans_mobile/l10n/app_localizations.dart';
 import '../../core/services/geo_audio_manager.dart';
 
 class NarrationStatusPage extends StatefulWidget {
@@ -30,13 +31,13 @@ class _NarrationStatusPageState extends State<NarrationStatusPage> {
     final poi = manager.currentPoi;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Trạng thái thuyết minh')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.narrationStatusTitle)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             if (poi == null)
-              const Text('Hiện không có thuyết minh nào đang chạy.')
+              Text(AppLocalizations.of(context)!.noNarration)
             else
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,13 +51,13 @@ class _NarrationStatusPageState extends State<NarrationStatusPage> {
                       ElevatedButton.icon(
                         onPressed: manager.togglePlay,
                         icon: Icon(manager.isPlaying ? Icons.pause : Icons.play_arrow),
-                        label: Text(manager.isPlaying ? 'Tạm dừng' : 'Tiếp tục'),
+                        label: Text(manager.isPlaying ? AppLocalizations.of(context)!.pause : AppLocalizations.of(context)!.resume),
                       ),
                       const SizedBox(width: 12),
                       OutlinedButton.icon(
                         onPressed: manager.leavePoi,
                         icon: const Icon(Icons.stop),
-                        label: const Text('Dừng'),
+                        label: Text(AppLocalizations.of(context)!.stop),
                       )
                     ],
                   )
@@ -65,8 +66,8 @@ class _NarrationStatusPageState extends State<NarrationStatusPage> {
             const SizedBox(height: 24),
             const Divider(),
             const SizedBox(height: 8),
-            Text('Đã nghe: ${manager.visitedCount} điểm'),
-            Text('Tổng thời gian nghe: ${manager.totalListen.inMinutes} phút')
+            Text(AppLocalizations.of(context)!.visitedCountLabel(manager.visitedCount)),
+            Text(AppLocalizations.of(context)!.totalListenLabel(manager.totalListen.inMinutes))
           ],
         ),
       ),

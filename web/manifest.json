@@ -1,6 +1,6 @@
 {
-    "name": "ans_mobile",
-    "short_name": "ans_mobile",
+    "name": "Street Food Go",
+    "short_name": "Street Food",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

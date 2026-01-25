@@ -1,0 +1,52 @@
+{
+  "@@locale": "zh",
+  "appTitle": "Street Food Go",
+  "menuTitle": "Street Food Go — 菜单",
+  "mapTitle": "地图",
+  "poiListTitle": "地点列表",
+  "settingsTitle": "设置",
+  "statsTitle": "个人统计",
+  "narrationStatusTitle": "播报状态",
+  "recentLabel": "附近",
+  "versionLabel": "版本",
+  "playNow": "立即播放",
+  "backToMap": "返回地图",
+  "locationInfo": "位置信息：",
+  "noNarration": "当前没有正在播放的播报。",
+  "stop": "停止",
+  "pause": "暂停",
+  "resume": "继续",
+  "autoPlayTitle": "到达地点时自动播放",
+  "allowNotificationsTitle": "允许通知",
+  "splashSubtitle": "进入景点区域时播放音频",
+  "permissionEnableMsg": "请启用定位服务以使用地图功能。",
+  "permissionDeniedMsg": "定位权限被拒绝。",
+  "permissionDeniedForeverMsg": "定位权限已被永久拒绝。请打开设置以授予权限。",
+  "locationErrorPrefix": "获取位置错误：{error}",
+  "@locationErrorPrefix": {
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "noUserPositionMsg": "当前没有可用位置。点击请求定位权限。",
+  "suggestionsLabel": "建议：",
+  "suggestion_keep_gps": "- 保持 GPS 打开以接收自动播报",
+  "visitedCountLabel": "已访问地点：{count}",
+  "@visitedCountLabel": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "totalListenLabel": "总收听时间：{minutes} 分钟",
+  "@totalListenLabel": {
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "languageLabel": "语言",
+  "language_system": "系统默认",
+  "language_en_label": "English",
+  "language_vi_label": "Tiếng Việt",
+  "language_zh_label": "中文",
+  "language_ko_label": "한국어"
+}

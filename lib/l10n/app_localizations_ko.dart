@@ -115,4 +115,79 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get language_ko_label => '한국어';
+
+  @override
+  String get loginButton => '로그인';
+
+  @override
+  String get createAccount => '계정 생성';
+
+  @override
+  String get createAccountNew => '새 계정 만들기';
+
+  @override
+  String get fullNameLabel => '이름';
+
+  @override
+  String get emailLabel => '이메일';
+
+  @override
+  String get passwordLabel => '비밀번호';
+
+  @override
+  String get enterNameMsg => '이름을 입력하세요';
+
+  @override
+  String get enterEmailMsg => '이메일을 입력하세요';
+
+  @override
+  String get enterPasswordMsg => '비밀번호를 입력하세요';
+
+  @override
+  String get passwordMinLengthMsg => '비밀번호는 최소 6자여야 합니다';
+
+  @override
+  String get loginSuccessMsg => '로그인 성공';
+
+  @override
+  String get registerSuccessMsg => '계정 생성 완료';
+
+  @override
+  String get loginGoogleSuccessMsg => 'Google로 로그인 성공';
+
+  @override
+  String get loginDemoSuccessMsg => '데모 로그인 성공';
+
+  @override
+  String get loginWithGoogle => 'Google로 로그인';
+
+  @override
+  String get quickLoginDemo => '빠른 로그인 (데모)';
+
+  @override
+  String get logoutLabel => '로그아웃';
+
+  @override
+  String get loggedOutMsg => '로그아웃되었습니다';
+
+  @override
+  String get backToLogin => '로그인으로 돌아가기';
+
+  @override
+  String get forgotPassword => '비밀번호를 잊으셨나요?';
+
+  @override
+  String get bottom_home => '홈';
+
+  @override
+  String get bottom_notifications => '알림';
+
+  @override
+  String get bottom_profile => '프로필';
+
+  @override
+  String get bottom_calendar => '달력';
+
+  @override
+  String get bottom_settings => '설정';
 }

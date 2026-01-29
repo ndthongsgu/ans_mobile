@@ -115,4 +115,79 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get language_ko_label => '한국어';
+
+  @override
+  String get loginButton => 'Log in';
+
+  @override
+  String get createAccount => 'Create account';
+
+  @override
+  String get createAccountNew => 'Create new account';
+
+  @override
+  String get fullNameLabel => 'Full name';
+
+  @override
+  String get emailLabel => 'Email';
+
+  @override
+  String get passwordLabel => 'Password';
+
+  @override
+  String get enterNameMsg => 'Enter full name';
+
+  @override
+  String get enterEmailMsg => 'Enter email';
+
+  @override
+  String get enterPasswordMsg => 'Enter password';
+
+  @override
+  String get passwordMinLengthMsg => 'Password must be at least 6 characters';
+
+  @override
+  String get loginSuccessMsg => 'Login successful';
+
+  @override
+  String get registerSuccessMsg => 'Account created successfully';
+
+  @override
+  String get loginGoogleSuccessMsg => 'Signed in with Google successfully';
+
+  @override
+  String get loginDemoSuccessMsg => 'Demo login successful';
+
+  @override
+  String get loginWithGoogle => 'Sign in with Google';
+
+  @override
+  String get quickLoginDemo => 'Quick login (Demo)';
+
+  @override
+  String get logoutLabel => 'Sign out';
+
+  @override
+  String get loggedOutMsg => 'Signed out';
+
+  @override
+  String get backToLogin => 'Back to login';
+
+  @override
+  String get forgotPassword => 'Forgot password';
+
+  @override
+  String get bottom_home => 'Home';
+
+  @override
+  String get bottom_notifications => 'Notifications';
+
+  @override
+  String get bottom_profile => 'Profile';
+
+  @override
+  String get bottom_calendar => 'Calendar';
+
+  @override
+  String get bottom_settings => 'Settings';
 }

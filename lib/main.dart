@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ans_mobile/l10n/app_localizations.dart';
 import 'package:ans_mobile/core/services/locale_provider.dart';
+import 'package:ans_mobile/core/services/auth_service.dart';
+import 'package:ans_mobile/core/theme/grap_theme.dart';
+
 import 'presentation/pages/splash_page.dart';
 import 'presentation/pages/map_page.dart';
 import 'presentation/pages/poi_list_page.dart';
@@ -9,10 +12,14 @@ import 'presentation/pages/poi_detail_page.dart';
 import 'presentation/pages/narration_status_page.dart';
 import 'presentation/pages/settings_page.dart';
 import 'presentation/pages/stats_page.dart';
+import 'presentation/pages/login_page.dart';
+import 'presentation/pages/register_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocaleProvider.instance.init();
+  // Init local auth service (loads persisted user if any)
+  await AuthService.instance.init();
   runApp(const MyApp());
 }
 
@@ -40,11 +47,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = ColorScheme.fromSeed(seedColor: const Color(0xFF3C828E)).copyWith(
-      secondary: const Color(0xFFAB2524),
-      tertiary: const Color(0xFFD69D45),
-    );
-
     return MaterialApp(
       // Title is provided by localization
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
@@ -57,36 +59,12 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: LocaleProvider.instance.locale,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: scheme,
-        appBarTheme: AppBarTheme(
-          backgroundColor: scheme.primary,
-          foregroundColor: scheme.onPrimary,
-          elevation: 0,
-          centerTitle: true,
-        ),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: scheme.secondary,
-          foregroundColor: scheme.onSecondary,
-        ),
-        drawerTheme: DrawerThemeData(
-          backgroundColor: scheme.primary,
-        ),
-        listTileTheme: ListTileThemeData(
-          iconColor: scheme.onPrimary,
-          textColor: scheme.onPrimary,
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: scheme.secondary,
-            foregroundColor: scheme.onSecondary,
-          ),
-        ),
-      ),
+      theme: grapTheme(),
       initialRoute: '/splash',
       routes: {
         '/splash': (ctx) => const SplashPage(),
+        '/login': (ctx) => const LoginPage(),
+        '/register': (ctx) => const RegisterPage(),
         '/map': (ctx) => const MapPage(),
         '/poi_list': (ctx) => const PoiListPage(),
         '/poi_detail': (ctx) => const PoiDetailPage(),

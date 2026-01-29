@@ -115,4 +115,79 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get language_ko_label => '한국어';
+
+  @override
+  String get loginButton => '登录';
+
+  @override
+  String get createAccount => '创建账户';
+
+  @override
+  String get createAccountNew => '创建新账户';
+
+  @override
+  String get fullNameLabel => '姓名';
+
+  @override
+  String get emailLabel => '电子邮件';
+
+  @override
+  String get passwordLabel => '密码';
+
+  @override
+  String get enterNameMsg => '请输入姓名';
+
+  @override
+  String get enterEmailMsg => '请输入电子邮件';
+
+  @override
+  String get enterPasswordMsg => '请输入密码';
+
+  @override
+  String get passwordMinLengthMsg => '密码至少需要6个字符';
+
+  @override
+  String get loginSuccessMsg => '登录成功';
+
+  @override
+  String get registerSuccessMsg => '账户创建成功';
+
+  @override
+  String get loginGoogleSuccessMsg => '使用 Google 登录成功';
+
+  @override
+  String get loginDemoSuccessMsg => '演示登录成功';
+
+  @override
+  String get loginWithGoogle => '使用 Google 登录';
+
+  @override
+  String get quickLoginDemo => '快速登录（演示）';
+
+  @override
+  String get logoutLabel => '登出';
+
+  @override
+  String get loggedOutMsg => '已登出';
+
+  @override
+  String get backToLogin => '返回登录';
+
+  @override
+  String get forgotPassword => '忘记密码';
+
+  @override
+  String get bottom_home => '首页';
+
+  @override
+  String get bottom_notifications => '通知';
+
+  @override
+  String get bottom_profile => '个人';
+
+  @override
+  String get bottom_calendar => '日历';
+
+  @override
+  String get bottom_settings => '设置';
 }

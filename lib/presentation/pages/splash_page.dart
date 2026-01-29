@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:ans_mobile/l10n/app_localizations.dart';
+import 'package:ans_mobile/core/services/auth_service.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -14,7 +15,8 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Timer(const Duration(milliseconds: 1400), () {
-      Navigator.of(context).pushReplacementNamed('/map');
+      final loggedIn = AuthService.instance.isLoggedIn;
+      Navigator.of(context).pushReplacementNamed(loggedIn ? '/map' : '/login');
     });
   }
 
@@ -32,7 +34,7 @@ class _SplashPageState extends State<SplashPage> {
           child: Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.45),
+              color: Colors.black.withAlpha(115),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(

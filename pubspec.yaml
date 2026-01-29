@@ -37,6 +37,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   shared_preferences: ^2.1.1
+  google_sign_in: ^5.4.0
+  crypto: ^3.0.2
 
   # OpenStreetMap via flutter_map
   flutter_map: ^4.0.0
@@ -72,6 +74,24 @@ flutter:
   assets:
     - lib/assets/imgs/background.png
     - lib/assets/imgs/favicon.png
+    - lib/assets/imgs/logo.svg
+
+  fonts:
+    - family: 'Noto Sans'
+      fonts:
+        - asset: lib/assets/fonts/NotoSans-Regular.ttf
+          weight: 400
+        - asset: lib/assets/fonts/NotoSans-Italic.ttf
+          weight: 400
+          style: italic
+        - asset: lib/assets/fonts/NotoSans-Medium.ttf
+          weight: 500
+        - asset: lib/assets/fonts/NotoSans-SemiBold.ttf
+          weight: 600
+        - asset: lib/assets/fonts/NotoSans-Bold.ttf
+          weight: 700
+        - asset: lib/assets/fonts/NotoSans-Black.ttf
+          weight: 900
 
 
 

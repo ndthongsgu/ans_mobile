@@ -302,6 +302,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'한국어'**
   String get language_ko_label;
+
+  /// No description provided for @loginButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Log in'**
+  String get loginButton;
+
+  /// No description provided for @createAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get createAccount;
+
+  /// No description provided for @createAccountNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Create new account'**
+  String get createAccountNew;
+
+  /// No description provided for @fullNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get fullNameLabel;
+
+  /// No description provided for @emailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get emailLabel;
+
+  /// No description provided for @passwordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get passwordLabel;
+
+  /// No description provided for @enterNameMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter full name'**
+  String get enterNameMsg;
+
+  /// No description provided for @enterEmailMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter email'**
+  String get enterEmailMsg;
+
+  /// No description provided for @enterPasswordMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter password'**
+  String get enterPasswordMsg;
+
+  /// No description provided for @passwordMinLengthMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get passwordMinLengthMsg;
+
+  /// No description provided for @loginSuccessMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Login successful'**
+  String get loginSuccessMsg;
+
+  /// No description provided for @registerSuccessMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Account created successfully'**
+  String get registerSuccessMsg;
+
+  /// No description provided for @loginGoogleSuccessMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in with Google successfully'**
+  String get loginGoogleSuccessMsg;
+
+  /// No description provided for @loginDemoSuccessMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo login successful'**
+  String get loginDemoSuccessMsg;
+
+  /// No description provided for @loginWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Google'**
+  String get loginWithGoogle;
+
+  /// No description provided for @quickLoginDemo.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick login (Demo)'**
+  String get quickLoginDemo;
+
+  /// No description provided for @logoutLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get logoutLabel;
+
+  /// No description provided for @loggedOutMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed out'**
+  String get loggedOutMsg;
+
+  /// No description provided for @backToLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to login'**
+  String get backToLogin;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password'**
+  String get forgotPassword;
+
+  /// No description provided for @bottom_home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get bottom_home;
+
+  /// No description provided for @bottom_notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get bottom_notifications;
+
+  /// No description provided for @bottom_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get bottom_profile;
+
+  /// No description provided for @bottom_calendar.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar'**
+  String get bottom_calendar;
+
+  /// No description provided for @bottom_settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get bottom_settings;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

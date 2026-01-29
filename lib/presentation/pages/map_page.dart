@@ -2,12 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:ans_mobile/l10n/app_localizations.dart';
+import 'package:ans_mobile/presentation/widgets/app_toast.dart';
+import '../../core/services/auth_service.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as ll;
 import 'package:geolocator/geolocator.dart';
 
 import '../../data/local/mock_pois.dart';
 import '../../presentation/widgets/poi_card.dart';
+import '../widgets/app_bottom_nav.dart';
 import '../../data/models/poi.dart';
 import '../../features/map/map_controller.dart';
 
@@ -23,6 +26,8 @@ class _MapPageState extends State<MapPage> {
 
   ll.LatLng? _userPos;
   StreamSubscription<Position>? _posSub;
+  int _selectedIndex = 2; // center item (home) by default
+
 
   @override
   void initState() {
@@ -41,7 +46,7 @@ class _MapPageState extends State<MapPage> {
     if (!serviceEnabled) {
       // Prompt user to enable location services
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.permissionEnableMsg)));
+        AppToast.showInfo(context, AppLocalizations.of(context)!.permissionEnableMsg);
       }
       return;
     }
@@ -51,7 +56,7 @@ class _MapPageState extends State<MapPage> {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.permissionDeniedMsg)));
+          AppToast.showError(context, AppLocalizations.of(context)!.permissionDeniedMsg);
         }
         return;
       }
@@ -72,7 +77,7 @@ class _MapPageState extends State<MapPage> {
       });
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.locationErrorPrefix(e.toString()))));
+        AppToast.showError(context, AppLocalizations.of(context)!.locationErrorPrefix(e.toString()));
       }
     }
   }
@@ -82,6 +87,8 @@ class _MapPageState extends State<MapPage> {
     controller.moveToPoi(poi);
     Navigator.of(context).pushNamed('/poi_detail', arguments: poi);
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -111,112 +118,102 @@ class _MapPageState extends State<MapPage> {
           ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.mapTitle),
-      ),
-      drawer: Drawer(
-        child: ListView(
+      extendBody: true,
+      body: SafeArea(
+        child: Column(
           children: [
-            DrawerHeader(
-              decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(AppLocalizations.of(context)!.menuTitle, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary, fontSize: 18, fontWeight: FontWeight.bold)),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.list, color: Theme.of(context).colorScheme.onPrimary),
-              title: Text(AppLocalizations.of(context)!.poiListTitle, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
-              onTap: () => Navigator.of(context).pushNamed('/poi_list'),
-            ),
-            ListTile(
-              leading: Icon(Icons.headset, color: Theme.of(context).colorScheme.onPrimary),
-              title: Text(AppLocalizations.of(context)!.narrationStatusTitle, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
-              onTap: () => Navigator.of(context).pushNamed('/status'),
-            ),
-            ListTile(
-              leading: Icon(Icons.settings, color: Theme.of(context).colorScheme.onPrimary),
-              title: Text(AppLocalizations.of(context)!.settingsTitle, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
-              onTap: () => Navigator.of(context).pushNamed('/settings'),
-            ),
-            ListTile(
-              leading: Icon(Icons.bar_chart, color: Theme.of(context).colorScheme.onPrimary),
-              title: Text(AppLocalizations.of(context)!.statsTitle, style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
-              onTap: () => Navigator.of(context).pushNamed('/stats'),
-            ),
-          ],
-        ),
-      ),
-      body: Column(
-        children: [
-          Container(
+          Card(
             margin: const EdgeInsets.all(12),
-            height: 320,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(8),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            elevation: 6,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Stack(
-                children: [
-                  FlutterMap(
-                    mapController: controller.mapController,
-                    options: MapOptions(
-                      center: center,
-                      zoom: 16,
-                      minZoom: 3.0,
-                      maxZoom: 18.0,
-                    ),
-                    children: [
-                      TileLayer(
-                        urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                        subdomains: const ['a', 'b', 'c'],
-                        userAgentPackageName: 'com.example.ans_mobile',
+              borderRadius: BorderRadius.circular(16),
+              child: SizedBox(
+                height: 340,
+                child: Stack(
+                  children: [
+                    FlutterMap(
+                      mapController: controller.mapController,
+                      options: MapOptions(
+                        center: center,
+                        zoom: 16,
+                        minZoom: 3.0,
+                        maxZoom: 18.0,
                       ),
-                      MarkerLayer(markers: [...poiMarkers, ...userMarkers]),
-                    ],
-                  ),
-                  Positioned(
-                    top: 8,
-                    right: 8,
-                    child: FloatingActionButton.small(
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      onPressed: () {
-                        if (_userPos == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.noUserPositionMsg)));
-                          _initLocation();
-                          return;
-                        }
-                        controller.moveToLatLng(_userPos!);
-                      },
-                      child: Icon(Icons.my_location, color: Theme.of(context).colorScheme.onSecondary),
+                      children: [
+                        TileLayer(
+                          urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                          subdomains: const ['a', 'b', 'c'],
+                          userAgentPackageName: 'com.example.ans_mobile',
+                        ),
+                        MarkerLayer(markers: [...poiMarkers, ...userMarkers]),
+                      ],
                     ),
-                  )
-                ],
+                    Positioned(
+                      top: 12,
+                      left: 12,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(color: Colors.black.withAlpha(60), borderRadius: BorderRadius.circular(8)),
+                        child: Text(AppLocalizations.of(context)!.mapTitle, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    Positioned(
+                      top: 8,
+                      right: 8,
+                      child: FloatingActionButton.small(
+                        heroTag: 'fab_user_pos',
+                        backgroundColor: Theme.of(context).colorScheme.secondary,
+                        onPressed: () {
+                          if (_userPos == null) {
+                            AppToast.showInfo(context, AppLocalizations.of(context)!.noUserPositionMsg);
+                            _initLocation();
+                            return;
+                          }
+                          controller.moveToLatLng(_userPos!);
+                        },
+                        child: Icon(Icons.my_location, color: Theme.of(context).colorScheme.onSecondary),
+                      ),
+                    ),
+                    
+                  ],
+                ),
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Align(alignment: Alignment.centerLeft, child: Text(AppLocalizations.of(context)!.recentLabel, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(AppLocalizations.of(context)!.recentLabel, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                TextButton(onPressed: () => Navigator.of(context).pushNamed('/poi_list'), child: Text(AppLocalizations.of(context)!.poiListTitle)),
+              ],
+            ),
           ),
-          Expanded(
-            child: ListView.builder(
+          SizedBox(
+            height: 140,
+            child: ListView.separated(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              scrollDirection: Axis.horizontal,
               itemCount: mockPois.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 8),
               itemBuilder: (context, index) {
                 final poi = mockPois[index];
-                return PoiCard(poi: poi, onTap: () => _openPoi(context, poi));
+                return SizedBox(width: 320, child: PoiCard(poi: poi, onTap: () => _openPoi(context, poi)));
               },
             ),
-          )
+          ),
         ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'fab_open_list',
         backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () => Navigator.of(context).pushNamed('/poi_list'),
         child: Icon(Icons.list, color: Theme.of(context).colorScheme.onSecondary),
       ),
+      bottomNavigationBar: AppBottomNav(currentIndex: _selectedIndex),
     );
   }
 }

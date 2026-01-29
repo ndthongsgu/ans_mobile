@@ -115,4 +115,79 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get language_ko_label => '한국어';
+
+  @override
+  String get loginButton => 'Đăng nhập';
+
+  @override
+  String get createAccount => 'Tạo tài khoản';
+
+  @override
+  String get createAccountNew => 'Tạo tài khoản mới';
+
+  @override
+  String get fullNameLabel => 'Họ tên';
+
+  @override
+  String get emailLabel => 'Email';
+
+  @override
+  String get passwordLabel => 'Mật khẩu';
+
+  @override
+  String get enterNameMsg => 'Nhập họ tên';
+
+  @override
+  String get enterEmailMsg => 'Nhập email';
+
+  @override
+  String get enterPasswordMsg => 'Nhập mật khẩu';
+
+  @override
+  String get passwordMinLengthMsg => 'Mật khẩu ít nhất 6 ký tự';
+
+  @override
+  String get loginSuccessMsg => 'Đăng nhập thành công';
+
+  @override
+  String get registerSuccessMsg => 'Tạo tài khoản thành công';
+
+  @override
+  String get loginGoogleSuccessMsg => 'Đăng nhập bằng Google thành công';
+
+  @override
+  String get loginDemoSuccessMsg => 'Đăng nhập demo thành công';
+
+  @override
+  String get loginWithGoogle => 'Đăng nhập bằng Google';
+
+  @override
+  String get quickLoginDemo => 'Đăng nhập nhanh (Demo)';
+
+  @override
+  String get logoutLabel => 'Đăng xuất';
+
+  @override
+  String get loggedOutMsg => 'Đã đăng xuất';
+
+  @override
+  String get backToLogin => 'Quay lại đăng nhập';
+
+  @override
+  String get forgotPassword => 'Quên mật khẩu';
+
+  @override
+  String get bottom_home => 'Trang chủ';
+
+  @override
+  String get bottom_notifications => 'Thông báo';
+
+  @override
+  String get bottom_profile => 'Hồ sơ';
+
+  @override
+  String get bottom_calendar => 'Lịch';
+
+  @override
+  String get bottom_settings => 'Cài đặt';
 }

@@ -9,11 +9,11 @@ class AppToast {
   }
 
   static void showSuccess(BuildContext context, String message) {
-    _show(context, message, background: Theme.of(context).colorScheme.secondary, icon: Icons.check_circle_outline);
+    _show(context, message, background: Theme.of(context).colorScheme.tertiary, icon: Icons.check_circle_outline);
   }
 
   static void showInfo(BuildContext context, String message) {
-    _show(context, message, background: Theme.of(context).colorScheme.primary, icon: Icons.info_outline);
+    _show(context, message, background: Theme.of(context).colorScheme.secondary, icon: Icons.info_outline);
   }
 
   static void _show(BuildContext context, String message, {required Color background, IconData? icon}) {

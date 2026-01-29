@@ -9,17 +9,49 @@ class PoiListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.poiListTitle)),
-      body: ListView.builder(
-        itemCount: mockPois.length,
-        itemBuilder: (context, index) {
-          final poi = mockPois[index];
-          return PoiCard(poi: poi, onTap: () => Navigator.of(context).pushNamed('/poi_detail', arguments: poi));
-        },
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: const Text('Thoát ứng dụng?'),
+            content: const Text('Bạn có chắc muốn thoát không?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('Hủy'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('Thoát'),
+              ),
+            ],
+          ),
+        );
+      },
+      child: Scaffold(
+        extendBody: true,
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context)!.poiListTitle),
+          automaticallyImplyLeading: false,
+        ),
+        body: ListView.builder(
+          itemCount: mockPois.length,
+          itemBuilder: (context, index) {
+            final poi = mockPois[index];
+            return PoiCard(
+              poi: poi,
+              onTap: () => Navigator.of(
+                context,
+              ).pushNamed('/poi_detail', arguments: poi),
+            );
+          },
+        ),
+        bottomNavigationBar: const AppBottomNav(currentIndex: 1),
       ),
-      bottomNavigationBar: const AppBottomNav(currentIndex: 3),
     );
   }
 }

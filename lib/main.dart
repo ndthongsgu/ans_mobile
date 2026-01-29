@@ -10,10 +10,19 @@ import 'presentation/pages/map_page.dart';
 import 'presentation/pages/poi_list_page.dart';
 import 'presentation/pages/poi_detail_page.dart';
 import 'presentation/pages/narration_status_page.dart';
-import 'presentation/pages/settings_page.dart';
+
 import 'presentation/pages/stats_page.dart';
 import 'presentation/pages/login_page.dart';
 import 'presentation/pages/register_page.dart';
+import 'presentation/pages/forgot_password_page.dart';
+import 'presentation/pages/profile_page.dart';
+import 'presentation/pages/player_page.dart';
+import 'presentation/pages/downloads_page.dart';
+import 'presentation/pages/history_page.dart';
+import 'presentation/pages/favorites_page.dart';
+import 'presentation/pages/reviews_page.dart';
+import 'presentation/pages/support_page.dart';
+import 'presentation/pages/notifications_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,8 +78,16 @@ class _MyAppState extends State<MyApp> {
         '/poi_list': (ctx) => const PoiListPage(),
         '/poi_detail': (ctx) => const PoiDetailPage(),
         '/status': (ctx) => const NarrationStatusPage(),
-        '/settings': (ctx) => const SettingsPage(),
         '/stats': (ctx) => const StatsPage(),
+        '/forgot': (ctx) => const ForgotPasswordPage(),
+        '/profile': (ctx) => const ProfilePage(),
+        '/player': (ctx) => const PlayerPage(),
+        '/downloads': (ctx) => const DownloadsPage(),
+        '/history': (ctx) => const HistoryPage(),
+        '/favorites': (ctx) => const FavoritesPage(),
+        '/reviews': (ctx) => const ReviewsPage(),
+        '/support': (ctx) => const SupportPage(),
+        '/notifications': (ctx) => const NotificationsPage(),
       },
     );
   }

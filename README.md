@@ -1,16 +1,126 @@
-# Street Food Go
+# Street Food Go 🚀
 
-A new Flutter project.
+Ứng dụng di động viết bằng Flutter.
 
-## Getting Started
+## 📋 Mô tả ngắn
+Ứng dụng phục vụ demo chức năng của dự án (Street Food Go). File này hướng dẫn cách thiết lập môi trường và chạy source trên máy phát triển.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## ✅ Yêu cầu (Prerequisites)
+- Flutter (cài đặt và thêm vào PATH) — kiểm tra bằng `flutter --version` và `flutter doctor`.
+- Android SDK (Android Studio) cho Android.
+- Xcode (chỉ macOS) cho iOS.
+- Java JDK (nếu cần build Android trên vài máy).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ⚙️ Chuẩn bị dự án
+1. Clone repo:
+
+   ```bash
+   git clone <repo-url>
+   cd ans_mobile
+   ```
+
+2. Cài thư viện:
+
+   ```bash
+   flutter pub get
+   ```
+
+3. Kiểm tra môi trường:
+
+   ```bash
+   flutter doctor -v
+   ```
+
+4. (Nếu dùng Firebase/Google services) đặt `google-services.json` vào `android/app/` và `GoogleService-Info.plist` vào `ios/Runner/`.
+
+---
+
+## ▶️ Chạy ứng dụng (Development)
+- Chạy trên thiết bị Android (Windows):
+
+  - Bật emulator từ Android Studio hoặc dùng:
+    ```bash
+    flutter emulators
+    flutter emulators --launch <emulator-id>
+    ```
+  - Chạy app:
+    ```bash
+    flutter run
+    # hoặc chỉ định thiết bị
+    flutter run -d <device-id>
+    ```
+
+- Chạy trên iOS (macOS):
+
+  ```bash
+  cd ios
+  pod install
+  cd ..
+  flutter run
+  ```
+
+- Chạy trên Web:
+
+  ```bash
+  flutter run -d chrome
+  ```
+
+---
+
+## 📦 Build (Release)
+- Android APK (debug/release):
+
+  ```bash
+  # Debug
+  flutter build apk --debug
+
+  # Release (ví dụ split per ABI)
+  flutter build apk --release --split-per-abi
+  ```
+
+- iOS (chỉ macOS):
+
+  ```bash
+  flutter build ios --release
+  ```
+
+---
+
+## 🧰 Kiểm tra & format
+- Phân tích code:
+
+  ```bash
+  flutter analyze
+  ```
+
+- Chạy test:
+
+  ```bash
+  flutter test
+  ```
+
+- Định dạng code:
+
+  ```bash
+  dart format .
+  ```
+
+---
+
+## ⚠️ Các lỗi thường gặp & xử lý nhanh
+- Lỗi Android SDK: kiểm tra `local.properties` (chỉ trên Android): `sdk.dir = C:\\Users\\<user>\\AppData\\Local\\Android\\sdk`.
+- Thiếu file cấu hình (Firebase): đảm bảo `google-services.json` / `GoogleService-Info.plist` đã đặt đúng.
+- Lỗi plugin iOS: chạy `pod install` trong thư mục `ios` và thử `flutter clean` → `flutter pub get` → `flutter run`.
+
+---
+
+## 💬 Liên hệ
+Nếu cần hỗ trợ thêm, mô tả lỗi / bước bạn đã thử và mở issue hoặc gửi thông tin cho người quản lý dự án.
+
+---
+
+Chúc bạn phát triển thuận lợi! ✅

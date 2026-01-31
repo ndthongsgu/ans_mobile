@@ -1,0 +1,28 @@
+import 'auth_api.dart';
+
+class ApiClient {
+  ApiClient._private();
+  static final ApiClient instance = ApiClient._private();
+
+  /// Set this to your running API address. For Android emulator use 10.0.2.2
+  String baseUrl = const String.fromEnvironment('ANS_API_BASE', defaultValue: 'https://unsuccinctly-unadhering-zenaida.ngrok-free.dev');
+
+  Future<Map<String, dynamic>> login({required String email, required String password}) =>
+      AuthApi.instance.login(email: email, password: password);
+
+  Future<Map<String, dynamic>> register({String? username, required String email, required String password, required String full_name}) =>
+      AuthApi.instance.register(username: username, email: email, password: password, full_name: full_name);
+
+  Future<Map<String, dynamic>> verify({required String email, required String otp}) =>
+      AuthApi.instance.verify(email: email, otp: otp);
+
+  Future<Map<String, dynamic>> forgotPassword({required String email}) =>
+      AuthApi.instance.forgotPassword(email: email);
+
+  Future<Map<String, dynamic>> resetPassword({required String email, required String otp, required String newPassword}) =>
+      AuthApi.instance.resetPassword(email: email, otp: otp, newPassword: newPassword);
+
+  Future<Map<String, dynamic>> me(String accessToken) => AuthApi.instance.me(accessToken);
+
+  Future<Map<String, dynamic>> refresh(String refreshToken) => AuthApi.instance.refresh(refreshToken);
+}

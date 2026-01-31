@@ -1,5 +1,21 @@
 import 'package:flutter/material.dart';
 
+// A small PageTransitionsBuilder that disables the default page transition animations.
+class _NoTransitionsBuilder extends PageTransitionsBuilder {
+  const _NoTransitionsBuilder();
+
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return child; // No animation, immediate switch
+  }
+}
+
 const LinearGradient kGrapGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
@@ -56,6 +72,13 @@ ThemeData grapTheme() {
     ),
     // Use local Noto Sans font for better multilingual coverage
     fontFamily: 'Noto Sans',
+    pageTransitionsTheme: const PageTransitionsTheme(builders: {
+      TargetPlatform.android: const _NoTransitionsBuilder(),
+      TargetPlatform.iOS: const _NoTransitionsBuilder(),
+      TargetPlatform.linux: const _NoTransitionsBuilder(),
+      TargetPlatform.macOS: const _NoTransitionsBuilder(),
+      TargetPlatform.windows: const _NoTransitionsBuilder(),
+    }),
     textTheme: baseText.copyWith(
       titleLarge: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, fontFamily: 'Noto Sans'),
       headlineMedium: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'Noto Sans'),

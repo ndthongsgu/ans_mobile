@@ -1,4 +1,5 @@
 import 'package:ans_mobile/presentation/pages/login_page.dart';
+import 'package:ans_mobile/presentation/pages/verify_otp_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ans_mobile/core/services/auth_service.dart';
 import 'package:ans_mobile/presentation/widgets/app_toast.dart';
@@ -28,13 +29,16 @@ class _RegisterPageState extends State<RegisterPage> {
     final theme = Theme.of(context);
     setState(() => _loading = true);
     try {
-      await AuthService.instance.register(email: _emailCtrl.text.trim(), password: _passCtrl.text, displayName: _nameCtrl.text.trim());
+      await AuthService.instance.register(email: _emailCtrl.text.trim(), password: _passCtrl.text, full_name: _nameCtrl.text.trim());
       messenger.hideCurrentSnackBar();
       AppToast.showSuccess(context, AppLocalizations.of(context)!.registerSuccessMsg);
-      navigator.pushReplacementNamed('/map');
+      // Navigate to OTP verification page — pass data so user can resend OTP without retyping
+      navigator.pushReplacement(MaterialPageRoute(builder: (_) => VerifyOtpPage(email: _emailCtrl.text.trim(), fullName: _nameCtrl.text.trim(), password: _passCtrl.text)));
     } catch (e) {
       messenger.hideCurrentSnackBar();
-      AppToast.showError(context, e.toString());
+      var s = e.toString();
+      while (s.startsWith('Exception: ')) s = s.substring('Exception: '.length);
+      AppToast.showError(context, s);
     } finally {
       if (mounted) setState(() => _loading = false);
     }

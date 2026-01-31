@@ -153,6 +153,21 @@ class AppLocalizationsKo extends AppLocalizations {
   String get registerSuccessMsg => '계정 생성 완료';
 
   @override
+  String get emailVerificationTitle => '이메일 인증';
+
+  @override
+  String get emailVerificationDesc => '이메일로 전송된 인증 코드를 입력하세요';
+
+  @override
+  String get verifyButtonText => '인증';
+
+  @override
+  String get resendOtpText => '코드 재전송';
+
+  @override
+  String get backToRegister => '등록으로 돌아가기';
+
+  @override
   String get loginGoogleSuccessMsg => 'Google로 로그인 성공';
 
   @override
@@ -175,6 +190,33 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get forgotPassword => '비밀번호를 잊으셨나요?';
+
+  @override
+  String get forgotPasswordDesc => '재설정 코드를 받으려면 이메일을 입력하세요.';
+
+  @override
+  String get sendResetButton => '전송';
+
+  @override
+  String get resetSentMsg => '비밀번호 재설정 코드가 이메일로 전송되었습니다';
+
+  @override
+  String get resetPasswordTitle => '비밀번호 재설정';
+
+  @override
+  String get resetPasswordDesc => '이메일로 전송된 코드를 입력하고 새 비밀번호를 설정하세요';
+
+  @override
+  String get otpLabel => '코드';
+
+  @override
+  String get newPasswordLabel => '새 비밀번호';
+
+  @override
+  String get resetButton => '재설정';
+
+  @override
+  String get resetSuccessMsg => '비밀번호가 재설정되었습니다';
 
   @override
   String get bottom_home => '홈';

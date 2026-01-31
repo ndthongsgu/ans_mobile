@@ -4,6 +4,7 @@ import 'package:ans_mobile/presentation/widgets/app_toast.dart';
 import 'package:ans_mobile/core/theme/grap_theme.dart';
 import 'package:ans_mobile/l10n/app_localizations.dart';
 import 'register_page.dart';
+import 'forgot_password_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -34,7 +35,9 @@ class _LoginPageState extends State<LoginPage> {
       navigator.pushReplacementNamed('/map');
     } catch (e) {
       messenger.hideCurrentSnackBar();
-      AppToast.showError(context, e.toString());
+      var s = e.toString();
+      while (s.startsWith('Exception: ')) s = s.substring('Exception: '.length);
+      AppToast.showError(context, s);
     } finally {
       if (mounted) setState(() => _loading = false);
     }
@@ -147,22 +150,8 @@ class _LoginPageState extends State<LoginPage> {
                               TextButton(
                                 onPressed: _loading
                                     ? null
-                                    : () async {
-                                        final navigator = Navigator.of(context);
-                                        final messenger = ScaffoldMessenger.of(context);
-                                        final theme = Theme.of(context);
-                                        if (mounted) setState(() => _loading = true);
-                                        try {
-                                          await AuthService.instance.quickLoginDemo();
-                                          messenger.hideCurrentSnackBar();
-                                          AppToast.showSuccess(context, AppLocalizations.of(context)!.loginDemoSuccessMsg);
-                                          navigator.pushReplacementNamed('/map');
-                                        } catch (e) {
-                                          messenger.hideCurrentSnackBar();
-                                          AppToast.showError(context, e.toString());
-                                        } finally {
-                                          if (mounted) setState(() => _loading = false);
-                                        }
+                                    : () {
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ForgotPasswordPage()));
                                       },
                                 child: Text(AppLocalizations.of(context)!.forgotPassword, style: TextStyle(decoration: TextDecoration.underline, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.w600),),
                               ),

@@ -153,6 +153,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registerSuccessMsg => 'Account created successfully';
 
   @override
+  String get emailVerificationTitle => 'Email verification';
+
+  @override
+  String get emailVerificationDesc => 'Enter the verification code sent to your email';
+
+  @override
+  String get verifyButtonText => 'Verify';
+
+  @override
+  String get resendOtpText => 'Resend code';
+
+  @override
+  String get backToRegister => 'Back to register';
+
+  @override
   String get loginGoogleSuccessMsg => 'Signed in with Google successfully';
 
   @override
@@ -175,6 +190,33 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get forgotPassword => 'Forgot password';
+
+  @override
+  String get forgotPasswordDesc => 'Enter your email to receive a reset code.';
+
+  @override
+  String get sendResetButton => 'Send';
+
+  @override
+  String get resetSentMsg => 'Password reset code sent to email';
+
+  @override
+  String get resetPasswordTitle => 'Reset password';
+
+  @override
+  String get resetPasswordDesc => 'Enter the code sent to your email and choose a new password';
+
+  @override
+  String get otpLabel => 'OTP';
+
+  @override
+  String get newPasswordLabel => 'New password';
+
+  @override
+  String get resetButton => 'Reset';
+
+  @override
+  String get resetSuccessMsg => 'Password reset successful';
 
   @override
   String get bottom_home => 'Home';

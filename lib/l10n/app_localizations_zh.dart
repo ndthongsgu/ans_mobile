@@ -153,6 +153,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get registerSuccessMsg => '账户创建成功';
 
   @override
+  String get emailVerificationTitle => '邮箱验证';
+
+  @override
+  String get emailVerificationDesc => '请输入发送到您邮箱的验证码';
+
+  @override
+  String get verifyButtonText => '验证';
+
+  @override
+  String get resendOtpText => '重新发送验证码';
+
+  @override
+  String get backToRegister => '返回注册';
+
+  @override
   String get loginGoogleSuccessMsg => '使用 Google 登录成功';
 
   @override
@@ -175,6 +190,33 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get forgotPassword => '忘记密码';
+
+  @override
+  String get forgotPasswordDesc => '输入邮箱以接收重置代码。';
+
+  @override
+  String get sendResetButton => '发送';
+
+  @override
+  String get resetSentMsg => '密码重置代码已发送到邮箱';
+
+  @override
+  String get resetPasswordTitle => '重置密码';
+
+  @override
+  String get resetPasswordDesc => '输入发送到您邮箱的代码并设置新密码';
+
+  @override
+  String get otpLabel => '验证码';
+
+  @override
+  String get newPasswordLabel => '新密码';
+
+  @override
+  String get resetButton => '重置';
+
+  @override
+  String get resetSuccessMsg => '密码重置成功';
 
   @override
   String get bottom_home => '首页';

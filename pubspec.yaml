@@ -38,6 +38,7 @@ dependencies:
     sdk: flutter
   shared_preferences: ^2.1.1
   google_sign_in: ^5.4.0
+  http: ^0.13.6
   crypto: ^3.0.2
 
   # OpenStreetMap via flutter_map

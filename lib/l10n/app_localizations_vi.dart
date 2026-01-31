@@ -153,6 +153,21 @@ class AppLocalizationsVi extends AppLocalizations {
   String get registerSuccessMsg => 'Tạo tài khoản thành công';
 
   @override
+  String get emailVerificationTitle => 'Xác thực email';
+
+  @override
+  String get emailVerificationDesc => 'Nhập mã OTP đã gửi tới email của bạn';
+
+  @override
+  String get verifyButtonText => 'Xác thực';
+
+  @override
+  String get resendOtpText => 'Gửi lại mã';
+
+  @override
+  String get backToRegister => 'Trở lại đăng ký';
+
+  @override
   String get loginGoogleSuccessMsg => 'Đăng nhập bằng Google thành công';
 
   @override
@@ -175,6 +190,33 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get forgotPassword => 'Quên mật khẩu';
+
+  @override
+  String get forgotPasswordDesc => 'Nhập email để nhận mã đặt lại mật khẩu.';
+
+  @override
+  String get sendResetButton => 'Gửi';
+
+  @override
+  String get resetSentMsg => 'Mã đặt lại mật khẩu đã được gửi tới email';
+
+  @override
+  String get resetPasswordTitle => 'Đặt lại mật khẩu';
+
+  @override
+  String get resetPasswordDesc => 'Nhập mã được gửi tới email và nhập mật khẩu mới';
+
+  @override
+  String get otpLabel => 'Mã OTP';
+
+  @override
+  String get newPasswordLabel => 'Mật khẩu mới';
+
+  @override
+  String get resetButton => 'Đặt lại';
+
+  @override
+  String get resetSuccessMsg => 'Đặt lại mật khẩu thành công';
 
   @override
   String get bottom_home => 'Trang chủ';

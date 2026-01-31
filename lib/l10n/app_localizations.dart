@@ -375,6 +375,36 @@ abstract class AppLocalizations {
   /// **'Account created successfully'**
   String get registerSuccessMsg;
 
+  /// Title for email verification screen
+  ///
+  /// In en, this message translates to:
+  /// **'Email verification'**
+  String get emailVerificationTitle;
+
+  /// Description text for email verification screen
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the verification code sent to your email'**
+  String get emailVerificationDesc;
+
+  /// Text for the verification button
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get verifyButtonText;
+
+  /// Text for resend OTP action
+  ///
+  /// In en, this message translates to:
+  /// **'Resend code'**
+  String get resendOtpText;
+
+  /// Label to go back to the registration screen
+  ///
+  /// In en, this message translates to:
+  /// **'Back to register'**
+  String get backToRegister;
+
   /// No description provided for @loginGoogleSuccessMsg.
   ///
   /// In en, this message translates to:
@@ -422,6 +452,33 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Forgot password'**
   String get forgotPassword;
+
+  /// Description for forgot password screen
+  String get forgotPasswordDesc;
+
+  /// Label for send/reset button on forgot-password screen
+  String get sendResetButton;
+
+  /// Message shown when reset email sent
+  String get resetSentMsg;
+
+  /// Title for reset password screen
+  String get resetPasswordTitle;
+
+  /// Description for reset password screen
+  String get resetPasswordDesc;
+
+  /// Label for OTP input
+  String get otpLabel;
+
+  /// Label for new password input
+  String get newPasswordLabel;
+
+  /// Text for reset button
+  String get resetButton;
+
+  /// Message shown when reset is successful
+  String get resetSuccessMsg;
 
   /// No description provided for @bottom_home.
   ///

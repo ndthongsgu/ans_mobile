@@ -18,9 +18,19 @@ class _RegisterPageState extends State<RegisterPage> {
   final _emailCtrl = TextEditingController();
   final _nameCtrl = TextEditingController();
   final _passCtrl = TextEditingController();
+  final _confirmPassCtrl = TextEditingController();
   bool _loading = false;
 
   void _showError(String msg) => AppToast.showError(context, msg);
+
+  @override
+  void dispose() {
+    _emailCtrl.dispose();
+    _nameCtrl.dispose();
+    _passCtrl.dispose();
+    _confirmPassCtrl.dispose();
+    super.dispose();
+  }
 
   Future<void> _register() async {
     if (!_formKey.currentState!.validate()) return;
@@ -89,6 +99,17 @@ class _RegisterPageState extends State<RegisterPage> {
                               decoration: InputDecoration(prefixIcon: const Icon(Icons.lock_outline), labelText: AppLocalizations.of(context)!.passwordLabel, border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
                               obscureText: true,
                               validator: (v) => (v == null || v.length < 6) ? AppLocalizations.of(context)!.passwordMinLengthMsg : null,
+                            ),
+                            const SizedBox(height: 8),
+                            TextFormField(
+                              controller: _confirmPassCtrl,
+                              decoration: InputDecoration(prefixIcon: const Icon(Icons.lock_outline), labelText: AppLocalizations.of(context)!.confirmPasswordLabel, border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
+                              obscureText: true,
+                              validator: (v) {
+                                if (v == null || v.isEmpty) return AppLocalizations.of(context)!.confirmPasswordRequiredMsg;
+                                if (v != _passCtrl.text) return AppLocalizations.of(context)!.passwordMismatchMsg;
+                                return null;
+                              },
                             ),
                             const SizedBox(height: 16),
                             SizedBox(

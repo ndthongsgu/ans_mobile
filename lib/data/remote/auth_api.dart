@@ -4,12 +4,13 @@ import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:ans_mobile/core/services/locale_provider.dart';
 import 'api_client.dart';
+import 'http_client.dart';
 
 class AuthApi {
   AuthApi._private();
   static final AuthApi instance = AuthApi._private();
 
-  static const _timeout = Duration(seconds: 10);
+  static const _timeout = Duration(seconds: 60);
 
   Uri _uri(String path) => Uri.parse('${ApiClient.instance.baseUrl}$path');
 
@@ -20,6 +21,15 @@ class AuthApi {
       'Accept-Language': defaultLocale,
       if (headers != null) ...headers,
     };
+    // Use HttpClientWithTokenRefresh if this is an authenticated request
+    if (mergedHeaders.containsKey('Authorization')) {
+      return await HttpClientWithTokenRefresh.instance.post(
+        _uri(path),
+        headers: mergedHeaders,
+        body: body,
+        timeout: _timeout,
+      );
+    }
     try {
       final res = await http.post(_uri(path), headers: mergedHeaders, body: body).timeout(_timeout);
       return res;
@@ -34,6 +44,14 @@ class AuthApi {
       'Accept-Language': defaultLocale,
       if (headers != null) ...headers,
     };
+    // Use HttpClientWithTokenRefresh if this is an authenticated request
+    if (mergedHeaders.containsKey('Authorization')) {
+      return await HttpClientWithTokenRefresh.instance.get(
+        _uri(path),
+        headers: mergedHeaders,
+        timeout: _timeout,
+      );
+    }
     try {
       final res = await http.get(_uri(path), headers: mergedHeaders).timeout(_timeout);
       return res;
@@ -44,7 +62,7 @@ class AuthApi {
 
   Future<Map<String, dynamic>> login({required String email, required String password}) async {
     final res = await _postReq(
-      '/customer/auth/login',
+      '/mobile/auth/login',
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'email': email, 'password': password}),
     );
@@ -52,8 +70,16 @@ class AuthApi {
       throw Exception(_parseError(res));
     }
     try {
-      return Map<String, dynamic>.from(jsonDecode(res.body) as Map);
+      final js = Map<String, dynamic>.from(jsonDecode(res.body) as Map);
+      // Ensure tokens exist
+      final access = js['accessToken'];
+      final refresh = js['refreshToken'];
+      if (access == null || refresh == null || access is! String || refresh is! String) {
+        throw Exception('Login response missing tokens');
+      }
+      return js;
     } catch (e) {
+      if (e is Exception) rethrow;
       throw Exception('Invalid response from server during login');
     }
   }
@@ -61,7 +87,7 @@ class AuthApi {
   Future<Map<String, dynamic>> register({String? username, required String email, required String password, required String full_name}) async {
     final payload = <String, dynamic>{'username': username, 'email': email, 'password': password, 'full_name': full_name};
     final res = await _postReq(
-      '/customer/auth/register',
+      '/mobile/auth/register',
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(payload),
     );
@@ -78,7 +104,7 @@ class AuthApi {
 
   Future<Map<String, dynamic>> verify({required String email, required String otp}) async {
     final res = await _postReq(
-      '/customer/auth/verify',
+      '/mobile/auth/verify',
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'email': email, 'otp': otp}),
     );
@@ -86,15 +112,22 @@ class AuthApi {
       throw Exception(_parseError(res));
     }
     try {
-      return Map<String, dynamic>.from(jsonDecode(res.body) as Map);
+      final js = Map<String, dynamic>.from(jsonDecode(res.body) as Map);
+      final access = js['accessToken'];
+      final refresh = js['refreshToken'];
+      if (access == null || refresh == null || access is! String || refresh is! String) {
+        throw Exception('Verify response missing tokens');
+      }
+      return js;
     } catch (e) {
+      if (e is Exception) rethrow;
       throw Exception('Invalid response from server during verify');
     }
   }
 
   Future<Map<String, dynamic>> me(String accessToken) async {
     final res = await _getReq(
-      '/customer/auth/me',
+      '/mobile/auth/me',
       headers: {'Authorization': 'Bearer $accessToken', 'Accept': 'application/json'},
     );
     if (res.statusCode >= 400) {
@@ -109,7 +142,7 @@ class AuthApi {
 
   Future<Map<String, dynamic>> refresh(String refreshToken) async {
     final res = await _postReq(
-      '/customer/auth/refresh',
+      '/mobile/auth/refresh',
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'refreshToken': refreshToken}),
     );
@@ -125,7 +158,7 @@ class AuthApi {
 
   Future<Map<String, dynamic>> forgotPassword({required String email}) async {
     final res = await _postReq(
-      '/customer/auth/forgot-password',
+      '/mobile/auth/forgot-password',
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'email': email}),
     );
@@ -142,7 +175,7 @@ class AuthApi {
 
   Future<Map<String, dynamic>> resetPassword({required String email, required String otp, required String newPassword}) async {
     final res = await _postReq(
-      '/customer/auth/reset-password',
+      '/mobile/auth/reset-password',
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'email': email, 'otp': otp, 'new_password': newPassword}),
     );
@@ -153,6 +186,29 @@ class AuthApi {
       return Map<String, dynamic>.from(jsonDecode(res.body) as Map);
     } catch (e) {
       return {'message': 'Password reset successful'};
+    }
+  }
+
+  Future<Map<String, dynamic>> googleLogin({required String idToken}) async {
+    final res = await _postReq(
+      '/mobile/auth/google-login',
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'idToken': idToken}),
+    );
+    if (res.statusCode >= 400) {
+      throw Exception(_parseError(res));
+    }
+    try {
+      final js = Map<String, dynamic>.from(jsonDecode(res.body) as Map);
+      final access = js['accessToken'];
+      final refresh = js['refreshToken'];
+      if (access == null || refresh == null || access is! String || refresh is! String) {
+        throw Exception('Google login response missing tokens');
+      }
+      return js;
+    } catch (e) {
+      if (e is Exception) rethrow;
+      throw Exception('Invalid response from server during Google login');
     }
   }
 

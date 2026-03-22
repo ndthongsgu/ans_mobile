@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // A small PageTransitionsBuilder that disables the default page transition animations.
 class _NoTransitionsBuilder extends PageTransitionsBuilder {
@@ -34,7 +35,7 @@ ThemeData grapTheme() {
     surface: Colors.white,
   );
 
-  final baseText = Typography.material2018().black.apply(bodyColor: Colors.black87);
+  final notoSansTextTheme = GoogleFonts.notoSansTextTheme();
 
   return ThemeData(
     useMaterial3: true,
@@ -70,8 +71,8 @@ ThemeData grapTheme() {
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
-    // Use local Noto Sans font for better multilingual coverage
-    fontFamily: 'Noto Sans',
+    // Use Google Fonts Noto Sans for better multilingual coverage
+    fontFamily: GoogleFonts.notoSans().fontFamily,
     pageTransitionsTheme: const PageTransitionsTheme(builders: {
       TargetPlatform.android: const _NoTransitionsBuilder(),
       TargetPlatform.iOS: const _NoTransitionsBuilder(),
@@ -79,10 +80,10 @@ ThemeData grapTheme() {
       TargetPlatform.macOS: const _NoTransitionsBuilder(),
       TargetPlatform.windows: const _NoTransitionsBuilder(),
     }),
-    textTheme: baseText.copyWith(
-      titleLarge: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, fontFamily: 'Noto Sans'),
-      headlineMedium: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'Noto Sans'),
-      bodyLarge: const TextStyle(fontSize: 14, color: Colors.black87, fontFamily: 'Noto Sans'),
+    textTheme: notoSansTextTheme.copyWith(
+      titleLarge: GoogleFonts.notoSans(fontSize: 20, fontWeight: FontWeight.w600),
+      headlineMedium: GoogleFonts.notoSans(fontSize: 18, fontWeight: FontWeight.bold),
+      bodyLarge: GoogleFonts.notoSans(fontSize: 14, color: Colors.black87),
     ),
   );
 }

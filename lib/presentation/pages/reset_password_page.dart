@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ans_mobile/core/services/auth_service.dart';
 import 'package:ans_mobile/presentation/widgets/app_toast.dart';
 import 'package:ans_mobile/l10n/app_localizations.dart';
+import 'package:ans_mobile/core/theme/grap_theme.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   final String email;
@@ -95,43 +96,71 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     final resendLabel = _secondsRemaining > 0 ? '${locale?.resendOtpText ?? 'Resend'} (${_formatTime(_secondsRemaining)})' : (locale?.resendOtpText ?? 'Resend');
 
     return Scaffold(
-      appBar: AppBar(title: Text(locale?.resetPasswordTitle ?? 'Reset password')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 12),
-            Text(locale?.resetPasswordDesc ?? 'Enter the code sent to your email and choose a new password'),
-            const SizedBox(height: 12),
-            Text('Mã đã gửi tới: ${widget.email}'),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _otpCtrl,
-              decoration: InputDecoration(prefixIcon: const Icon(Icons.confirmation_number_outlined), labelText: locale?.otpLabel ?? 'OTP'),
-              keyboardType: TextInputType.number,
+      body: Container(
+        decoration: BoxDecoration(gradient: kGrapGradient),
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 540),
+              child: Card(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                elevation: 8,
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(width: 64, height: 64, child: Image.asset('lib/assets/imgs/favicon.png')),
+                      const SizedBox(height: 12),
+                      Text(locale?.resetPasswordTitle ?? 'Reset password', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                      const SizedBox(height: 8),
+                      Text(locale?.resetPasswordDesc ?? 'Enter the code sent to your email and choose a new password', textAlign: TextAlign.center),
+                      const SizedBox(height: 12),
+
+                      Align(alignment: Alignment.centerLeft, child: Text('${locale?.codeSentTo ?? 'Code sent to:'} ${widget.email}', style: const TextStyle(color: Colors.black54))),
+                      const SizedBox(height: 12),
+
+                      TextField(
+                        controller: _otpCtrl,
+                        decoration: InputDecoration(prefixIcon: const Icon(Icons.confirmation_number_outlined), labelText: locale?.otpLabel ?? 'OTP'),
+                        keyboardType: TextInputType.number,
+                      ),
+                      const SizedBox(height: 8),
+                      TextField(
+                        controller: _passCtrl,
+                        decoration: InputDecoration(prefixIcon: const Icon(Icons.lock_outline), labelText: locale?.newPasswordLabel ?? 'New password'),
+                        obscureText: true,
+                      ),
+                      const SizedBox(height: 16),
+
+                      SizedBox(
+                        width: double.infinity,
+                        height: 52,
+                        child: ElevatedButton(
+                          onPressed: _loading ? null : _reset,
+                          style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)), backgroundColor: Theme.of(context).colorScheme.primary),
+                          child: _loading ? const CircularProgressIndicator(color: Colors.white) : Text(locale?.resetButton ?? 'Reset', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+
+                      const SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextButton(
+                            onPressed: (_resendLoading || _secondsRemaining > 0) ? null : _resend,
+                            child: _resendLoading ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator()) : Text(resendLabel),
+                          ),
+                          TextButton(onPressed: () => Navigator.of(context).pushReplacementNamed('/login'), child: Text(locale?.backToLogin ?? 'Back to login')),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
-            const SizedBox(height: 8),
-            TextField(
-              controller: _passCtrl,
-              decoration: InputDecoration(prefixIcon: const Icon(Icons.lock_outline), labelText: locale?.newPasswordLabel ?? 'New password'),
-              obscureText: true,
-            ),
-            const SizedBox(height: 16),
-            SizedBox(
-              width: double.infinity,
-              height: 52,
-              child: ElevatedButton(onPressed: _loading ? null : _reset, child: _loading ? const CircularProgressIndicator(color: Colors.white) : Text(locale?.resetButton ?? 'Reset')),
-            ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(onPressed: (_resendLoading || _secondsRemaining > 0) ? null : _resend, child: _resendLoading ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator()) : Text(resendLabel)),
-                TextButton(onPressed: () => Navigator.of(context).pushReplacementNamed('/login'), child: Text(locale?.backToLogin ?? 'Back to login')),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
     );

@@ -117,6 +117,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get language_ko_label => '한국어';
 
   @override
+  String get language_ja_label => '日本語';
+
+  @override
   String get loginButton => 'Log in';
 
   @override
@@ -135,6 +138,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordLabel => 'Password';
 
   @override
+  String get confirmPasswordLabel => 'Confirm password';
+
+  @override
+  String get confirmPasswordRequiredMsg => 'Please confirm your password';
+
+  @override
+  String get passwordMismatchMsg => 'Passwords do not match';
+
+  @override
   String get enterNameMsg => 'Enter full name';
 
   @override
@@ -151,21 +163,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get registerSuccessMsg => 'Account created successfully';
-
-  @override
-  String get emailVerificationTitle => 'Email verification';
-
-  @override
-  String get emailVerificationDesc => 'Enter the verification code sent to your email';
-
-  @override
-  String get verifyButtonText => 'Verify';
-
-  @override
-  String get resendOtpText => 'Resend code';
-
-  @override
-  String get backToRegister => 'Back to register';
 
   @override
   String get loginGoogleSuccessMsg => 'Signed in with Google successfully';
@@ -192,19 +189,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forgotPassword => 'Forgot password';
 
   @override
+  String get buyPackageTitle => 'Buy package';
+
+  @override
+  String get noActivePackageMsg => 'You don\'t have an active package. Please purchase a package to continue.';
+
+  @override
+  String get buyNowToast => 'Purchase flow will be implemented soon';
+
+  @override
+  String get buyNowButton => 'Buy now';
+
+  @override
+  String get skipPurchase => 'Skip (trial)';
+
+  @override
   String get forgotPasswordDesc => 'Enter your email to receive a reset code.';
+
+  @override
+  String get resetSentMsg => 'Password reset email sent';
 
   @override
   String get sendResetButton => 'Send';
 
   @override
-  String get resetSentMsg => 'Password reset code sent to email';
+  String get resetSuccessMsg => 'Password reset successful';
+
+  @override
+  String get resendOtpText => 'Resend';
 
   @override
   String get resetPasswordTitle => 'Reset password';
 
   @override
   String get resetPasswordDesc => 'Enter the code sent to your email and choose a new password';
+
+  @override
+  String get codeSentTo => 'Code sent to:';
 
   @override
   String get otpLabel => 'OTP';
@@ -216,7 +237,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resetButton => 'Reset';
 
   @override
-  String get resetSuccessMsg => 'Password reset successful';
+  String get emailVerificationTitle => 'Email verification';
+
+  @override
+  String get emailVerificationDesc => 'Enter the code sent to your email';
+
+  @override
+  String get verifyButtonText => 'Verify';
+
+  @override
+  String get backToRegister => 'Back to register';
 
   @override
   String get bottom_home => 'Home';
@@ -232,4 +262,67 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bottom_settings => 'Settings';
+
+  @override
+  String get ownerLabel => 'Owner:';
+
+  @override
+  String get descriptionTitle => 'Description';
+
+  @override
+  String get contactTitle => 'Contact';
+
+  @override
+  String get phoneLabel => 'Phone';
+
+  @override
+  String get websiteLabel => 'Website';
+
+  @override
+  String get infoTitle => 'Information';
+
+  @override
+  String get openingHoursLabel => 'Opening hours';
+
+  @override
+  String get priceRangeLabel => 'Price range';
+
+  @override
+  String get searchHintText => 'Search store name...';
+
+  @override
+  String get exitAppTitle => 'Exit app?';
+
+  @override
+  String get exitAppConfirm => 'Are you sure you want to exit?';
+
+  @override
+  String get cancelButton => 'Cancel';
+
+  @override
+  String get exitButton => 'Exit';
+
+  @override
+  String get errorPrefix => 'Error: ';
+
+  @override
+  String get retryButton => 'Retry';
+
+  @override
+  String get noStallsMessage => 'No stores found';
+
+  @override
+  String get noSearchResultsMessage => 'No matching stores found';
+
+  @override
+  String get profilePageTitle => 'Profile';
+
+  @override
+  String get userLabel => 'User';
+
+  @override
+  String get editProfileLabel => 'Edit profile';
+
+  @override
+  String get changePasswordLabel => 'Change password';
 }

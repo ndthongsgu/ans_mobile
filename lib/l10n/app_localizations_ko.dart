@@ -117,6 +117,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get language_ko_label => '한국어';
 
   @override
+  String get language_ja_label => '日本語';
+
+  @override
   String get loginButton => '로그인';
 
   @override
@@ -135,6 +138,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get passwordLabel => '비밀번호';
 
   @override
+  String get confirmPasswordLabel => '비밀번호 확인';
+
+  @override
+  String get confirmPasswordRequiredMsg => '비밀번호를 확인하세요';
+
+  @override
+  String get passwordMismatchMsg => '비밀번호가 일치하지 않습니다';
+
+  @override
   String get enterNameMsg => '이름을 입력하세요';
 
   @override
@@ -151,21 +163,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get registerSuccessMsg => '계정 생성 완료';
-
-  @override
-  String get emailVerificationTitle => '이메일 인증';
-
-  @override
-  String get emailVerificationDesc => '이메일로 전송된 인증 코드를 입력하세요';
-
-  @override
-  String get verifyButtonText => '인증';
-
-  @override
-  String get resendOtpText => '코드 재전송';
-
-  @override
-  String get backToRegister => '등록으로 돌아가기';
 
   @override
   String get loginGoogleSuccessMsg => 'Google로 로그인 성공';
@@ -192,22 +189,46 @@ class AppLocalizationsKo extends AppLocalizations {
   String get forgotPassword => '비밀번호를 잊으셨나요?';
 
   @override
-  String get forgotPasswordDesc => '재설정 코드를 받으려면 이메일을 입력하세요.';
+  String get buyPackageTitle => '패키지 구매';
+
+  @override
+  String get noActivePackageMsg => '활성 패키지가 없습니다. 계속하려면 패키지를 구매하세요.';
+
+  @override
+  String get buyNowToast => '구매 기능은 곧 구현됩니다';
+
+  @override
+  String get buyNowButton => '지금 구매';
+
+  @override
+  String get skipPurchase => '건너뛰기 (체험)';
+
+  @override
+  String get forgotPasswordDesc => '리셋 코드를 받으려면 이메일을 입력하세요.';
+
+  @override
+  String get resetSentMsg => '비밀번호 재설정 이메일이 전송되었습니다';
 
   @override
   String get sendResetButton => '전송';
 
   @override
-  String get resetSentMsg => '비밀번호 재설정 코드가 이메일로 전송되었습니다';
+  String get resetSuccessMsg => '비밀번호 재설정 성공';
+
+  @override
+  String get resendOtpText => '재전송';
 
   @override
   String get resetPasswordTitle => '비밀번호 재설정';
 
   @override
-  String get resetPasswordDesc => '이메일로 전송된 코드를 입력하고 새 비밀번호를 설정하세요';
+  String get resetPasswordDesc => '이메일로 전송된 코드를 입력하고 새 비밀번호를 선택하세요';
 
   @override
-  String get otpLabel => '코드';
+  String get codeSentTo => '코드 전송 대상:';
+
+  @override
+  String get otpLabel => 'OTP';
 
   @override
   String get newPasswordLabel => '새 비밀번호';
@@ -216,7 +237,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get resetButton => '재설정';
 
   @override
-  String get resetSuccessMsg => '비밀번호가 재설정되었습니다';
+  String get emailVerificationTitle => '이메일 인증';
+
+  @override
+  String get emailVerificationDesc => '이메일로 전송된 코드를 입력하세요';
+
+  @override
+  String get verifyButtonText => '인증';
+
+  @override
+  String get backToRegister => '등록으로 돌아가기';
 
   @override
   String get bottom_home => '홈';
@@ -232,4 +262,67 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get bottom_settings => '설정';
+
+  @override
+  String get ownerLabel => '사장:';
+
+  @override
+  String get descriptionTitle => '설명';
+
+  @override
+  String get contactTitle => '연락처';
+
+  @override
+  String get phoneLabel => '전화';
+
+  @override
+  String get websiteLabel => '웹사이트';
+
+  @override
+  String get infoTitle => '정보';
+
+  @override
+  String get openingHoursLabel => '영업 시간';
+
+  @override
+  String get priceRangeLabel => '가격대';
+
+  @override
+  String get searchHintText => '가게 이름 검색...';
+
+  @override
+  String get exitAppTitle => '앱을 종료하시겠습니까?';
+
+  @override
+  String get exitAppConfirm => '정말로 앱을 종료하시겠습니까?';
+
+  @override
+  String get cancelButton => '취소';
+
+  @override
+  String get exitButton => '종료';
+
+  @override
+  String get errorPrefix => '오류: ';
+
+  @override
+  String get retryButton => '다시 시도';
+
+  @override
+  String get noStallsMessage => '가게를 찾을 수 없습니다';
+
+  @override
+  String get noSearchResultsMessage => '일치하는 가게를 찾을 수 없습니다';
+
+  @override
+  String get profilePageTitle => '프로필';
+
+  @override
+  String get userLabel => '사용자';
+
+  @override
+  String get editProfileLabel => '프로필 수정';
+
+  @override
+  String get changePasswordLabel => '비밀번호 변경';
 }

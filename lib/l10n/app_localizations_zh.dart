@@ -117,6 +117,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get language_ko_label => '한국어';
 
   @override
+  String get language_ja_label => '日本語';
+
+  @override
   String get loginButton => '登录';
 
   @override
@@ -135,6 +138,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get passwordLabel => '密码';
 
   @override
+  String get confirmPasswordLabel => '确认密码';
+
+  @override
+  String get confirmPasswordRequiredMsg => '请确认密码';
+
+  @override
+  String get passwordMismatchMsg => '密码不匹配';
+
+  @override
   String get enterNameMsg => '请输入姓名';
 
   @override
@@ -151,21 +163,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get registerSuccessMsg => '账户创建成功';
-
-  @override
-  String get emailVerificationTitle => '邮箱验证';
-
-  @override
-  String get emailVerificationDesc => '请输入发送到您邮箱的验证码';
-
-  @override
-  String get verifyButtonText => '验证';
-
-  @override
-  String get resendOtpText => '重新发送验证码';
-
-  @override
-  String get backToRegister => '返回注册';
 
   @override
   String get loginGoogleSuccessMsg => '使用 Google 登录成功';
@@ -192,19 +189,43 @@ class AppLocalizationsZh extends AppLocalizations {
   String get forgotPassword => '忘记密码';
 
   @override
-  String get forgotPasswordDesc => '输入邮箱以接收重置代码。';
+  String get buyPackageTitle => '购买套餐';
+
+  @override
+  String get noActivePackageMsg => '您尚未订购套餐。请购买套餐以继续。';
+
+  @override
+  String get buyNowToast => '购买功能将会实现';
+
+  @override
+  String get buyNowButton => '立即购买';
+
+  @override
+  String get skipPurchase => '跳过（试用）';
+
+  @override
+  String get forgotPasswordDesc => '输入您的电子邮件以接收重置代码。';
+
+  @override
+  String get resetSentMsg => '密码重置邮件已发送';
 
   @override
   String get sendResetButton => '发送';
 
   @override
-  String get resetSentMsg => '密码重置代码已发送到邮箱';
+  String get resetSuccessMsg => '密码重置成功';
+
+  @override
+  String get resendOtpText => '重新发送';
 
   @override
   String get resetPasswordTitle => '重置密码';
 
   @override
-  String get resetPasswordDesc => '输入发送到您邮箱的代码并设置新密码';
+  String get resetPasswordDesc => '输入发送到您邮箱的代码并选择新密码';
+
+  @override
+  String get codeSentTo => '代码已发送至：';
 
   @override
   String get otpLabel => '验证码';
@@ -216,7 +237,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get resetButton => '重置';
 
   @override
-  String get resetSuccessMsg => '密码重置成功';
+  String get emailVerificationTitle => '邮箱验证';
+
+  @override
+  String get emailVerificationDesc => '输入发送到您邮箱的验证码';
+
+  @override
+  String get verifyButtonText => '验证';
+
+  @override
+  String get backToRegister => '返回注册';
 
   @override
   String get bottom_home => '首页';
@@ -232,4 +262,67 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get bottom_settings => '设置';
+
+  @override
+  String get ownerLabel => '老板:';
+
+  @override
+  String get descriptionTitle => '描述';
+
+  @override
+  String get contactTitle => '联系方式';
+
+  @override
+  String get phoneLabel => '电话';
+
+  @override
+  String get websiteLabel => '网站';
+
+  @override
+  String get infoTitle => '信息';
+
+  @override
+  String get openingHoursLabel => '营业时间';
+
+  @override
+  String get priceRangeLabel => '价格范围';
+
+  @override
+  String get searchHintText => '搜索店铺名称...';
+
+  @override
+  String get exitAppTitle => '退出应用？';
+
+  @override
+  String get exitAppConfirm => '确定要退出应用吗？';
+
+  @override
+  String get cancelButton => '取消';
+
+  @override
+  String get exitButton => '退出';
+
+  @override
+  String get errorPrefix => '错误: ';
+
+  @override
+  String get retryButton => '重试';
+
+  @override
+  String get noStallsMessage => '未找到店铺';
+
+  @override
+  String get noSearchResultsMessage => '未找到匹配的店铺';
+
+  @override
+  String get profilePageTitle => '个人资料';
+
+  @override
+  String get userLabel => '用户';
+
+  @override
+  String get editProfileLabel => '编辑个人资料';
+
+  @override
+  String get changePasswordLabel => '修改密码';
 }

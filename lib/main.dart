@@ -10,7 +10,6 @@ import 'presentation/pages/map_page.dart';
 import 'presentation/pages/poi_list_page.dart';
 import 'presentation/pages/poi_detail_page.dart';
 import 'presentation/pages/narration_status_page.dart';
-
 import 'presentation/pages/stats_page.dart';
 import 'presentation/pages/login_page.dart';
 import 'presentation/pages/register_page.dart';

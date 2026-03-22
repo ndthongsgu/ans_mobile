@@ -117,6 +117,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get language_ko_label => '한국어';
 
   @override
+  String get language_ja_label => '日本語';
+
+  @override
   String get loginButton => 'Đăng nhập';
 
   @override
@@ -135,6 +138,15 @@ class AppLocalizationsVi extends AppLocalizations {
   String get passwordLabel => 'Mật khẩu';
 
   @override
+  String get confirmPasswordLabel => 'Nhập lại mật khẩu';
+
+  @override
+  String get confirmPasswordRequiredMsg => 'Vui lòng xác nhận mật khẩu';
+
+  @override
+  String get passwordMismatchMsg => 'Mật khẩu không khớp';
+
+  @override
   String get enterNameMsg => 'Nhập họ tên';
 
   @override
@@ -151,21 +163,6 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get registerSuccessMsg => 'Tạo tài khoản thành công';
-
-  @override
-  String get emailVerificationTitle => 'Xác thực email';
-
-  @override
-  String get emailVerificationDesc => 'Nhập mã OTP đã gửi tới email của bạn';
-
-  @override
-  String get verifyButtonText => 'Xác thực';
-
-  @override
-  String get resendOtpText => 'Gửi lại mã';
-
-  @override
-  String get backToRegister => 'Trở lại đăng ký';
 
   @override
   String get loginGoogleSuccessMsg => 'Đăng nhập bằng Google thành công';
@@ -192,19 +189,43 @@ class AppLocalizationsVi extends AppLocalizations {
   String get forgotPassword => 'Quên mật khẩu';
 
   @override
-  String get forgotPasswordDesc => 'Nhập email để nhận mã đặt lại mật khẩu.';
+  String get buyPackageTitle => 'Mua gói';
 
   @override
-  String get sendResetButton => 'Gửi';
+  String get noActivePackageMsg => 'Bạn chưa đăng ký gói. Vui lòng mua gói để tiếp tục.';
+
+  @override
+  String get buyNowToast => 'Chức năng mua sẽ được triển khai';
+
+  @override
+  String get buyNowButton => 'Mua ngay';
+
+  @override
+  String get skipPurchase => 'Bỏ qua (dùng thử)';
+
+  @override
+  String get forgotPasswordDesc => 'Nhập email để nhận mã đặt lại.';
 
   @override
   String get resetSentMsg => 'Mã đặt lại mật khẩu đã được gửi tới email';
 
   @override
+  String get sendResetButton => 'Gửi';
+
+  @override
+  String get resetSuccessMsg => 'Đặt lại mật khẩu thành công';
+
+  @override
+  String get resendOtpText => 'Gửi lại mã';
+
+  @override
   String get resetPasswordTitle => 'Đặt lại mật khẩu';
 
   @override
-  String get resetPasswordDesc => 'Nhập mã được gửi tới email và nhập mật khẩu mới';
+  String get resetPasswordDesc => 'Nhập mã đã gửi đến email của bạn và chọn mật khẩu mới';
+
+  @override
+  String get codeSentTo => 'Mã đã gửi tới:';
 
   @override
   String get otpLabel => 'Mã OTP';
@@ -216,7 +237,16 @@ class AppLocalizationsVi extends AppLocalizations {
   String get resetButton => 'Đặt lại';
 
   @override
-  String get resetSuccessMsg => 'Đặt lại mật khẩu thành công';
+  String get emailVerificationTitle => 'Xác thực email';
+
+  @override
+  String get emailVerificationDesc => 'Nhập mã OTP đã gửi tới email của bạn';
+
+  @override
+  String get verifyButtonText => 'Xác thực';
+
+  @override
+  String get backToRegister => 'Trở lại đăng ký';
 
   @override
   String get bottom_home => 'Trang chủ';
@@ -232,4 +262,67 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get bottom_settings => 'Cài đặt';
+
+  @override
+  String get ownerLabel => 'Chủ quán:';
+
+  @override
+  String get descriptionTitle => 'Mô tả';
+
+  @override
+  String get contactTitle => 'Liên hệ';
+
+  @override
+  String get phoneLabel => 'Điện thoại';
+
+  @override
+  String get websiteLabel => 'Website';
+
+  @override
+  String get infoTitle => 'Thông tin';
+
+  @override
+  String get openingHoursLabel => 'Giờ mở cửa';
+
+  @override
+  String get priceRangeLabel => 'Mức giá';
+
+  @override
+  String get searchHintText => 'Tìm kiếm tên quán...';
+
+  @override
+  String get exitAppTitle => 'Thoát ứng dụng?';
+
+  @override
+  String get exitAppConfirm => 'Bạn có chắc muốn thoát không?';
+
+  @override
+  String get cancelButton => 'Hủy';
+
+  @override
+  String get exitButton => 'Thoát';
+
+  @override
+  String get errorPrefix => 'Lỗi: ';
+
+  @override
+  String get retryButton => 'Thử lại';
+
+  @override
+  String get noStallsMessage => 'Không có quán ăn nào';
+
+  @override
+  String get noSearchResultsMessage => 'Không tìm thấy quán nào phù hợp';
+
+  @override
+  String get profilePageTitle => 'Trang cá nhân';
+
+  @override
+  String get userLabel => 'Người dùng';
+
+  @override
+  String get editProfileLabel => 'Chỉnh sửa hồ sơ';
+
+  @override
+  String get changePasswordLabel => 'Đổi mật khẩu';
 }

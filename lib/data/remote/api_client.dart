@@ -1,4 +1,5 @@
 import 'auth_api.dart';
+import 'poi_api.dart';
 
 class ApiClient {
   ApiClient._private();
@@ -25,4 +26,10 @@ class ApiClient {
   Future<Map<String, dynamic>> me(String accessToken) => AuthApi.instance.me(accessToken);
 
   Future<Map<String, dynamic>> refresh(String refreshToken) => AuthApi.instance.refresh(refreshToken);
+
+  Future<Map<String, dynamic>> googleLogin({required String idToken}) => AuthApi.instance.googleLogin(idToken: idToken);
+
+  Future<List<Map<String, dynamic>>> listStalls(String accessToken, {String? search}) => PoiApi.instance.listStalls(accessToken, search: search);
+
+  Future<List<Map<String, dynamic>>> getStallContents(String stallId, String accessToken) => PoiApi.instance.getStallContents(stallId, accessToken);
 }

@@ -23,11 +23,11 @@ class PoiCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Container(
-                  width: 64,
-                  height: 64,
+                  width: 80,
+                  height: 80,
                   color: colorScheme.primary.withAlpha(30),
-                  child: poi.thumbnailUrl != null
-                      ? Image.network(poi.thumbnailUrl!, fit: BoxFit.cover)
+                  child: poi.coverImage != null
+                      ? Image.network(poi.coverImage!, fit: BoxFit.cover)
                       : Icon(Icons.restaurant, color: colorScheme.primary, size: 36),
                 ),
               ),
@@ -36,14 +36,42 @@ class PoiCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(poi.name, style: TextStyle(color: colorScheme.onSurface, fontWeight: FontWeight.w600)),
-                    const SizedBox(height: 6),
-                    Text(
-                      poi.description,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: colorScheme.onSurface.withAlpha(180)),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            poi.name,
+                            style: TextStyle(color: colorScheme.onSurface, fontWeight: FontWeight.w600, fontSize: 15),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
+                    const SizedBox(height: 4),
+                    if (poi.category != null)
+                      Text(
+                        poi.category!,
+                        style: TextStyle(color: colorScheme.onSurface.withAlpha(180), fontSize: 12),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    const SizedBox(height: 4),
+                    if (poi.priceRange != null)
+                      Text(
+                        poi.priceRange!,
+                        style: TextStyle(color: colorScheme.primary, fontSize: 13, fontWeight: FontWeight.w500),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    const SizedBox(height: 4),
+                    if (poi.openingHours != null)
+                      Text(
+                        poi.openingHours!,
+                        style: TextStyle(color: colorScheme.onSurface.withAlpha(180), fontSize: 12),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                   ],
                 ),
               ),

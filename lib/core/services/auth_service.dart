@@ -59,6 +59,7 @@ class AuthService extends ChangeNotifier {
     if (access != null) {
       try {
         final me = await ApiClient.instance.me(access);
+        _me = me;
         _user = _profileFromMe(me);
         await _saveUserToPrefs();
       } catch (e) {
@@ -68,6 +69,7 @@ class AuthService extends ChangeNotifier {
             final tokens = await ApiClient.instance.refresh(refresh);
             await _storeTokens(tokens['accessToken'] as String, tokens['refreshToken'] as String);
             final me2 = await ApiClient.instance.me(tokens['accessToken'] as String);
+            _me = me2;
             _user = _profileFromMe(me2);
             await _saveUserToPrefs();
           } catch (_) {
@@ -96,10 +98,12 @@ class AuthService extends ChangeNotifier {
   Future<void> verifyAndComplete({required String email, required String otp}) async {
     try {
       final res = await ApiClient.instance.verify(email: email, otp: otp);
-      final access = res['accessToken'] as String;
-      final refresh = res['refreshToken'] as String;
+      final access = res['accessToken'] as String?;
+      final refresh = res['refreshToken'] as String?;
+      if (access == null || refresh == null) throw Exception('Verify failed: missing tokens');
       await _storeTokens(access, refresh);
       final me = await ApiClient.instance.me(access);
+      _me = me;
       _user = _profileFromMe(me);
       await _saveUserToPrefs();
       notifyListeners();
@@ -132,10 +136,12 @@ class AuthService extends ChangeNotifier {
   Future<void> signInWithEmail({required String email, required String password}) async {
     try {
       final res = await ApiClient.instance.login(email: email, password: password);
-      final access = res['accessToken'] as String;
-      final refresh = res['refreshToken'] as String;
+      final access = res['accessToken'] as String?;
+      final refresh = res['refreshToken'] as String?;
+      if (access == null || refresh == null) throw Exception('Login failed: missing tokens');
       await _storeTokens(access, refresh);
       final me = await ApiClient.instance.me(access);
+      _me = me;
       _user = _profileFromMe(me);
       await _saveUserToPrefs();
       notifyListeners();
@@ -144,14 +150,84 @@ class AuthService extends ChangeNotifier {
     }
   }
 
+  /// Returns stored access token (if any)
+  String? get accessToken => _prefs.getString(_kAccessTokenKey);
+
+  /// Public method to refresh tokens - used by HTTP client interceptor
+  Future<bool> refreshAccessToken() async {
+    try {
+      final refresh = _prefs.getString(_kRefreshTokenKey);
+      if (refresh == null) return false;
+      
+      final res = await ApiClient.instance.refresh(refresh);
+      final access = res['accessToken'] as String?;
+      final newRefresh = res['refreshToken'] as String?;
+      
+      if (access == null || newRefresh == null) return false;
+      
+      await _storeTokens(access, newRefresh);
+      return true;
+    } catch (_) {
+      // Refresh failed - log out the user
+      await signOut();
+      return false;
+    }
+  }
+
+  /// Get refresh token (used by HTTP client)
+  String? getRefreshToken() => _prefs.getString(_kRefreshTokenKey);
+
+  // --- Subscription helpers -------------------------------------------------
+  Map<String, dynamic>? _me;
+  Map<String, dynamic>? get me => _me;
+
+  Future<void> _fetchMeFromApi() async {
+    final access = _prefs.getString(_kAccessTokenKey);
+    if (access == null) return;
+    try {
+      final current = await ApiClient.instance.me(access);
+      _me = current;
+      _user = _profileFromMe(current);
+      await _saveUserToPrefs();
+      notifyListeners();
+    } catch (_) {
+      // ignore network/errors here
+    }
+  }
+
+
+
   Future<void> signInWithGoogle() async {
-    final googleSignIn = GoogleSignIn(scopes: ['email']);
-    final acc = await googleSignIn.signIn();
-    if (acc == null) throw Exception('Quá trình đăng nhập Google bị huỷ');
-    final idStr = acc.id;
-    _user = UserProfile(id: idStr, email: acc.email, full_name: acc.displayName);
-    await _saveUserToPrefs();
-    notifyListeners();
+    try {
+      final googleSignIn = GoogleSignIn(
+        scopes: ['email', 'profile'],
+        serverClientId: '350012144118-96dcm1mdupduqkmbsbnil2f1d5lh6hub.apps.googleusercontent.com', // Replace with your server client ID
+      );
+      final acc = await googleSignIn.signIn();
+      if (acc == null) throw Exception('Quá trình đăng nhập Google bị huỷ');
+      
+      // Get the authentication object to obtain ID token
+      final auth = await acc.authentication;
+      final idToken = auth.idToken;
+      
+      if (idToken == null) throw Exception('Không thể lấy Google ID token');
+      
+      // Send to backend for authentication
+      final res = await ApiClient.instance.googleLogin(idToken: idToken);
+      final access = res['accessToken'] as String?;
+      final refresh = res['refreshToken'] as String?;
+      
+      if (access == null || refresh == null) throw Exception('Google login failed: missing tokens');
+      
+      await _storeTokens(access, refresh);
+      final me = await ApiClient.instance.me(access);
+      _me = me;
+      _user = _profileFromMe(me);
+      await _saveUserToPrefs();
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<void> signOut() async {

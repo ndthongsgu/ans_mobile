@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
+import 'app_localizations_ja.dart';
 import 'app_localizations_ko.dart';
 import 'app_localizations_vi.dart';
 import 'app_localizations_zh.dart';
@@ -94,6 +95,7 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
+    Locale('ja'),
     Locale('ko'),
     Locale('vi'),
     Locale('zh')
@@ -339,6 +341,24 @@ abstract class AppLocalizations {
   /// **'Password'**
   String get passwordLabel;
 
+  /// No description provided for @confirmPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get confirmPasswordLabel;
+
+  /// No description provided for @confirmPasswordRequiredMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Please confirm your password'**
+  String get confirmPasswordRequiredMsg;
+
+  /// No description provided for @passwordMismatchMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordMismatchMsg;
+
   /// No description provided for @enterNameMsg.
   ///
   /// In en, this message translates to:
@@ -374,36 +394,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Account created successfully'**
   String get registerSuccessMsg;
-
-  /// Title for email verification screen
-  ///
-  /// In en, this message translates to:
-  /// **'Email verification'**
-  String get emailVerificationTitle;
-
-  /// Description text for email verification screen
-  ///
-  /// In en, this message translates to:
-  /// **'Enter the verification code sent to your email'**
-  String get emailVerificationDesc;
-
-  /// Text for the verification button
-  ///
-  /// In en, this message translates to:
-  /// **'Verify'**
-  String get verifyButtonText;
-
-  /// Text for resend OTP action
-  ///
-  /// In en, this message translates to:
-  /// **'Resend code'**
-  String get resendOtpText;
-
-  /// Label to go back to the registration screen
-  ///
-  /// In en, this message translates to:
-  /// **'Back to register'**
-  String get backToRegister;
 
   /// No description provided for @loginGoogleSuccessMsg.
   ///
@@ -453,32 +443,125 @@ abstract class AppLocalizations {
   /// **'Forgot password'**
   String get forgotPassword;
 
-  /// Description for forgot password screen
+  /// No description provided for @buyPackageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy package'**
+  String get buyPackageTitle;
+
+  /// No description provided for @noActivePackageMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t have an active package. Please purchase a package to continue.'**
+  String get noActivePackageMsg;
+
+  /// No description provided for @buyNowToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase flow will be implemented soon'**
+  String get buyNowToast;
+
+  /// No description provided for @buyNowButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy now'**
+  String get buyNowButton;
+
+  /// No description provided for @skipPurchase.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip (trial)'**
+  String get skipPurchase;
+
+  /// No description provided for @forgotPasswordDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email to receive a reset code.'**
   String get forgotPasswordDesc;
 
-  /// Label for send/reset button on forgot-password screen
-  String get sendResetButton;
-
-  /// Message shown when reset email sent
+  /// No description provided for @resetSentMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset email sent'**
   String get resetSentMsg;
 
-  /// Title for reset password screen
+  /// No description provided for @sendResetButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get sendResetButton;
+
+  /// No description provided for @resetSuccessMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset successful'**
+  String get resetSuccessMsg;
+
+  /// No description provided for @resendOtpText.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend'**
+  String get resendOtpText;
+
+  /// No description provided for @resetPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset password'**
   String get resetPasswordTitle;
 
-  /// Description for reset password screen
+  /// No description provided for @resetPasswordDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the code sent to your email and choose a new password'**
   String get resetPasswordDesc;
 
-  /// Label for OTP input
+  /// No description provided for @codeSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Code sent to:'**
+  String get codeSentTo;
+
+  /// No description provided for @otpLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP'**
   String get otpLabel;
 
-  /// Label for new password input
+  /// No description provided for @newPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
   String get newPasswordLabel;
 
-  /// Text for reset button
+  /// No description provided for @resetButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
   String get resetButton;
 
-  /// Message shown when reset is successful
-  String get resetSuccessMsg;
+  /// No description provided for @emailVerificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Email verification'**
+  String get emailVerificationTitle;
+
+  /// No description provided for @emailVerificationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the code sent to your email'**
+  String get emailVerificationDesc;
+
+  /// No description provided for @verifyButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get verifyButtonText;
+
+  /// No description provided for @backToRegister.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to register'**
+  String get backToRegister;
 
   /// No description provided for @bottom_home.
   ///
@@ -509,6 +592,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get bottom_settings;
+
+  /// No description provided for @ownerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner:'**
+  String get ownerLabel;
+
+  /// No description provided for @descriptionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get descriptionTitle;
+
+  /// No description provided for @contactTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get contactTitle;
+
+  /// No description provided for @phoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phoneLabel;
+
+  /// No description provided for @websiteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Website'**
+  String get websiteLabel;
+
+  /// No description provided for @infoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Information'**
+  String get infoTitle;
+
+  /// No description provided for @openingHoursLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Opening hours'**
+  String get openingHoursLabel;
+
+  /// No description provided for @priceRangeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Price range'**
+  String get priceRangeLabel;
+
+  /// No description provided for @searchHintText.
+  ///
+  /// In en, this message translates to:
+  /// **'Search store name...'**
+  String get searchHintText;
+
+  /// No description provided for @exitAppTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit app?'**
+  String get exitAppTitle;
+
+  /// No description provided for @exitAppConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to exit?'**
+  String get exitAppConfirm;
+
+  /// No description provided for @cancelButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancelButton;
+
+  /// No description provided for @exitButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get exitButton;
+
+  /// No description provided for @errorPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'Error: '**
+  String get errorPrefix;
+
+  /// No description provided for @retryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retryButton;
+
+  /// No description provided for @noStallsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'No stores found'**
+  String get noStallsMessage;
+
+  /// No description provided for @noSearchResultsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching stores found'**
+  String get noSearchResultsMessage;
+
+  /// No description provided for @profilePageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profilePageTitle;
+
+  /// No description provided for @userLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get userLabel;
+
+  /// No description provided for @editProfileLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get editProfileLabel;
+
+  /// No description provided for @changePasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get changePasswordLabel;
+
+  /// No description provided for @language_ja_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Japanese'**
+  String get language_ja_label;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -520,7 +735,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'ko', 'vi', 'zh'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'ja', 'ko', 'vi', 'zh'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -532,6 +747,7 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en': return AppLocalizationsEn();
+    case 'ja': return AppLocalizationsJa();
     case 'ko': return AppLocalizationsKo();
     case 'vi': return AppLocalizationsVi();
     case 'zh': return AppLocalizationsZh();

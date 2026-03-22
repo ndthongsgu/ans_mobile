@@ -102,7 +102,7 @@ class _ToastWidgetState extends State<_ToastWidget> with SingleTickerProviderSta
                   Icon(widget.icon, color: Colors.white),
                   const SizedBox(width: 12),
                 ],
-                Expanded(child: Text(widget.message, style: const TextStyle(color: Colors.white))),
+                Expanded(child: Text(widget.message, maxLines: 3, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white))),
               ],
             ),
           ),

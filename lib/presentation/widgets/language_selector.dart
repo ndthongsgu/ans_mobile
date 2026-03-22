@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ans_mobile/l10n/app_localizations.dart';
 import '../../core/services/locale_provider.dart';
 
 class _LanguageItem {
@@ -22,11 +21,12 @@ class _LanguageSelectorState extends State<LanguageSelector> {
     final current = provider.locale;
 
     final items = <_LanguageItem>[
-      _LanguageItem(null, AppLocalizations.of(context)!.language_system),
-      _LanguageItem(const Locale('en'), AppLocalizations.of(context)!.language_en_label),
-      _LanguageItem(const Locale('vi'), AppLocalizations.of(context)!.language_vi_label),
-      _LanguageItem(const Locale('zh'), AppLocalizations.of(context)!.language_zh_label),
-      _LanguageItem(const Locale('ko'), AppLocalizations.of(context)!.language_ko_label),
+      const _LanguageItem(null, 'System default'),
+      const _LanguageItem(Locale('en'), 'English'),
+      const _LanguageItem(Locale('vi'), 'Tiếng Việt'),
+      const _LanguageItem(Locale('ja'), '日本語'),
+      const _LanguageItem(Locale('zh'), '中文'),
+      const _LanguageItem(Locale('ko'), '한국어'),
     ];
 
     return DropdownButton<Locale?>(

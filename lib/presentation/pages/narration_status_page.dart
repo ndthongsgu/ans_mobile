@@ -65,12 +65,13 @@ class _NarrationStatusPageState extends State<NarrationStatusPage> {
                     children: [
                       Text(poi.name, style: Theme.of(context).textTheme.titleLarge),
                       const SizedBox(height: 8),
-                      Text(poi.description, style: Theme.of(context).textTheme.bodyLarge),
+                      if (poi.category != null)
+                        Text(poi.category!, style: Theme.of(context).textTheme.bodyLarge),
                       const SizedBox(height: 16),
                       Row(
                         children: [
                           ElevatedButton(
-                            onPressed: manager.togglePlay,
+                            onPressed: () => manager.togglePlay(),
                             style: ElevatedButton.styleFrom(shape: const CircleBorder(), padding: const EdgeInsets.all(14)),
                             child: Icon(manager.isPlaying ? Icons.pause : Icons.play_arrow),
                           ),

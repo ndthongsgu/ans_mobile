@@ -264,7 +264,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get bottom_settings => '設定';
 
   @override
-  String get ownerLabel => 'オーナー:';
+  String get searchPoiHint => '屋台や場所を検索...';
+
+  @override
+  String get ownerLabel => 'オーナー：';
 
   @override
   String get descriptionTitle => '説明';
@@ -273,46 +276,34 @@ class AppLocalizationsJa extends AppLocalizations {
   String get contactTitle => 'お問い合わせ';
 
   @override
-  String get phoneLabel => '電話';
+  String get phoneLabel => '電話：';
 
   @override
-  String get websiteLabel => 'ウェブサイト';
+  String get websiteLabel => 'ウェブサイト：';
 
   @override
   String get infoTitle => '情報';
 
   @override
-  String get openingHoursLabel => '営業時間';
+  String get openingHoursLabel => '営業時間：';
 
   @override
-  String get priceRangeLabel => '価格帯';
+  String get priceRangeLabel => '価格帯：';
 
   @override
-  String get searchHintText => '店舗名を検索...';
+  String get searchHintText => '屋台を検索...';
 
   @override
-  String get exitAppTitle => 'アプリを終了しますか?';
-
-  @override
-  String get exitAppConfirm => 'アプリを終了してもよろしいですか?';
-
-  @override
-  String get cancelButton => 'キャンセル';
-
-  @override
-  String get exitButton => '終了';
-
-  @override
-  String get errorPrefix => 'エラー: ';
+  String get errorPrefix => 'エラー：';
 
   @override
   String get retryButton => '再試行';
 
   @override
-  String get noStallsMessage => '店舗が見つかりません';
+  String get noStallsMessage => '屋台がありません';
 
   @override
-  String get noSearchResultsMessage => '一致する店舗が見つかりません';
+  String get noSearchResultsMessage => '一致する屋台がありません';
 
   @override
   String get profilePageTitle => 'プロフィール';
@@ -321,8 +312,20 @@ class AppLocalizationsJa extends AppLocalizations {
   String get userLabel => 'ユーザー';
 
   @override
-  String get editProfileLabel => 'プロフィールを編集';
+  String get editProfileLabel => 'プロフィール編集';
 
   @override
-  String get changePasswordLabel => 'パスワードを変更';
+  String get changePasswordLabel => 'パスワード変更';
+
+  @override
+  String get cancelButton => 'キャンセル';
+
+  @override
+  String get exitButton => '終了';
+
+  @override
+  String get exitAppTitle => 'アプリを終了';
+
+  @override
+  String get exitAppConfirm => '本当に終了してもよろしいですか？';
 }

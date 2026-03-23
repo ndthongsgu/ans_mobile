@@ -264,6 +264,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get bottom_settings => '설정';
 
   @override
+  String get searchPoiHint => '노점상, 장소 검색...';
+
+  @override
   String get ownerLabel => '사장:';
 
   @override
@@ -273,34 +276,22 @@ class AppLocalizationsKo extends AppLocalizations {
   String get contactTitle => '연락처';
 
   @override
-  String get phoneLabel => '전화';
+  String get phoneLabel => '전화:';
 
   @override
-  String get websiteLabel => '웹사이트';
+  String get websiteLabel => '웹사이트:';
 
   @override
   String get infoTitle => '정보';
 
   @override
-  String get openingHoursLabel => '영업 시간';
+  String get openingHoursLabel => '영업시간:';
 
   @override
-  String get priceRangeLabel => '가격대';
+  String get priceRangeLabel => '가격대:';
 
   @override
-  String get searchHintText => '가게 이름 검색...';
-
-  @override
-  String get exitAppTitle => '앱을 종료하시겠습니까?';
-
-  @override
-  String get exitAppConfirm => '정말로 앱을 종료하시겠습니까?';
-
-  @override
-  String get cancelButton => '취소';
-
-  @override
-  String get exitButton => '종료';
+  String get searchHintText => '노점상 검색...';
 
   @override
   String get errorPrefix => '오류: ';
@@ -309,10 +300,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get retryButton => '다시 시도';
 
   @override
-  String get noStallsMessage => '가게를 찾을 수 없습니다';
+  String get noStallsMessage => '노점상이 없습니다';
 
   @override
-  String get noSearchResultsMessage => '일치하는 가게를 찾을 수 없습니다';
+  String get noSearchResultsMessage => '일치하는 노점상이 없습니다';
 
   @override
   String get profilePageTitle => '프로필';
@@ -321,8 +312,20 @@ class AppLocalizationsKo extends AppLocalizations {
   String get userLabel => '사용자';
 
   @override
-  String get editProfileLabel => '프로필 수정';
+  String get editProfileLabel => '프로필 편집';
 
   @override
   String get changePasswordLabel => '비밀번호 변경';
+
+  @override
+  String get cancelButton => '취소';
+
+  @override
+  String get exitButton => '종료';
+
+  @override
+  String get exitAppTitle => '앱 종료';
+
+  @override
+  String get exitAppConfirm => '정말로 종료하시겠습니까?';
 }

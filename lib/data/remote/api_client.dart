@@ -29,7 +29,22 @@ class ApiClient {
 
   Future<Map<String, dynamic>> googleLogin({required String idToken}) => AuthApi.instance.googleLogin(idToken: idToken);
 
-  Future<List<Map<String, dynamic>>> listStalls(String accessToken, {String? search}) => PoiApi.instance.listStalls(accessToken, search: search);
+  Future<List<Map<String, dynamic>>> listStalls(
+    String accessToken, {
+    String? search,
+    double? latitude,
+    double? longitude,
+    int limit = 20,
+    int offset = 0,
+  }) =>
+      PoiApi.instance.listStalls(
+        accessToken,
+        search: search,
+        latitude: latitude,
+        longitude: longitude,
+        limit: limit,
+        offset: offset,
+      );
 
   Future<List<Map<String, dynamic>>> getStallContents(String stallId, String accessToken) => PoiApi.instance.getStallContents(stallId, accessToken);
 }

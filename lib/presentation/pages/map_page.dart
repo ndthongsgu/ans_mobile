@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:ans_mobile/l10n/app_localizations.dart';
 import 'package:ans_mobile/presentation/widgets/app_toast.dart';
 import '../../core/services/auth_service.dart';
@@ -11,7 +10,6 @@ import 'package:latlong2/latlong.dart' as ll;
 import 'package:geolocator/geolocator.dart';
 
 import '../../data/models/poi.dart';
-import '../../presentation/widgets/poi_card.dart';
 import '../widgets/app_bottom_nav.dart';
 import '../../features/map/map_controller.dart';
 
@@ -24,12 +22,15 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   final controller = MapFeatureController();
+  final _searchController = TextEditingController();
 
   ll.LatLng? _userPos;
   StreamSubscription<Position>? _posSub;
   int _selectedIndex = 2; // center item (home) by default
   List<Poi> _nearbyPois = [];
   bool _isLoadingPois = false;
+  List<Poi> _searchResults = [];
+  bool _showSearchResults = false;
 
   @override
   void initState() {
@@ -40,6 +41,7 @@ class _MapPageState extends State<MapPage> {
   @override
   void dispose() {
     _posSub?.cancel();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -121,26 +123,18 @@ class _MapPageState extends State<MapPage> {
         return;
       }
 
-      final poisData = await ApiClient.instance.listStalls(accessToken);
-      final userLocation = ll.LatLng(lat, lng);
+      final poisData = await ApiClient.instance.listStalls(
+        accessToken,
+        latitude: lat,
+        longitude: lng,
+        limit: 20,
+        offset: 0,
+      );
       
-      // Calculate distances and filter to nearest 10
-      final poisWithDistance = poisData.map((item) {
-        final poi = Poi.fromJson(item);
-        final poiLocation = ll.LatLng(poi.latitude, poi.longitude);
-        final distanceInMeters = const ll.Haversine().distance(userLocation, poiLocation);
-        return (poi: poi, distance: distanceInMeters);
-      }).toList();
-      
-      // Sort by distance and take top 10
-      poisWithDistance.sort((a, b) => a.distance.compareTo(b.distance));
-      final nearestPois = poisWithDistance
-          .take(10)
-          .map((item) => item.poi)
-          .toList();
+      final pois = poisData.map((item) => Poi.fromJson(item)).toList();
       
       setState(() {
-        _nearbyPois = nearestPois;
+        _nearbyPois = pois;
         _isLoadingPois = false;
       });
     } catch (e) {
@@ -157,6 +151,36 @@ class _MapPageState extends State<MapPage> {
     Navigator.of(context).pushNamed('/poi_detail', arguments: poi);
   }
 
+  void _performSearch(String query) {
+    if (query.isEmpty) {
+      setState(() {
+        _searchResults = [];
+        _showSearchResults = false;
+      });
+      return;
+    }
+
+    final lowerQuery = query.toLowerCase();
+    final results = _nearbyPois.where((poi) {
+      return poi.name.toLowerCase().contains(lowerQuery) ||
+          (poi.category?.toLowerCase().contains(lowerQuery) ?? false);
+    }).toList();
+
+    setState(() {
+      _searchResults = results;
+      _showSearchResults = true;
+    });
+  }
+
+  void _selectSearchResult(Poi poi) {
+    _searchController.clear();
+    setState(() {
+      _showSearchResults = false;
+    });
+    // Zoom to selected POI
+    controller.moveToLatLng(ll.LatLng(poi.latitude, poi.longitude));
+  }
+
   @override
   Widget build(BuildContext context) {
     final poiList = _userPos == null ? <Poi>[] : _nearbyPois;
@@ -164,15 +188,48 @@ class _MapPageState extends State<MapPage> {
 
     final poiMarkers = poiList.map((poi) {
       return Marker(
-        width: 40,
-        height: 40,
+        width: 50,
+        height: 50,
         point: ll.LatLng(poi.latitude, poi.longitude),
         builder: (ctx) => GestureDetector(
           onTap: () => _openPoi(context, poi),
-          child: Icon(
-            Icons.location_on,
-            color: Theme.of(ctx).colorScheme.primary,
-            size: 36,
+          child: Tooltip(
+            message: poi.name,
+            decoration: BoxDecoration(
+              color: Colors.black87,
+              borderRadius: BorderRadius.circular(6),
+            ),
+            textStyle: const TextStyle(color: Colors.white),
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Theme.of(ctx).colorScheme.primary,
+                  width: 2,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: CircleAvatar(
+                radius: 24,
+                backgroundColor: Colors.grey[300],
+                backgroundImage: poi.coverImage != null && poi.coverImage!.isNotEmpty
+                    ? NetworkImage(poi.coverImage!)
+                    : null,
+                child: poi.coverImage == null || poi.coverImage!.isEmpty
+                    ? Icon(
+                        Icons.store,
+                        color: Colors.grey[600],
+                        size: 24,
+                      )
+                    : null,
+              ),
+            ),
           ),
         ),
       );
@@ -298,36 +355,108 @@ class _MapPageState extends State<MapPage> {
                               top: 12,
                               left: 16,
                               right: 16,
-                              child: Material(
-                                elevation: 2,
-                                borderRadius: BorderRadius.circular(16),
-                                color: Colors.white.withOpacity(0.95),
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    hintText: 'Tìm quán, địa điểm...',
-                                    prefixIcon: Icon(
-                                      Icons.search,
-                                      color: Colors.grey[600],
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 12,
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide.none, // bỏ viền
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide.none,
+                              child: CompositedTransformTarget(
+                                link: LayerLink(),
+                                child: Material(
+                                  elevation: 2,
+                                  borderRadius: BorderRadius.circular(16),
+                                  color: Colors.white.withOpacity(0.95),
+                                  child: TextField(
+                                    controller: _searchController,
+                                    onChanged: _performSearch,
+                                    decoration: InputDecoration(
+                                      hintText: AppLocalizations.of(context)!.searchPoiHint,
+                                      prefixIcon: Icon(
+                                        Icons.search,
+                                        color: Colors.grey[600],
+                                      ),
+                                      suffixIcon: _searchController.text.isNotEmpty
+                                          ? IconButton(
+                                              icon: const Icon(Icons.clear),
+                                              onPressed: () {
+                                                _searchController.clear();
+                                                setState(() {
+                                                  _showSearchResults = false;
+                                                });
+                                              },
+                                            )
+                                          : null,
+                                      contentPadding: const EdgeInsets.symmetric(
+                                        vertical: 12,
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                        borderSide: BorderSide.none,
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                        borderSide: BorderSide.none,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
+                            // Search results dropdown
+                            if (_showSearchResults && _searchResults.isNotEmpty)
+                              Positioned(
+                                top: 70,
+                                left: 16,
+                                right: 16,
+                                child: Material(
+                                  elevation: 8,
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(12),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 8,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    constraints: BoxConstraints(
+                                      maxHeight: 300,
+                                    ),
+                                    child: ListView.separated(
+                                      shrinkWrap: true,
+                                      padding: const EdgeInsets.symmetric(vertical: 8),
+                                      itemCount: _searchResults.length,
+                                      separatorBuilder: (_, __) => const Divider(height: 1),
+                                      itemBuilder: (context, index) {
+                                        final poi = _searchResults[index];
+                                        return ListTile(
+                                          leading: Icon(
+                                            Icons.location_on,
+                                            color: Theme.of(context).colorScheme.primary,
+                                            size: 20,
+                                          ),
+                                          title: Text(
+                                            poi.name,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          subtitle: poi.category != null
+                                              ? Text(
+                                                  poi.category!,
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                )
+                                              : null,
+                                          onTap: () => _selectSearchResult(poi),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
                             // Location + list FABs
                             Positioned(
                               right: 12,
@@ -446,20 +575,51 @@ class _MapPageState extends State<MapPage> {
                                 ),
                                 child: Row(
                                   children: [
-                                    Container(
-                                      width: 120,
-                                      height: 150,
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey[300],
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(12),
-                                          bottomLeft: Radius.circular(12),
-                                        ),
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(12),
+                                        bottomLeft: Radius.circular(12),
                                       ),
-                                      child: const Icon(
-                                        Icons.store,
-                                        size: 48,
-                                        color: Colors.white,
+                                      child: Container(
+                                        width: 120,
+                                        height: 150,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[300],
+                                        ),
+                                        child: poi.coverImage != null && poi.coverImage!.isNotEmpty
+                                            ? Image.network(
+                                                poi.coverImage!,
+                                                fit: BoxFit.cover,
+                                                errorBuilder: (context, error, stackTrace) => Container(
+                                                  color: Colors.grey[300],
+                                                  child: Icon(
+                                                    Icons.store,
+                                                    size: 48,
+                                                    color: Colors.grey[600],
+                                                  ),
+                                                ),
+                                                loadingBuilder: (context, child, loadingProgress) {
+                                                  if (loadingProgress == null) {
+                                                    return child;
+                                                  }
+                                                  return Container(
+                                                    color: Colors.grey[300],
+                                                    child: Center(
+                                                      child: CircularProgressIndicator(
+                                                        value: loadingProgress.expectedTotalBytes != null
+                                                            ? loadingProgress.cumulativeBytesLoaded /
+                                                                loadingProgress.expectedTotalBytes!
+                                                            : null,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              )
+                                            : Icon(
+                                                Icons.store,
+                                                size: 48,
+                                                color: Colors.grey[600],
+                                              ),
                                       ),
                                     ),
                                     Expanded(

@@ -43,7 +43,7 @@ class Poi {
         category: json['category'] as String?,
         latitude: (json['latitude'] as num).toDouble(),
         longitude: (json['longitude'] as num).toDouble(),
-        coverImage: json['cover_image'] as String?,
+        coverImage: _buildFullImageUrl(json['cover_image'] as String?),
         priceRange: json['price_range'] as String?,
         openingHours: json['opening_hours'] as String?,
         contactPhone: json['contact_phone'] as String?,
@@ -53,6 +53,19 @@ class Poi {
         radius: json['radius'] as int?,
         languageCode: json['language_code'] as String?,
       );
+
+  static String? _buildFullImageUrl(String? coverImage) {
+    if (coverImage == null || coverImage.isEmpty) return null;
+    
+    // If already absolute URL, return as is
+    if (coverImage.startsWith('http')) {
+      return coverImage;
+    }
+    
+    // Otherwise prepend base URL
+    const String baseUrl = 'https://unsuccinctly-unadhering-zenaida.ngrok-free.dev';
+    return '$baseUrl${coverImage.startsWith('/') ? coverImage : '/$coverImage'}';
+  }
 
   Map<String, dynamic> toJson() => {
         'id': id,

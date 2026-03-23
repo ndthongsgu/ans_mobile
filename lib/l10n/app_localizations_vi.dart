@@ -264,6 +264,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get bottom_settings => 'Cài đặt';
 
   @override
+  String get searchPoiHint => 'Tìm quán, địa điểm...';
+
+  @override
   String get ownerLabel => 'Chủ quán:';
 
   @override
@@ -273,34 +276,22 @@ class AppLocalizationsVi extends AppLocalizations {
   String get contactTitle => 'Liên hệ';
 
   @override
-  String get phoneLabel => 'Điện thoại';
+  String get phoneLabel => 'Điện thoại:';
 
   @override
-  String get websiteLabel => 'Website';
+  String get websiteLabel => 'Website:';
 
   @override
   String get infoTitle => 'Thông tin';
 
   @override
-  String get openingHoursLabel => 'Giờ mở cửa';
+  String get openingHoursLabel => 'Giờ mở cửa:';
 
   @override
-  String get priceRangeLabel => 'Mức giá';
+  String get priceRangeLabel => 'Mức giá:';
 
   @override
-  String get searchHintText => 'Tìm kiếm tên quán...';
-
-  @override
-  String get exitAppTitle => 'Thoát ứng dụng?';
-
-  @override
-  String get exitAppConfirm => 'Bạn có chắc muốn thoát không?';
-
-  @override
-  String get cancelButton => 'Hủy';
-
-  @override
-  String get exitButton => 'Thoát';
+  String get searchHintText => 'Tìm quán...';
 
   @override
   String get errorPrefix => 'Lỗi: ';
@@ -309,13 +300,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get retryButton => 'Thử lại';
 
   @override
-  String get noStallsMessage => 'Không có quán ăn nào';
+  String get noStallsMessage => 'Không có quán nào';
 
   @override
-  String get noSearchResultsMessage => 'Không tìm thấy quán nào phù hợp';
+  String get noSearchResultsMessage => 'Không tìm thấy quán phù hợp';
 
   @override
-  String get profilePageTitle => 'Trang cá nhân';
+  String get profilePageTitle => 'Hồ sơ cá nhân';
 
   @override
   String get userLabel => 'Người dùng';
@@ -324,5 +315,17 @@ class AppLocalizationsVi extends AppLocalizations {
   String get editProfileLabel => 'Chỉnh sửa hồ sơ';
 
   @override
-  String get changePasswordLabel => 'Đổi mật khẩu';
+  String get changePasswordLabel => 'Thay đổi mật khẩu';
+
+  @override
+  String get cancelButton => 'Hủy';
+
+  @override
+  String get exitButton => 'Thoát';
+
+  @override
+  String get exitAppTitle => 'Thoát ứng dụng';
+
+  @override
+  String get exitAppConfirm => 'Bạn có chắc chắn muốn thoát?';
 }

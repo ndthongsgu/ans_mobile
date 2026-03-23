@@ -28,12 +28,41 @@ class PoiApi {
     );
   }
 
-  Future<List<Map<String, dynamic>>> listStalls(String accessToken, {String? search}) async {
-    final path = search != null ? '/mobile/stalls/?search=$search' : '/mobile/stalls/';
-    final res = await _getReq(
-      path,
-      headers: {'Authorization': 'Bearer $accessToken', 'Accept': 'application/json'},
+  Future<List<Map<String, dynamic>>> listStalls(
+    String accessToken, {
+    String? search,
+    double? latitude,
+    double? longitude,
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    final queryParams = <String, String>{
+      'limit': limit.toString(),
+      'offset': offset.toString(),
+    };
+    
+    if (search != null && search.isNotEmpty) {
+      queryParams['search'] = search;
+    }
+    
+    if (latitude != null && longitude != null) {
+      queryParams['latitude'] = latitude.toString();
+      queryParams['longitude'] = longitude.toString();
+    }
+    
+    final path = '/mobile/stalls/';
+    final uri = _uri(path).replace(queryParameters: queryParams);
+    
+    final res = await HttpClientWithTokenRefresh.instance.get(
+      uri,
+      headers: {
+        'Accept-Language': LocaleProvider.instance.locale?.languageCode ?? (PlatformDispatcher.instance.locale.languageCode),
+        'Authorization': 'Bearer $accessToken',
+        'Accept': 'application/json',
+      },
+      timeout: _timeout,
     );
+    
     if (res.statusCode >= 400) {
       throw Exception(_parseError(res));
     }

@@ -264,7 +264,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get bottom_settings => '设置';
 
   @override
-  String get ownerLabel => '老板:';
+  String get searchPoiHint => '搜索摊位、地点...';
+
+  @override
+  String get ownerLabel => '老板：';
 
   @override
   String get descriptionTitle => '描述';
@@ -273,46 +276,34 @@ class AppLocalizationsZh extends AppLocalizations {
   String get contactTitle => '联系方式';
 
   @override
-  String get phoneLabel => '电话';
+  String get phoneLabel => '电话：';
 
   @override
-  String get websiteLabel => '网站';
+  String get websiteLabel => '网站：';
 
   @override
   String get infoTitle => '信息';
 
   @override
-  String get openingHoursLabel => '营业时间';
+  String get openingHoursLabel => '营业时间：';
 
   @override
-  String get priceRangeLabel => '价格范围';
+  String get priceRangeLabel => '价格范围：';
 
   @override
-  String get searchHintText => '搜索店铺名称...';
+  String get searchHintText => '搜索摊位...';
 
   @override
-  String get exitAppTitle => '退出应用？';
-
-  @override
-  String get exitAppConfirm => '确定要退出应用吗？';
-
-  @override
-  String get cancelButton => '取消';
-
-  @override
-  String get exitButton => '退出';
-
-  @override
-  String get errorPrefix => '错误: ';
+  String get errorPrefix => '错误：';
 
   @override
   String get retryButton => '重试';
 
   @override
-  String get noStallsMessage => '未找到店铺';
+  String get noStallsMessage => '没有摊位';
 
   @override
-  String get noSearchResultsMessage => '未找到匹配的店铺';
+  String get noSearchResultsMessage => '没有找到匹配的摊位';
 
   @override
   String get profilePageTitle => '个人资料';
@@ -321,8 +312,20 @@ class AppLocalizationsZh extends AppLocalizations {
   String get userLabel => '用户';
 
   @override
-  String get editProfileLabel => '编辑个人资料';
+  String get editProfileLabel => '编辑资料';
 
   @override
-  String get changePasswordLabel => '修改密码';
+  String get changePasswordLabel => '更改密码';
+
+  @override
+  String get cancelButton => '取消';
+
+  @override
+  String get exitButton => '退出';
+
+  @override
+  String get exitAppTitle => '退出应用';
+
+  @override
+  String get exitAppConfirm => '您确定要退出吗？';
 }

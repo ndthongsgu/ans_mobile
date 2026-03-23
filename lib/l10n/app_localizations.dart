@@ -305,6 +305,12 @@ abstract class AppLocalizations {
   /// **'한국어'**
   String get language_ko_label;
 
+  /// No description provided for @language_ja_label.
+  ///
+  /// In en, this message translates to:
+  /// **'日本語'**
+  String get language_ja_label;
+
   /// No description provided for @loginButton.
   ///
   /// In en, this message translates to:
@@ -593,6 +599,12 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get bottom_settings;
 
+  /// No description provided for @searchPoiHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search stalls, locations...'**
+  String get searchPoiHint;
+
   /// No description provided for @ownerLabel.
   ///
   /// In en, this message translates to:
@@ -614,13 +626,13 @@ abstract class AppLocalizations {
   /// No description provided for @phoneLabel.
   ///
   /// In en, this message translates to:
-  /// **'Phone'**
+  /// **'Phone:'**
   String get phoneLabel;
 
   /// No description provided for @websiteLabel.
   ///
   /// In en, this message translates to:
-  /// **'Website'**
+  /// **'Website:'**
   String get websiteLabel;
 
   /// No description provided for @infoTitle.
@@ -632,44 +644,20 @@ abstract class AppLocalizations {
   /// No description provided for @openingHoursLabel.
   ///
   /// In en, this message translates to:
-  /// **'Opening hours'**
+  /// **'Opening Hours:'**
   String get openingHoursLabel;
 
   /// No description provided for @priceRangeLabel.
   ///
   /// In en, this message translates to:
-  /// **'Price range'**
+  /// **'Price Range:'**
   String get priceRangeLabel;
 
   /// No description provided for @searchHintText.
   ///
   /// In en, this message translates to:
-  /// **'Search store name...'**
+  /// **'Search stalls...'**
   String get searchHintText;
-
-  /// No description provided for @exitAppTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Exit app?'**
-  String get exitAppTitle;
-
-  /// No description provided for @exitAppConfirm.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to exit?'**
-  String get exitAppConfirm;
-
-  /// No description provided for @cancelButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get cancelButton;
-
-  /// No description provided for @exitButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Exit'**
-  String get exitButton;
 
   /// No description provided for @errorPrefix.
   ///
@@ -686,13 +674,13 @@ abstract class AppLocalizations {
   /// No description provided for @noStallsMessage.
   ///
   /// In en, this message translates to:
-  /// **'No stores found'**
+  /// **'No stalls available'**
   String get noStallsMessage;
 
   /// No description provided for @noSearchResultsMessage.
   ///
   /// In en, this message translates to:
-  /// **'No matching stores found'**
+  /// **'No stalls match your search'**
   String get noSearchResultsMessage;
 
   /// No description provided for @profilePageTitle.
@@ -710,20 +698,38 @@ abstract class AppLocalizations {
   /// No description provided for @editProfileLabel.
   ///
   /// In en, this message translates to:
-  /// **'Edit profile'**
+  /// **'Edit Profile'**
   String get editProfileLabel;
 
   /// No description provided for @changePasswordLabel.
   ///
   /// In en, this message translates to:
-  /// **'Change password'**
+  /// **'Change Password'**
   String get changePasswordLabel;
 
-  /// No description provided for @language_ja_label.
+  /// No description provided for @cancelButton.
   ///
   /// In en, this message translates to:
-  /// **'Japanese'**
-  String get language_ja_label;
+  /// **'Cancel'**
+  String get cancelButton;
+
+  /// No description provided for @exitButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get exitButton;
+
+  /// No description provided for @exitAppTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit Application'**
+  String get exitAppTitle;
+
+  /// No description provided for @exitAppConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to exit?'**
+  String get exitAppConfirm;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

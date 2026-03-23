@@ -264,6 +264,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bottom_settings => 'Settings';
 
   @override
+  String get searchPoiHint => 'Search stalls, locations...';
+
+  @override
   String get ownerLabel => 'Owner:';
 
   @override
@@ -273,34 +276,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contactTitle => 'Contact';
 
   @override
-  String get phoneLabel => 'Phone';
+  String get phoneLabel => 'Phone:';
 
   @override
-  String get websiteLabel => 'Website';
+  String get websiteLabel => 'Website:';
 
   @override
   String get infoTitle => 'Information';
 
   @override
-  String get openingHoursLabel => 'Opening hours';
+  String get openingHoursLabel => 'Opening Hours:';
 
   @override
-  String get priceRangeLabel => 'Price range';
+  String get priceRangeLabel => 'Price Range:';
 
   @override
-  String get searchHintText => 'Search store name...';
-
-  @override
-  String get exitAppTitle => 'Exit app?';
-
-  @override
-  String get exitAppConfirm => 'Are you sure you want to exit?';
-
-  @override
-  String get cancelButton => 'Cancel';
-
-  @override
-  String get exitButton => 'Exit';
+  String get searchHintText => 'Search stalls...';
 
   @override
   String get errorPrefix => 'Error: ';
@@ -309,10 +300,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get retryButton => 'Retry';
 
   @override
-  String get noStallsMessage => 'No stores found';
+  String get noStallsMessage => 'No stalls available';
 
   @override
-  String get noSearchResultsMessage => 'No matching stores found';
+  String get noSearchResultsMessage => 'No stalls match your search';
 
   @override
   String get profilePageTitle => 'Profile';
@@ -321,8 +312,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get userLabel => 'User';
 
   @override
-  String get editProfileLabel => 'Edit profile';
+  String get editProfileLabel => 'Edit Profile';
 
   @override
-  String get changePasswordLabel => 'Change password';
+  String get changePasswordLabel => 'Change Password';
+
+  @override
+  String get cancelButton => 'Cancel';
+
+  @override
+  String get exitButton => 'Exit';
+
+  @override
+  String get exitAppTitle => 'Exit Application';
+
+  @override
+  String get exitAppConfirm => 'Are you sure you want to exit?';
 }

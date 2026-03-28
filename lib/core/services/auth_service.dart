@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ans_mobile/data/remote/api_client.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 class UserProfile {
   final String id;
@@ -13,16 +15,16 @@ class UserProfile {
   UserProfile({required this.id, this.email, this.full_name});
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'email': email,
-        'full_name': full_name,
-      };
+    'id': id,
+    'email': email,
+    'full_name': full_name,
+  };
 
   factory UserProfile.fromJson(Map<String, dynamic> js) => UserProfile(
-        id: js['id'] as String,
-        email: js['email'] as String?,
-        full_name: js['full_name'] as String?,
-      );
+    id: js['id'] as String,
+    email: js['email'] as String?,
+    full_name: js['full_name'] as String?,
+  );
 }
 
 class AuthService extends ChangeNotifier {
@@ -67,8 +69,13 @@ class AuthService extends ChangeNotifier {
         if (refresh != null) {
           try {
             final tokens = await ApiClient.instance.refresh(refresh);
-            await _storeTokens(tokens['accessToken'] as String, tokens['refreshToken'] as String);
-            final me2 = await ApiClient.instance.me(tokens['accessToken'] as String);
+            await _storeTokens(
+              tokens['accessToken'] as String,
+              tokens['refreshToken'] as String,
+            );
+            final me2 = await ApiClient.instance.me(
+              tokens['accessToken'] as String,
+            );
             _me = me2;
             _user = _profileFromMe(me2);
             await _saveUserToPrefs();
@@ -84,9 +91,19 @@ class AuthService extends ChangeNotifier {
 
   /// Register via remote API. On success stores tokens and user profile.
   /// Start registration: sends OTP to email. Does not log the user in.
-  Future<void> register({String? username, required String email, required String password, required String full_name}) async {
+  Future<void> register({
+    String? username,
+    required String email,
+    required String password,
+    required String full_name,
+  }) async {
     try {
-      await ApiClient.instance.register(username: username, full_name: full_name, email: email, password: password);
+      await ApiClient.instance.register(
+        username: username,
+        full_name: full_name,
+        email: email,
+        password: password,
+      );
       // Register only sends OTP now; client should show verification UI.
       return;
     } catch (e) {
@@ -95,12 +112,16 @@ class AuthService extends ChangeNotifier {
   }
 
   /// Verify OTP and complete registration. On success stores tokens and fetches profile.
-  Future<void> verifyAndComplete({required String email, required String otp}) async {
+  Future<void> verifyAndComplete({
+    required String email,
+    required String otp,
+  }) async {
     try {
       final res = await ApiClient.instance.verify(email: email, otp: otp);
       final access = res['accessToken'] as String?;
       final refresh = res['refreshToken'] as String?;
-      if (access == null || refresh == null) throw Exception('Verify failed: missing tokens');
+      if (access == null || refresh == null)
+        throw Exception('Verify failed: missing tokens');
       await _storeTokens(access, refresh);
       final me = await ApiClient.instance.me(access);
       _me = me;
@@ -123,9 +144,17 @@ class AuthService extends ChangeNotifier {
   }
 
   /// Verify OTP and reset password
-  Future<void> resetPassword({required String email, required String otp, required String newPassword}) async {
+  Future<void> resetPassword({
+    required String email,
+    required String otp,
+    required String newPassword,
+  }) async {
     try {
-      await ApiClient.instance.resetPassword(email: email, otp: otp, newPassword: newPassword);
+      await ApiClient.instance.resetPassword(
+        email: email,
+        otp: otp,
+        newPassword: newPassword,
+      );
       return;
     } catch (e) {
       rethrow;
@@ -133,12 +162,19 @@ class AuthService extends ChangeNotifier {
   }
 
   /// Sign in using remote API
-  Future<void> signInWithEmail({required String email, required String password}) async {
+  Future<void> signInWithEmail({
+    required String email,
+    required String password,
+  }) async {
     try {
-      final res = await ApiClient.instance.login(email: email, password: password);
+      final res = await ApiClient.instance.login(
+        email: email,
+        password: password,
+      );
       final access = res['accessToken'] as String?;
       final refresh = res['refreshToken'] as String?;
-      if (access == null || refresh == null) throw Exception('Login failed: missing tokens');
+      if (access == null || refresh == null)
+        throw Exception('Login failed: missing tokens');
       await _storeTokens(access, refresh);
       final me = await ApiClient.instance.me(access);
       _me = me;
@@ -158,13 +194,13 @@ class AuthService extends ChangeNotifier {
     try {
       final refresh = _prefs.getString(_kRefreshTokenKey);
       if (refresh == null) return false;
-      
+
       final res = await ApiClient.instance.refresh(refresh);
       final access = res['accessToken'] as String?;
       final newRefresh = res['refreshToken'] as String?;
-      
+
       if (access == null || newRefresh == null) return false;
-      
+
       await _storeTokens(access, newRefresh);
       return true;
     } catch (_) {
@@ -195,30 +231,63 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-
-
   Future<void> signInWithGoogle() async {
     try {
       final googleSignIn = GoogleSignIn(
         scopes: ['email', 'profile'],
-        serverClientId: '350012144118-96dcm1mdupduqkmbsbnil2f1d5lh6hub.apps.googleusercontent.com', // Replace with your server client ID
+        serverClientId:
+            '350012144118-96dcm1mdupduqkmbsbnil2f1d5lh6hub.apps.googleusercontent.com', // Replace with your server client ID
       );
       final acc = await googleSignIn.signIn();
       if (acc == null) throw Exception('Quá trình đăng nhập Google bị huỷ');
-      
+
       // Get the authentication object to obtain ID token
       final auth = await acc.authentication;
       final idToken = auth.idToken;
-      
+
       if (idToken == null) throw Exception('Không thể lấy Google ID token');
-      
+
       // Send to backend for authentication
       final res = await ApiClient.instance.googleLogin(idToken: idToken);
       final access = res['accessToken'] as String?;
       final refresh = res['refreshToken'] as String?;
-      
-      if (access == null || refresh == null) throw Exception('Google login failed: missing tokens');
-      
+
+      if (access == null || refresh == null)
+        throw Exception('Google login failed: missing tokens');
+
+      await _storeTokens(access, refresh);
+      final me = await ApiClient.instance.me(access);
+      _me = me;
+      _user = _profileFromMe(me);
+      await _saveUserToPrefs();
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> signInWithDevice() async {
+    try {
+      final deviceInfoPlugin = DeviceInfoPlugin();
+      String deviceId;
+
+      if (Platform.isAndroid) {
+        final androidInfo = await deviceInfoPlugin.androidInfo;
+        deviceId = androidInfo.id;
+      } else if (Platform.isIOS) {
+        final iosInfo = await deviceInfoPlugin.iosInfo;
+        deviceId = iosInfo.identifierForVendor ?? iosInfo.name;
+      } else {
+        throw Exception('Unsupported platform');
+      }
+
+      final res = await ApiClient.instance.loginDevice(deviceId: deviceId);
+      final access = res['accessToken'] as String?;
+      final refresh = res['refreshToken'] as String?;
+
+      if (access == null || refresh == null)
+        throw Exception('Device login failed: missing tokens');
+
       await _storeTokens(access, refresh);
       final me = await ApiClient.instance.me(access);
       _me = me;
@@ -255,11 +324,17 @@ class AuthService extends ChangeNotifier {
 
   UserProfile _profileFromMe(Map<String, dynamic> me) {
     // id may be at top-level or nested under 'user'
-    final id = me['id']?.toString() ?? (me['user'] is Map ? (me['user']['id']?.toString()) : null) ?? 'unknown';
-    final email = me['email'] as String? ?? (me['user'] is Map ? me['user']['email'] as String? : null);
+    final id =
+        me['id']?.toString() ??
+        (me['user'] is Map ? (me['user']['id']?.toString()) : null) ??
+        'unknown';
+    final email =
+        me['email'] as String? ??
+        (me['user'] is Map ? me['user']['email'] as String? : null);
     String? full_name = me['full_name'] as String?;
     if (full_name == null && me['user'] is Map) {
-      full_name = me['user']['username'] as String? ?? me['user']['email'] as String?;
+      full_name =
+          me['user']['username'] as String? ?? me['user']['email'] as String?;
     }
     full_name ??= me['username'] as String?;
     return UserProfile(id: id, email: email, full_name: full_name);
@@ -281,7 +356,12 @@ class AuthService extends ChangeNotifier {
       }
     }
     if (!found) {
-      final demo = {'id': 'demo', 'email': 'demo@grap.dev', 'full_name': 'Demo User', 'password': _sha256('password123')};
+      final demo = {
+        'id': 'demo',
+        'email': 'demo@grap.dev',
+        'full_name': 'Demo User',
+        'password': _sha256('password123'),
+      };
       users.add(jsonEncode(demo));
       await _prefs.setStringList(usersKey, users);
     }
@@ -298,7 +378,11 @@ class AuthService extends ChangeNotifier {
       for (final u in users) {
         final m = Map<String, dynamic>.from(jsonDecode(u));
         if (m['email'] == 'demo@grap.dev' && m['password'] == pwdHash) {
-          _user = UserProfile(id: m['id'] as String, email: m['email'] as String?, full_name: m['full_name'] as String?);
+          _user = UserProfile(
+            id: m['id'] as String,
+            email: m['email'] as String?,
+            full_name: m['full_name'] as String?,
+          );
           await _saveUserToPrefs();
           notifyListeners();
           return;

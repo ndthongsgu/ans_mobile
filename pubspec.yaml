@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^4.0.4
   http: ^0.13.6
   crypto: ^3.0.2
+  device_info_plus: ^9.1.1
 
   # OpenStreetMap via flutter_map
   flutter_map: ^4.0.0
@@ -51,6 +52,9 @@ dependencies:
   
   # Audio playback
   just_audio: ^0.9.34
+
+  # QR Code scanner
+  mobile_scanner: ^6.0.0
 
 dev_dependencies:
   flutter_test:

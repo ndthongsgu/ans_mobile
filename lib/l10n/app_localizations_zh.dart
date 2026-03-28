@@ -328,4 +328,52 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get exitAppConfirm => '您确定要退出吗？';
+
+  @override
+  String get loginWithDevice => '设备登录';
+
+  @override
+  String get loginDeviceSuccessMsg => '登录成功';
+
+  @override
+  String loadPoiError(Object error) => '加载摊位错误: $error';
+
+  @override
+  String audioQueue(String queueInfo) => '音频队列: $queueInfo';
+
+  @override
+  String get pointNotInPoiZone => '此点不在任何POI区域内';
+
+  @override
+  String get audioQueueFinished => '音频队列播放完毕';
+
+  @override
+  String nowPlaying(String poiName) => '正在播放: $poiName';
+
+  @override
+  String get pleaseLoginFirst => '请先登录';
+
+  @override
+  String get scanQrCode => '扫描二维码';
+
+  @override
+  String get stallNotFound => '未找到摊位';
+
+  @override
+  String error(Object error) => '错误: $error';
+
+  @override
+  String get enableLocationTitle => '请启用位置';
+
+  @override
+  String get enableLocationDesc => '要在地图上查看附近的摊位，请授予位置权限';
+
+  @override
+  String get enableLocationButton => '启用位置';
+
+  @override
+  String get enableLocationToSeeStalls => '启用位置以查看附近的摊位';
+
+  @override
+  String get noStallsFound => '未找到摊位';
 }

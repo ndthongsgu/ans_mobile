@@ -14,8 +14,13 @@ class PoiApi {
 
   Uri _uri(String path) => Uri.parse('${ApiClient.instance.baseUrl}$path');
 
-  Future<http.Response> _getReq(String path, {Map<String, String>? headers}) async {
-    final defaultLocale = LocaleProvider.instance.locale?.languageCode ?? (PlatformDispatcher.instance.locale.languageCode);
+  Future<http.Response> _getReq(
+    String path, {
+    Map<String, String>? headers,
+  }) async {
+    final defaultLocale =
+        LocaleProvider.instance.locale?.languageCode ??
+        (PlatformDispatcher.instance.locale.languageCode);
     final mergedHeaders = {
       'Accept-Language': defaultLocale,
       if (headers != null) ...headers,
@@ -40,29 +45,31 @@ class PoiApi {
       'limit': limit.toString(),
       'offset': offset.toString(),
     };
-    
+
     if (search != null && search.isNotEmpty) {
       queryParams['search'] = search;
     }
-    
+
     if (latitude != null && longitude != null) {
       queryParams['latitude'] = latitude.toString();
       queryParams['longitude'] = longitude.toString();
     }
-    
+
     final path = '/mobile/stalls/';
     final uri = _uri(path).replace(queryParameters: queryParams);
-    
+
     final res = await HttpClientWithTokenRefresh.instance.get(
       uri,
       headers: {
-        'Accept-Language': LocaleProvider.instance.locale?.languageCode ?? (PlatformDispatcher.instance.locale.languageCode),
+        'Accept-Language':
+            LocaleProvider.instance.locale?.languageCode ??
+            (PlatformDispatcher.instance.locale.languageCode),
         'Authorization': 'Bearer $accessToken',
         'Accept': 'application/json',
       },
       timeout: _timeout,
     );
-    
+
     if (res.statusCode >= 400) {
       throw Exception(_parseError(res));
     }
@@ -77,10 +84,16 @@ class PoiApi {
     }
   }
 
-  Future<List<Map<String, dynamic>>> getStallContents(String stallId, String accessToken) async {
+  Future<List<Map<String, dynamic>>> getStallContents(
+    String stallId,
+    String accessToken,
+  ) async {
     final res = await _getReq(
       '/mobile/stall-contents/$stallId',
-      headers: {'Authorization': 'Bearer $accessToken', 'Accept': 'application/json'},
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'Accept': 'application/json',
+      },
     );
     if (res.statusCode >= 400) {
       throw Exception(_parseError(res));
@@ -93,6 +106,34 @@ class PoiApi {
       return <Map<String, dynamic>>[];
     } catch (e) {
       throw Exception('Invalid response from server during getStallContents');
+    }
+  }
+
+  Future<Map<String, dynamic>?> getStall(
+    String stallId,
+    String accessToken,
+  ) async {
+    final res = await _getReq(
+      '/mobile/stalls/$stallId',
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'Accept': 'application/json',
+      },
+    );
+    if (res.statusCode == 404) {
+      return null;
+    }
+    if (res.statusCode >= 400) {
+      throw Exception(_parseError(res));
+    }
+    try {
+      final body = jsonDecode(res.body);
+      if (body is Map && body['data'] != null) {
+        return body['data'] as Map<String, dynamic>;
+      }
+      return null;
+    } catch (e) {
+      throw Exception('Invalid response from server during getStall');
     }
   }
 
@@ -122,7 +163,8 @@ class PoiApi {
 
     try {
       final body = jsonDecode(raw);
-      if (body is Map && body['detail'] != null) return _fixMojibake(body['detail'].toString());
+      if (body is Map && body['detail'] != null)
+        return _fixMojibake(body['detail'].toString());
       return 'HTTP ${res.statusCode}: ${_fixMojibake(raw)}';
     } catch (_) {
       return 'HTTP ${res.statusCode}';

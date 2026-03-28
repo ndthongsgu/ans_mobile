@@ -66,13 +66,15 @@ class AppLocalizationsVi extends AppLocalizations {
   String get splashSubtitle => 'Phát audio khi đến khu vực điểm tham quan';
 
   @override
-  String get permissionEnableMsg => 'Vui lòng bật vị trí để sử dụng tính năng bản đồ.';
+  String get permissionEnableMsg =>
+      'Vui lòng bật vị trí để sử dụng tính năng bản đồ.';
 
   @override
   String get permissionDeniedMsg => 'Quyền vị trí bị từ chối.';
 
   @override
-  String get permissionDeniedForeverMsg => 'Quyền vị trí bị chặn vĩnh viễn. Hãy mở cài đặt để cấp phép.';
+  String get permissionDeniedForeverMsg =>
+      'Quyền vị trí bị chặn vĩnh viễn. Hãy mở cài đặt để cấp phép.';
 
   @override
   String locationErrorPrefix(Object error) {
@@ -80,7 +82,8 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get noUserPositionMsg => 'Chưa có vị trí hiện tại. Bấm để yêu cầu quyền vị trí.';
+  String get noUserPositionMsg =>
+      'Chưa có vị trí hiện tại. Bấm để yêu cầu quyền vị trí.';
 
   @override
   String get suggestionsLabel => 'Gợi ý:';
@@ -192,7 +195,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get buyPackageTitle => 'Mua gói';
 
   @override
-  String get noActivePackageMsg => 'Bạn chưa đăng ký gói. Vui lòng mua gói để tiếp tục.';
+  String get noActivePackageMsg =>
+      'Bạn chưa đăng ký gói. Vui lòng mua gói để tiếp tục.';
 
   @override
   String get buyNowToast => 'Chức năng mua sẽ được triển khai';
@@ -222,7 +226,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get resetPasswordTitle => 'Đặt lại mật khẩu';
 
   @override
-  String get resetPasswordDesc => 'Nhập mã đã gửi đến email của bạn và chọn mật khẩu mới';
+  String get resetPasswordDesc =>
+      'Nhập mã đã gửi đến email của bạn và chọn mật khẩu mới';
 
   @override
   String get codeSentTo => 'Mã đã gửi tới:';
@@ -328,4 +333,53 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get exitAppConfirm => 'Bạn có chắc chắn muốn thoát?';
+
+  @override
+  String get loginWithDevice => 'Đăng nhập bằng thiết bị';
+
+  @override
+  String get loginDeviceSuccessMsg => 'Đăng nhập thành công';
+
+  @override
+  String loadPoiError(Object error) => 'Lỗi tải dữ liệu quán: $error';
+
+  @override
+  String audioQueue(String queueInfo) => 'Audio queue: $queueInfo';
+
+  @override
+  String get pointNotInPoiZone => 'Điểm này không nằm trong vùng POI nào';
+
+  @override
+  String get audioQueueFinished => 'Đã phát hết audio queue';
+
+  @override
+  String nowPlaying(String poiName) => 'Đang phát: $poiName';
+
+  @override
+  String get pleaseLoginFirst => 'Vui lòng đăng nhập trước';
+
+  @override
+  String get scanQrCode => 'Quét QR Code';
+
+  @override
+  String get stallNotFound => 'Không tìm thấy quán';
+
+  @override
+  String error(Object error) => 'Lỗi: $error';
+
+  @override
+  String get enableLocationTitle => 'Vui lòng bật vị trí';
+
+  @override
+  String get enableLocationDesc =>
+      'Để xem các quán gần bạn trên bản đồ, vui lòng cấp quyền vị trí cho ứng dụng';
+
+  @override
+  String get enableLocationButton => 'Bật vị trí';
+
+  @override
+  String get enableLocationToSeeStalls => 'Bật vị trí để xem quán gần bạn';
+
+  @override
+  String get noStallsFound => 'Không tìm thấy quán nào';
 }

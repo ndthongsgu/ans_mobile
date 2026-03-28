@@ -48,5 +48,8 @@
 	<!-- Location permission description -->
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Ứng dụng cần quyền truy cập vị trí.</string>
+	<!-- Camera permission description -->
+	<key>NSCameraUsageDescription</key>
+	<string>Ứng dụng cần quyền truy cập camera để quét QR code.</string>
 </dict>
 </plist>

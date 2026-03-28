@@ -72,7 +72,8 @@ class AppLocalizationsKo extends AppLocalizations {
   String get permissionDeniedMsg => '위치 권한이 거부되었습니다.';
 
   @override
-  String get permissionDeniedForeverMsg => '위치 권한이 영구적으로 거부되었습니다. 설정에서 권한을 부여하세요.';
+  String get permissionDeniedForeverMsg =>
+      '위치 권한이 영구적으로 거부되었습니다. 설정에서 권한을 부여하세요.';
 
   @override
   String locationErrorPrefix(Object error) {
@@ -328,4 +329,52 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get exitAppConfirm => '정말로 종료하시겠습니까?';
+
+  @override
+  String get loginWithDevice => '기기 로그인';
+
+  @override
+  String get loginDeviceSuccessMsg => '로그인 성공';
+
+  @override
+  String loadPoiError(Object error) => '상점 로드 오류: $error';
+
+  @override
+  String audioQueue(String queueInfo) => '오디오 대기열: $queueInfo';
+
+  @override
+  String get pointNotInPoiZone => '이 지점은 POI 영역 내에 있지 않습니다';
+
+  @override
+  String get audioQueueFinished => '오디오 대기열 재생 완료';
+
+  @override
+  String nowPlaying(String poiName) => '재생 중: $poiName';
+
+  @override
+  String get pleaseLoginFirst => '먼저 로그인하세요';
+
+  @override
+  String get scanQrCode => 'QR 코드 스캔';
+
+  @override
+  String get stallNotFound => '상점을 찾을 수 없습니다';
+
+  @override
+  String error(Object error) => '오류: $error';
+
+  @override
+  String get enableLocationTitle => '위치를 활성화하세요';
+
+  @override
+  String get enableLocationDesc => '지도의 근처 상점을 보려면 위치 권한을 허용하세요';
+
+  @override
+  String get enableLocationButton => '위치 활성화';
+
+  @override
+  String get enableLocationToSeeStalls => '근처 상점을 보려면 위치 활성화';
+
+  @override
+  String get noStallsFound => '상점을 찾을 수 없습니다';
 }

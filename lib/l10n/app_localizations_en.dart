@@ -66,13 +66,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get splashSubtitle => 'Play audio when you enter a POI area';
 
   @override
-  String get permissionEnableMsg => 'Please enable location services to use the map.';
+  String get permissionEnableMsg =>
+      'Please enable location services to use the map.';
 
   @override
   String get permissionDeniedMsg => 'Location permission denied.';
 
   @override
-  String get permissionDeniedForeverMsg => 'Location permission is permanently denied. Open settings to grant permission.';
+  String get permissionDeniedForeverMsg =>
+      'Location permission is permanently denied. Open settings to grant permission.';
 
   @override
   String locationErrorPrefix(Object error) {
@@ -80,13 +82,15 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get noUserPositionMsg => 'No current location available. Tap to request permission.';
+  String get noUserPositionMsg =>
+      'No current location available. Tap to request permission.';
 
   @override
   String get suggestionsLabel => 'Suggestions:';
 
   @override
-  String get suggestion_keep_gps => '- Keep GPS on to receive automatic narration';
+  String get suggestion_keep_gps =>
+      '- Keep GPS on to receive automatic narration';
 
   @override
   String visitedCountLabel(Object count) {
@@ -192,7 +196,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get buyPackageTitle => 'Buy package';
 
   @override
-  String get noActivePackageMsg => 'You don\'t have an active package. Please purchase a package to continue.';
+  String get noActivePackageMsg =>
+      'You don\'t have an active package. Please purchase a package to continue.';
 
   @override
   String get buyNowToast => 'Purchase flow will be implemented soon';
@@ -222,7 +227,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resetPasswordTitle => 'Reset password';
 
   @override
-  String get resetPasswordDesc => 'Enter the code sent to your email and choose a new password';
+  String get resetPasswordDesc =>
+      'Enter the code sent to your email and choose a new password';
 
   @override
   String get codeSentTo => 'Code sent to:';
@@ -328,4 +334,54 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exitAppConfirm => 'Are you sure you want to exit?';
+
+  @override
+  String get loginWithDevice => 'Login with device';
+
+  @override
+  String get loginDeviceSuccessMsg => 'Login successful';
+
+  @override
+  String loadPoiError(Object error) => 'Error loading stalls: $error';
+
+  @override
+  String audioQueue(String queueInfo) => 'Audio queue: $queueInfo';
+
+  @override
+  String get pointNotInPoiZone => 'This point is not in any POI zone';
+
+  @override
+  String get audioQueueFinished => 'Audio queue finished';
+
+  @override
+  String nowPlaying(String poiName) => 'Now playing: $poiName';
+
+  @override
+  String get pleaseLoginFirst => 'Please login first';
+
+  @override
+  String get scanQrCode => 'Scan QR Code';
+
+  @override
+  String get stallNotFound => 'Stall not found';
+
+  @override
+  String error(Object error) => 'Error: $error';
+
+  @override
+  String get enableLocationTitle => 'Please enable location';
+
+  @override
+  String get enableLocationDesc =>
+      'To view nearby stalls on the map, please grant location permission';
+
+  @override
+  String get enableLocationButton => 'Enable location';
+
+  @override
+  String get enableLocationToSeeStalls =>
+      'Enable location to see nearby stalls';
+
+  @override
+  String get noStallsFound => 'No stalls found';
 }

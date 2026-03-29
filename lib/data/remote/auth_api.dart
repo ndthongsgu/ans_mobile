@@ -239,6 +239,130 @@ class AuthApi {
     }
   }
 
+  Future<Map<String, dynamic>> changePassword({
+    required String accessToken,
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    final res = await _postReq(
+      '/mobile/auth/change-password',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      },
+      body: jsonEncode({
+        'current_password': currentPassword,
+        'new_password': newPassword,
+      }),
+    );
+    if (res.statusCode >= 400) {
+      throw Exception(_parseError(res));
+    }
+    try {
+      return Map<String, dynamic>.from(jsonDecode(res.body) as Map);
+    } catch (e) {
+      return {'message': 'Password changed successfully'};
+    }
+  }
+
+  Future<Map<String, dynamic>> updateProfile({
+    required String accessToken,
+    String? fullName,
+    String? email,
+    String? phone,
+    String? avatarUrl,
+  }) async {
+    final body = <String, dynamic>{};
+    if (fullName != null) body['full_name'] = fullName;
+    if (email != null) body['email'] = email;
+    if (phone != null) body['phone'] = phone;
+    if (avatarUrl != null) body['avatar_url'] = avatarUrl;
+
+    final res = await _postReq(
+      '/mobile/auth/update-profile',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      },
+      body: jsonEncode(body),
+    );
+    if (res.statusCode >= 400) {
+      throw Exception(_parseError(res));
+    }
+    try {
+      return Map<String, dynamic>.from(jsonDecode(res.body) as Map);
+    } catch (e) {
+      return {'message': 'Profile updated successfully'};
+    }
+  }
+
+  Future<Map<String, dynamic>> listListeningHistory({
+    required String accessToken,
+    int page = 1,
+    int size = 20,
+    int? fromTimestamp,
+    int? toTimestamp,
+  }) async {
+    final query = <String, String>{
+      'page': page.toString(),
+      'size': size.toString(),
+      if (fromTimestamp != null) 'from_timestamp': fromTimestamp.toString(),
+      if (toTimestamp != null) 'to_timestamp': toTimestamp.toString(),
+    };
+
+    // Use the trailing slash endpoint to avoid 307 redirect.
+    final path = '/mobile/listening-history/?${Uri(queryParameters: query).query}';
+    final res = await _getReq(
+      path,
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+        'Accept': 'application/json',
+      },
+    );
+
+    if (res.statusCode >= 400) {
+      throw Exception(_parseError(res));
+    }
+
+    try {
+      return Map<String, dynamic>.from(jsonDecode(res.body) as Map);
+    } catch (e) {
+      throw Exception('Invalid response from server in listListeningHistory');
+    }
+  }
+
+  Future<Map<String, dynamic>> addListeningHistory({
+    required String accessToken,
+    required String stallId,
+    required String stallContentId,
+    required int listenedAt,
+    int? listenDuration,
+  }) async {
+    final res = await _postReq(
+      '/mobile/listening-history/',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      },
+      body: jsonEncode({
+        'stall_id': stallId,
+        'stall_content_id': stallContentId,
+        'listened_at': listenedAt,
+        if (listenDuration != null) 'listen_duration': listenDuration,
+      }),
+    );
+
+    if (res.statusCode >= 400) {
+      throw Exception(_parseError(res));
+    }
+
+    try {
+      return Map<String, dynamic>.from(jsonDecode(res.body) as Map);
+    } catch (e) {
+      throw Exception('Invalid response from server in addListeningHistory');
+    }
+  }
+
   Future<Map<String, dynamic>> googleLogin({required String idToken}) async {
     final res = await _postReq(
       '/mobile/auth/google-login',

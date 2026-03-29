@@ -16,6 +16,34 @@ class ApiClient {
     required String password,
   }) => AuthApi.instance.login(email: email, password: password);
 
+  Future<Map<String, dynamic>> listListeningHistory({
+    required String accessToken,
+    int page = 1,
+    int size = 20,
+    int? fromTimestamp,
+    int? toTimestamp,
+  }) => AuthApi.instance.listListeningHistory(
+        accessToken: accessToken,
+        page: page,
+        size: size,
+        fromTimestamp: fromTimestamp,
+        toTimestamp: toTimestamp,
+      );
+
+  Future<Map<String, dynamic>> addListeningHistory({
+    required String accessToken,
+    required String stallId,
+    required String stallContentId,
+    required int listenedAt,
+    int? listenDuration,
+  }) => AuthApi.instance.addListeningHistory(
+        accessToken: accessToken,
+        stallId: stallId,
+        stallContentId: stallContentId,
+        listenedAt: listenedAt,
+        listenDuration: listenDuration,
+      );
+
   Future<Map<String, dynamic>> register({
     String? username,
     required String email,
@@ -45,6 +73,30 @@ class ApiClient {
     otp: otp,
     newPassword: newPassword,
   );
+
+  Future<Map<String, dynamic>> changePassword({
+    required String accessToken,
+    required String currentPassword,
+    required String newPassword,
+  }) => AuthApi.instance.changePassword(
+        accessToken: accessToken,
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
+
+  Future<Map<String, dynamic>> updateProfile({
+    required String accessToken,
+    String? fullName,
+    String? email,
+    String? phone,
+    String? avatarUrl,
+  }) => AuthApi.instance.updateProfile(
+        accessToken: accessToken,
+        fullName: fullName,
+        email: email,
+        phone: phone,
+        avatarUrl: avatarUrl,
+      );
 
   Future<Map<String, dynamic>> me(String accessToken) =>
       AuthApi.instance.me(accessToken);

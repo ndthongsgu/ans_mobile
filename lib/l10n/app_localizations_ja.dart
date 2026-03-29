@@ -72,8 +72,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get permissionDeniedMsg => '位置情報の許可が拒否されました。';
 
   @override
-  String get permissionDeniedForeverMsg =>
-      '位置情報の許可が永続的に拒否されています。設定を開いて許可を付与してください。';
+  String get permissionDeniedForeverMsg => '位置情報の許可が永続的に拒否されています。設定を開いて許可を付与してください。';
 
   @override
   String locationErrorPrefix(Object error) {
@@ -277,7 +276,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get contactTitle => 'お問い合わせ';
 
   @override
-  String get phoneLabel => '電話：';
+  String get phoneLabel => '電話';
 
   @override
   String get websiteLabel => 'ウェブサイト：';
@@ -319,6 +318,79 @@ class AppLocalizationsJa extends AppLocalizations {
   String get changePasswordLabel => 'パスワード変更';
 
   @override
+  String get updateProfileSuccess => 'プロフィールを更新しました';
+
+  @override
+  String get invalidEmailMsg => '有効なメールアドレスを入力してください';
+
+  @override
+  String get avatarUrlLabel => 'アバターURL';
+
+  @override
+  String get saveButtonLabel => '保存';
+
+  @override
+  String get loginDeviceSuccessMsg => 'デバイスでのログインに成功しました';
+
+  @override
+  String get loginWithDevice => 'デバイスでログイン';
+
+  @override
+  String loadPoiError(Object error) {
+    return 'POIの読み込みに失敗しました: $error';
+  }
+
+  @override
+  String audioQueue(Object queueInfo) {
+    return 'オーディオキュー: $queueInfo';
+  }
+
+  @override
+  String alreadyListenedRecently(Object count) {
+    return 'You\'ve already listened to $count stall(s) recently, please try again in 2 minutes.';
+  }
+
+  @override
+  String get pointNotInPoiZone => '選択した地点はPOIゾーン内ではありません';
+
+  @override
+  String get audioQueueFinished => 'オーディオキュー再生完了';
+
+  @override
+  String nowPlaying(Object poiName) {
+    return '再生中: $poiName';
+  }
+
+  @override
+  String get pleaseLoginFirst => '先にログインしてください';
+
+  @override
+  String get scanQrCode => 'QRコードをスキャン';
+
+  @override
+  String get stallNotFound => '屋台が見つかりません';
+
+  @override
+  String error(Object error) {
+    return 'エラー: $error';
+  }
+
+  @override
+  String get enableLocationTitle => '位置情報サービスを有効にしてください';
+
+  @override
+  String get enableLocationDesc => '近くの屋台を見るには位置情報を有効にしてください';
+
+  @override
+  String get enableLocationButton => '位置情報を有効にする';
+
+  @override
+  String get enableLocationToSeeStalls => '屋台を見るには位置情報を有効にしてください';
+
+  @override
+  String get noStallsFound => '近くに屋台が見つかりません';
+
+  @override
   String get cancelButton => 'キャンセル';
 
   @override
@@ -329,52 +401,4 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get exitAppConfirm => '本当に終了してもよろしいですか？';
-
-  @override
-  String get loginWithDevice => 'デバイスでログイン';
-
-  @override
-  String get loginDeviceSuccessMsg => 'ログイン成功';
-
-  @override
-  String loadPoiError(Object error) => '屋の読み込みエラー: $error';
-
-  @override
-  String audioQueue(String queueInfo) => 'オーディオキュー: $queueInfo';
-
-  @override
-  String get pointNotInPoiZone => 'この点はPOIゾーン内にありません';
-
-  @override
-  String get audioQueueFinished => 'オーディオキュー再生完了';
-
-  @override
-  String nowPlaying(String poiName) => '再生中: $poiName';
-
-  @override
-  String get pleaseLoginFirst => '先にログインしてください';
-
-  @override
-  String get scanQrCode => 'QRコードをスキャン';
-
-  @override
-  String get stallNotFound => '屋が見つかりません';
-
-  @override
-  String error(Object error) => 'エラー: $error';
-
-  @override
-  String get enableLocationTitle => '位置情報を有効にしてください';
-
-  @override
-  String get enableLocationDesc => '地図で近くの屋を見るには、位置情報の許可を与えてください';
-
-  @override
-  String get enableLocationButton => '位置情報を有効にする';
-
-  @override
-  String get enableLocationToSeeStalls => '近くの屋を見るには位置情報を有効にしてください';
-
-  @override
-  String get noStallsFound => '屋が見つかりません';
 }

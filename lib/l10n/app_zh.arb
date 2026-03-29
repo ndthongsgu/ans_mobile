@@ -122,6 +122,38 @@
   "userLabel": "用户",
   "editProfileLabel": "编辑资料",
   "changePasswordLabel": "更改密码",
+  "updateProfileSuccess": "资料已更新",
+  "invalidEmailMsg": "请输入有效的电子邮件",
+  "avatarUrlLabel": "头像 URL",
+  "saveButtonLabel": "保存",
+  "loginDeviceSuccessMsg": "设备登录成功",
+  "loginWithDevice": "使用设备登录",
+  "loadPoiError": "加载 POI 失败: {error}",
+  "@loadPoiError": {
+    "placeholders": {"error": {}}
+  },
+  "audioQueue": "音频队列: {queueInfo}",
+  "@audioQueue": {
+    "placeholders": {"queueInfo": {}}
+  },
+  "pointNotInPoiZone": "选定点不在任何 POI 区域",
+  "audioQueueFinished": "音频队列播放完成",
+  "nowPlaying": "正在播放: {poiName}",
+  "@nowPlaying": {
+    "placeholders": {"poiName": {}}
+  },
+  "pleaseLoginFirst": "请先登录",
+  "scanQrCode": "扫描二维码",
+  "stallNotFound": "未找到摊位",
+  "error": "错误: {error}",
+  "@error": {
+    "placeholders": {"error": {}}
+  },
+  "enableLocationTitle": "启用定位服务",
+  "enableLocationDesc": "请启用定位以查看附近摊位",
+  "enableLocationButton": "启用定位",
+  "enableLocationToSeeStalls": "启用定位以查看摊位",
+  "noStallsFound": "未找到附近摊位",
   "cancelButton": "取消",
   "exitButton": "退出",
   "exitAppTitle": "退出应用",

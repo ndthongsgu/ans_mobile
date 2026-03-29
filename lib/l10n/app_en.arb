@@ -103,7 +103,7 @@
   "ownerLabel": "Owner:",
   "descriptionTitle": "Description",
   "contactTitle": "Contact",
-  "phoneLabel": "Phone:",
+  "phoneLabel": "Phone",
   "websiteLabel": "Website:",
   "infoTitle": "Information",
   "openingHoursLabel": "Opening Hours:",
@@ -117,6 +117,42 @@
   "userLabel": "User",
   "editProfileLabel": "Edit Profile",
   "changePasswordLabel": "Change Password",
+  "updateProfileSuccess": "Profile updated successfully",
+  "invalidEmailMsg": "Please enter a valid email",
+  "avatarUrlLabel": "Avatar URL",
+  "saveButtonLabel": "Save",
+  "loginDeviceSuccessMsg": "Signed in with device successfully",
+  "loginWithDevice": "Sign in with Device",
+  "loadPoiError": "Failed to load POI: {error}",
+  "@loadPoiError": {
+    "placeholders": {"error": {}}
+  },
+  "audioQueue": "Audio queue: {queueInfo}",
+  "@audioQueue": {
+    "placeholders": {"queueInfo": {}}
+  },
+  "alreadyListenedRecently": "You've already listened to {count} stall(s) recently, please try again in 2 minutes.",
+  "@alreadyListenedRecently": {
+    "placeholders": {"count": {}}
+  },
+  "pointNotInPoiZone": "Selected point is not in any POI zone",
+  "audioQueueFinished": "Audio queue finished",
+  "nowPlaying": "Now playing: {poiName}",
+  "@nowPlaying": {
+    "placeholders": {"poiName": {}}
+  },
+  "pleaseLoginFirst": "Please login first",
+  "scanQrCode": "Scan QR code",
+  "stallNotFound": "Stall not found",
+  "error": "Error: {error}",
+  "@error": {
+    "placeholders": {"error": {}}
+  },
+  "enableLocationTitle": "Enable location services",
+  "enableLocationDesc": "Please enable location to see nearby stalls",
+  "enableLocationButton": "Enable Location",
+  "enableLocationToSeeStalls": "Enable location to see stalls",
+  "noStallsFound": "No stalls found nearby",
   "cancelButton": "Cancel",
   "exitButton": "Exit",
   "exitAppTitle": "Exit Application",

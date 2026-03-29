@@ -108,7 +108,7 @@
   "ownerLabel": "사장:",
   "descriptionTitle": "설명",
   "contactTitle": "연락처",
-  "phoneLabel": "전화:",
+  "phoneLabel": "전화",
   "websiteLabel": "웹사이트:",
   "infoTitle": "정보",
   "openingHoursLabel": "영업시간:",
@@ -122,6 +122,38 @@
   "userLabel": "사용자",
   "editProfileLabel": "프로필 편집",
   "changePasswordLabel": "비밀번호 변경",
+  "updateProfileSuccess": "프로필이 업데이트되었습니다",
+  "invalidEmailMsg": "유효한 이메일을 입력해주세요",
+  "avatarUrlLabel": "아바타 URL",
+  "saveButtonLabel": "저장",
+  "loginDeviceSuccessMsg": "기기 로그인에 성공했습니다",
+  "loginWithDevice": "기기로 로그인",
+  "loadPoiError": "POI 불러오기 실패: {error}",
+  "@loadPoiError": {
+    "placeholders": {"error": {}}
+  },
+  "audioQueue": "오디오 큐: {queueInfo}",
+  "@audioQueue": {
+    "placeholders": {"queueInfo": {}}
+  },
+  "pointNotInPoiZone": "선택한 지점이 POI 영역에 없습니다",
+  "audioQueueFinished": "오디오 큐 재생 완료",
+  "nowPlaying": "재생 중: {poiName}",
+  "@nowPlaying": {
+    "placeholders": {"poiName": {}}
+  },
+  "pleaseLoginFirst": "먼저 로그인해주세요",
+  "scanQrCode": "QR 코드 스캔",
+  "stallNotFound": "가게를 찾을 수 없습니다",
+  "error": "오류: {error}",
+  "@error": {
+    "placeholders": {"error": {}}
+  },
+  "enableLocationTitle": "위치 서비스 활성화",
+  "enableLocationDesc": "근처 가게를 보려면 위치를 활성화하세요",
+  "enableLocationButton": "위치 활성화",
+  "enableLocationToSeeStalls": "가게 보려면 위치 활성화",
+  "noStallsFound": "근처에 가게가 없습니다",
   "cancelButton": "취소",
   "exitButton": "종료",
   "exitAppTitle": "앱 종료",

@@ -318,37 +318,48 @@ class AppLocalizationsZh extends AppLocalizations {
   String get changePasswordLabel => '更改密码';
 
   @override
-  String get cancelButton => '取消';
+  String get updateProfileSuccess => '资料已更新';
 
   @override
-  String get exitButton => '退出';
+  String get invalidEmailMsg => '请输入有效的电子邮件';
 
   @override
-  String get exitAppTitle => '退出应用';
+  String get avatarUrlLabel => '头像 URL';
 
   @override
-  String get exitAppConfirm => '您确定要退出吗？';
+  String get saveButtonLabel => '保存';
 
   @override
-  String get loginWithDevice => '设备登录';
+  String get loginDeviceSuccessMsg => '设备登录成功';
 
   @override
-  String get loginDeviceSuccessMsg => '登录成功';
+  String get loginWithDevice => '使用设备登录';
 
   @override
-  String loadPoiError(Object error) => '加载摊位错误: $error';
+  String loadPoiError(Object error) {
+    return '加载 POI 失败: $error';
+  }
 
   @override
-  String audioQueue(String queueInfo) => '音频队列: $queueInfo';
+  String audioQueue(Object queueInfo) {
+    return '音频队列: $queueInfo';
+  }
 
   @override
-  String get pointNotInPoiZone => '此点不在任何POI区域内';
+  String alreadyListenedRecently(Object count) {
+    return 'You\'ve already listened to $count stall(s) recently, please try again in 2 minutes.';
+  }
 
   @override
-  String get audioQueueFinished => '音频队列播放完毕';
+  String get pointNotInPoiZone => '选定点不在任何 POI 区域';
 
   @override
-  String nowPlaying(String poiName) => '正在播放: $poiName';
+  String get audioQueueFinished => '音频队列播放完成';
+
+  @override
+  String nowPlaying(Object poiName) {
+    return '正在播放: $poiName';
+  }
 
   @override
   String get pleaseLoginFirst => '请先登录';
@@ -360,20 +371,34 @@ class AppLocalizationsZh extends AppLocalizations {
   String get stallNotFound => '未找到摊位';
 
   @override
-  String error(Object error) => '错误: $error';
+  String error(Object error) {
+    return '错误: $error';
+  }
 
   @override
-  String get enableLocationTitle => '请启用位置';
+  String get enableLocationTitle => '启用定位服务';
 
   @override
-  String get enableLocationDesc => '要在地图上查看附近的摊位，请授予位置权限';
+  String get enableLocationDesc => '请启用定位以查看附近摊位';
 
   @override
-  String get enableLocationButton => '启用位置';
+  String get enableLocationButton => '启用定位';
 
   @override
-  String get enableLocationToSeeStalls => '启用位置以查看附近的摊位';
+  String get enableLocationToSeeStalls => '启用定位以查看摊位';
 
   @override
-  String get noStallsFound => '未找到摊位';
+  String get noStallsFound => '未找到附近摊位';
+
+  @override
+  String get cancelButton => '取消';
+
+  @override
+  String get exitButton => '退出';
+
+  @override
+  String get exitAppTitle => '退出应用';
+
+  @override
+  String get exitAppConfirm => '您确定要退出吗？';
 }

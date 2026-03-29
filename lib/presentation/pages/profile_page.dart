@@ -115,13 +115,17 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         leading: Icon(Icons.edit, color: colorScheme.onSurface),
                         title: Text(AppLocalizations.of(context)!.editProfileLabel),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/update_profile');
+                        },
                       ),
                       const Divider(height: 1),
                       ListTile(
                         leading: Icon(Icons.lock, color: colorScheme.onSurface),
                         title: Text(AppLocalizations.of(context)!.changePasswordLabel),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/change_password');
+                        },
                       ),
                       const Divider(height: 1),
                       ListTile(

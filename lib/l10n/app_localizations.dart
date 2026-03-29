@@ -65,8 +65,7 @@ import 'app_localizations_zh.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -74,8 +73,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -87,13 +85,12 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
@@ -101,7 +98,7 @@ abstract class AppLocalizations {
     Locale('ja'),
     Locale('ko'),
     Locale('vi'),
-    Locale('zh'),
+    Locale('zh')
   ];
 
   /// No description provided for @appTitle.
@@ -629,7 +626,7 @@ abstract class AppLocalizations {
   /// No description provided for @phoneLabel.
   ///
   /// In en, this message translates to:
-  /// **'Phone:'**
+  /// **'Phone'**
   String get phoneLabel;
 
   /// No description provided for @websiteLabel.
@@ -710,6 +707,132 @@ abstract class AppLocalizations {
   /// **'Change Password'**
   String get changePasswordLabel;
 
+  /// No description provided for @updateProfileSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully'**
+  String get updateProfileSuccess;
+
+  /// No description provided for @invalidEmailMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get invalidEmailMsg;
+
+  /// No description provided for @avatarUrlLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Avatar URL'**
+  String get avatarUrlLabel;
+
+  /// No description provided for @saveButtonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get saveButtonLabel;
+
+  /// No description provided for @loginDeviceSuccessMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in with device successfully'**
+  String get loginDeviceSuccessMsg;
+
+  /// No description provided for @loginWithDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Device'**
+  String get loginWithDevice;
+
+  /// No description provided for @loadPoiError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load POI: {error}'**
+  String loadPoiError(Object error);
+
+  /// No description provided for @audioQueue.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio queue: {queueInfo}'**
+  String audioQueue(Object queueInfo);
+
+  /// No description provided for @alreadyListenedRecently.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve already listened to {count} stall(s) recently, please try again in 2 minutes.'**
+  String alreadyListenedRecently(Object count);
+
+  /// No description provided for @pointNotInPoiZone.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected point is not in any POI zone'**
+  String get pointNotInPoiZone;
+
+  /// No description provided for @audioQueueFinished.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio queue finished'**
+  String get audioQueueFinished;
+
+  /// No description provided for @nowPlaying.
+  ///
+  /// In en, this message translates to:
+  /// **'Now playing: {poiName}'**
+  String nowPlaying(Object poiName);
+
+  /// No description provided for @pleaseLoginFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Please login first'**
+  String get pleaseLoginFirst;
+
+  /// No description provided for @scanQrCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan QR code'**
+  String get scanQrCode;
+
+  /// No description provided for @stallNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Stall not found'**
+  String get stallNotFound;
+
+  /// No description provided for @error.
+  ///
+  /// In en, this message translates to:
+  /// **'Error: {error}'**
+  String error(Object error);
+
+  /// No description provided for @enableLocationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable location services'**
+  String get enableLocationTitle;
+
+  /// No description provided for @enableLocationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enable location to see nearby stalls'**
+  String get enableLocationDesc;
+
+  /// No description provided for @enableLocationButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Location'**
+  String get enableLocationButton;
+
+  /// No description provided for @enableLocationToSeeStalls.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable location to see stalls'**
+  String get enableLocationToSeeStalls;
+
+  /// No description provided for @noStallsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No stalls found nearby'**
+  String get noStallsFound;
+
   /// No description provided for @cancelButton.
   ///
   /// In en, this message translates to:
@@ -733,28 +856,9 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to exit?'**
   String get exitAppConfirm;
-
-  // Map page strings
-  String get loginWithDevice;
-  String get loginDeviceSuccessMsg;
-  String loadPoiError(Object error);
-  String audioQueue(String queueInfo);
-  String get pointNotInPoiZone;
-  String get audioQueueFinished;
-  String nowPlaying(String poiName);
-  String get pleaseLoginFirst;
-  String get scanQrCode;
-  String get stallNotFound;
-  String error(Object error);
-  String get enableLocationTitle;
-  String get enableLocationDesc;
-  String get enableLocationButton;
-  String get enableLocationToSeeStalls;
-  String get noStallsFound;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -763,32 +867,28 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'ja', 'ko', 'vi', 'zh'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'ja', 'ko', 'vi', 'zh'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en':
-      return AppLocalizationsEn();
-    case 'ja':
-      return AppLocalizationsJa();
-    case 'ko':
-      return AppLocalizationsKo();
-    case 'vi':
-      return AppLocalizationsVi();
-    case 'zh':
-      return AppLocalizationsZh();
+    case 'en': return AppLocalizationsEn();
+    case 'ja': return AppLocalizationsJa();
+    case 'ko': return AppLocalizationsKo();
+    case 'vi': return AppLocalizationsVi();
+    case 'zh': return AppLocalizationsZh();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
+    'that was used.'
   );
 }

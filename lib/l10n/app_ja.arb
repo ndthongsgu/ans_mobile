@@ -103,7 +103,7 @@
   "ownerLabel": "オーナー：",
   "descriptionTitle": "説明",
   "contactTitle": "お問い合わせ",
-  "phoneLabel": "電話：",
+  "phoneLabel": "電話",
   "websiteLabel": "ウェブサイト：",
   "infoTitle": "情報",
   "openingHoursLabel": "営業時間：",
@@ -117,6 +117,38 @@
   "userLabel": "ユーザー",
   "editProfileLabel": "プロフィール編集",
   "changePasswordLabel": "パスワード変更",
+  "updateProfileSuccess": "プロフィールを更新しました",
+  "invalidEmailMsg": "有効なメールアドレスを入力してください",
+  "avatarUrlLabel": "アバターURL",
+  "saveButtonLabel": "保存",
+  "loginDeviceSuccessMsg": "デバイスでのログインに成功しました",
+  "loginWithDevice": "デバイスでログイン",
+  "loadPoiError": "POIの読み込みに失敗しました: {error}",
+  "@loadPoiError": {
+    "placeholders": {"error": {}}
+  },
+  "audioQueue": "オーディオキュー: {queueInfo}",
+  "@audioQueue": {
+    "placeholders": {"queueInfo": {}}
+  },
+  "pointNotInPoiZone": "選択した地点はPOIゾーン内ではありません",
+  "audioQueueFinished": "オーディオキュー再生完了",
+  "nowPlaying": "再生中: {poiName}",
+  "@nowPlaying": {
+    "placeholders": {"poiName": {}}
+  },
+  "pleaseLoginFirst": "先にログインしてください",
+  "scanQrCode": "QRコードをスキャン",
+  "stallNotFound": "屋台が見つかりません",
+  "error": "エラー: {error}",
+  "@error": {
+    "placeholders": {"error": {}}
+  },
+  "enableLocationTitle": "位置情報サービスを有効にしてください",
+  "enableLocationDesc": "近くの屋台を見るには位置情報を有効にしてください",
+  "enableLocationButton": "位置情報を有効にする",
+  "enableLocationToSeeStalls": "屋台を見るには位置情報を有効にしてください",
+  "noStallsFound": "近くに屋台が見つかりません",
   "cancelButton": "キャンセル",
   "exitButton": "終了",
   "exitAppTitle": "アプリを終了",

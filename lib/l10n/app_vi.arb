@@ -108,7 +108,7 @@
   "ownerLabel": "Chủ quán:",
   "descriptionTitle": "Mô tả",
   "contactTitle": "Liên hệ",
-  "phoneLabel": "Điện thoại:",
+  "phoneLabel": "Điện thoại",
   "websiteLabel": "Website:",
   "infoTitle": "Thông tin",
   "openingHoursLabel": "Giờ mở cửa:",
@@ -122,6 +122,42 @@
   "userLabel": "Người dùng",
   "editProfileLabel": "Chỉnh sửa hồ sơ",
   "changePasswordLabel": "Thay đổi mật khẩu",
+  "updateProfileSuccess": "Cập nhật hồ sơ thành công",
+  "invalidEmailMsg": "Vui lòng nhập email hợp lệ",
+  "avatarUrlLabel": "URL ảnh đại diện",
+  "saveButtonLabel": "Lưu",
+  "loginDeviceSuccessMsg": "Đăng nhập bằng thiết bị thành công",
+  "loginWithDevice": "Đăng nhập bằng thiết bị",
+  "loadPoiError": "Tải POI thất bại: {error}",
+  "@loadPoiError": {
+    "placeholders": {"error": {}}
+  },
+  "audioQueue": "Hàng đợi âm thanh: {queueInfo}",
+  "@audioQueue": {
+    "placeholders": {"queueInfo": {}}
+  },
+  "alreadyListenedRecently": "Bạn đã nghe {count} quán này gần đây rồi, vui lòng thử lại sau 2 phút.",
+  "@alreadyListenedRecently": {
+    "placeholders": {"count": {}}
+  },
+  "pointNotInPoiZone": "Điểm đã chọn không ở vùng POI nào",
+  "audioQueueFinished": "Đã phát xong hàng đợi âm thanh",
+  "nowPlaying": "Đang phát: {poiName}",
+  "@nowPlaying": {
+    "placeholders": {"poiName": {}}
+  },
+  "pleaseLoginFirst": "Vui lòng đăng nhập trước",
+  "scanQrCode": "Quét mã QR",
+  "stallNotFound": "Không tìm thấy quán",
+  "error": "Lỗi: {error}",
+  "@error": {
+    "placeholders": {"error": {}}
+  },
+  "enableLocationTitle": "Bật dịch vụ vị trí",
+  "enableLocationDesc": "Vui lòng bật vị trí để xem quán gần đây",
+  "enableLocationButton": "Bật vị trí",
+  "enableLocationToSeeStalls": "Bật vị trí để xem quán",
+  "noStallsFound": "Không tìm thấy quán gần đây",
   "cancelButton": "Hủy",
   "exitButton": "Thoát",
   "exitAppTitle": "Thoát ứng dụng",

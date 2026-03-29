@@ -22,6 +22,8 @@ import 'presentation/pages/favorites_page.dart';
 import 'presentation/pages/reviews_page.dart';
 import 'presentation/pages/support_page.dart';
 import 'presentation/pages/notifications_page.dart';
+import 'presentation/pages/change_password_page.dart';
+import 'presentation/pages/update_profile_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -87,6 +89,8 @@ class _MyAppState extends State<MyApp> {
         '/reviews': (ctx) => const ReviewsPage(),
         '/support': (ctx) => const SupportPage(),
         '/notifications': (ctx) => const NotificationsPage(),
+        '/change_password': (ctx) => const ChangePasswordPage(),
+        '/update_profile': (ctx) => const UpdateProfilePage(),
       },
     );
   }

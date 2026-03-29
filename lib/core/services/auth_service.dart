@@ -161,6 +161,62 @@ class AuthService extends ChangeNotifier {
     }
   }
 
+  /// Change current user password (requires auth token)
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    final access = accessToken;
+    if (access == null) {
+      throw Exception('User is not authenticated');
+    }
+    try {
+      await ApiClient.instance.changePassword(
+        accessToken: access,
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Update user profile data
+  Future<void> updateProfile({
+    String? fullName,
+    String? email,
+    String? phone,
+    String? avatarUrl,
+  }) async {
+    final access = accessToken;
+    if (access == null) {
+      throw Exception('User is not authenticated');
+    }
+
+    try {
+      final result = await ApiClient.instance.updateProfile(
+        accessToken: access,
+        fullName: fullName,
+        email: email,
+        phone: phone,
+        avatarUrl: avatarUrl,
+      );
+
+      final data = result['data'] as Map<String, dynamic>?;
+      if (data != null) {
+        _me = data;
+        _user = _profileFromMe(data);
+        await _saveUserToPrefs();
+        notifyListeners();
+      }
+
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   /// Sign in using remote API
   Future<void> signInWithEmail({
     required String email,

@@ -5,6 +5,7 @@ import 'package:ans_mobile/l10n/app_localizations.dart';
 import 'package:ans_mobile/presentation/widgets/app_toast.dart';
 import '../../core/services/auth_service.dart';
 import '../../core/services/geo_audio_manager.dart';
+import '../../core/services/listening_history_service.dart';
 import '../../core/services/locale_provider.dart';
 import '../../data/remote/api_client.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -100,6 +101,11 @@ class _MapPageState extends State<MapPage> {
       // Load nearby POIs after getting location
       await _loadNearbyPois(pos.latitude, pos.longitude);
 
+      // If user is already inside a POI region on initial load, start queue logic
+      if (mounted && _userPos != null) {
+        await _processPoiQueueAtPoint(_userPos!);
+      }
+
       _posSub =
           Geolocator.getPositionStream(
             locationSettings: const LocationSettings(
@@ -112,6 +118,10 @@ class _MapPageState extends State<MapPage> {
             });
             // Reload nearby POIs when position changes
             _loadNearbyPois(p.latitude, p.longitude);
+            // Re-evaluate POI queue after moving
+            if (mounted) {
+              _processPoiQueueAtPoint(ll.LatLng(p.latitude, p.longitude));
+            }
           });
     } catch (e) {
       if (mounted) {
@@ -194,7 +204,12 @@ class _MapPageState extends State<MapPage> {
     controller.moveToLatLng(ll.LatLng(poi.latitude, poi.longitude));
   }
 
-  void _onMapTap(ll.LatLng point) {
+  Future<void> _onMapTap(ll.LatLng point) async {
+    _tappedPos = point;
+    await _processPoiQueueAtPoint(point);
+  }
+
+  Future<void> _processPoiQueueAtPoint(ll.LatLng point) async {
     _audioQueueTimer?.cancel();
 
     setState(() {
@@ -211,6 +226,18 @@ class _MapPageState extends State<MapPage> {
         }
       }
     }
+
+    final userLang = LocaleProvider.instance.locale?.languageCode ?? 'vi';
+    final initialQueueCount = _audioQueue.length;
+    final filteredQueue = <Poi>[];
+
+    for (final poi in _audioQueue) {
+      final skip = await _shouldSkipPoi(poi, userLang);
+      if (!skip) {
+        filteredQueue.add(poi);
+      }
+    }
+    _audioQueue = filteredQueue;
 
     _audioQueue.sort((a, b) {
       final distA = const ll.Haversine().distance(
@@ -234,6 +261,11 @@ class _MapPageState extends State<MapPage> {
       _audioQueueTimer = Timer(const Duration(seconds: 2), () {
         _playAudioQueue();
       });
+    } else if (initialQueueCount > 0) {
+      AppToast.showInfo(
+        context,
+        AppLocalizations.of(context)!.alreadyListenedRecently(initialQueueCount.toString()),
+      );
     } else {
       AppToast.showInfo(
         context,
@@ -249,6 +281,66 @@ class _MapPageState extends State<MapPage> {
 
     _currentAudioIndex = 0;
     await _playNextInQueue();
+  }
+
+  Future<bool> _shouldSkipPoi(Poi poi, String languageCode) async {
+    final accessToken = AuthService.instance.accessToken;
+    if (accessToken == null || accessToken.isEmpty) {
+      return false;
+    }
+
+    final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    late final Map<String, dynamic> history;
+    try {
+      history = await ListeningHistoryService.instance.fetchHistory(
+        page: 1,
+        size: 50,
+        fromTimestamp: now - 120,
+      );
+    } catch (e) {
+      return false;
+    }
+
+    final data = history['data'] as Map<String, dynamic>?;
+    final items = (data?['items'] as List<dynamic>?)?.cast<Map<String, dynamic>>() ?? [];
+    if (items.isEmpty) return false;
+
+    final recent = items.where((it) {
+      return it['stall_id'] == poi.id &&
+        it['stall_content_id'] != null &&
+        it['listen_duration'] != null;
+    }).toList();
+
+    if (recent.isEmpty) return false;
+
+    // Check audio duration of content to decide skip.
+    List<Map<String, dynamic>> contents;
+    try {
+      contents = await ApiClient.instance.getStallContents(poi.id, accessToken);
+    } catch (_) {
+      // Fail safe: don't skip if no contents available.
+      return false;
+    }
+
+    if (contents.isEmpty) return false;
+
+    for (final content in contents) {
+      final contentId = content['id'] as String? ?? '';
+      final contentDuration = content['audio_duration'] as int? ?? 0;
+      if (contentId.isEmpty || contentDuration <= 0) continue;
+
+      final matched = recent.where((it) {
+        final listenedId = it['stall_content_id'] as String?;
+        final listenDuration = it['listen_duration'] as int?; // in seconds
+        return listenedId == contentId && (listenDuration ?? 0) >= contentDuration;
+      });
+
+      if (matched.isNotEmpty) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   Future<void> _playNextInQueue() async {
@@ -799,7 +891,7 @@ class _MapPageState extends State<MapPage> {
                                             backgroundColor: Theme.of(
                                               context,
                                             ).colorScheme.secondary,
-                                            onPressed: () {
+                                            onPressed: () async {
                                               if (_userPos == null) {
                                                 AppToast.showInfo(
                                                   context,
@@ -813,6 +905,7 @@ class _MapPageState extends State<MapPage> {
                                               controller.moveToLatLng(
                                                 _userPos!,
                                               );
+                                              await _processPoiQueueAtPoint(_userPos!);
                                             },
                                             child: Icon(
                                               Icons.my_location,

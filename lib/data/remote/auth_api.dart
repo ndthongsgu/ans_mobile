@@ -302,6 +302,7 @@ class AuthApi {
     int size = 20,
     int? fromTimestamp,
     int? toTimestamp,
+    String? languageCode,
   }) async {
     final query = <String, String>{
       'page': page.toString(),
@@ -312,12 +313,16 @@ class AuthApi {
 
     // Use the trailing slash endpoint to avoid 307 redirect.
     final path = '/mobile/listening-history/?${Uri(queryParameters: query).query}';
+    final headers = <String, String>{
+      'Authorization': 'Bearer $accessToken',
+      'Accept': 'application/json',
+    };
+    if (languageCode != null) {
+      headers['Accept-Language'] = languageCode;
+    }
     final res = await _getReq(
       path,
-      headers: {
-        'Authorization': 'Bearer $accessToken',
-        'Accept': 'application/json',
-      },
+      headers: headers,
     );
 
     if (res.statusCode >= 400) {

@@ -156,5 +156,17 @@
   "cancelButton": "Cancel",
   "exitButton": "Exit",
   "exitAppTitle": "Exit Application",
-  "exitAppConfirm": "Are you sure you want to exit?"
+  "exitAppConfirm": "Are you sure you want to exit?",
+  "historyTitle": "Listening History",
+  "noHistoryMessage": "You have no listening history yet.",
+  "listenedAtLabel": "Listened at",
+  "unknownStall": "Unknown stall",
+  "loadHistoryError": "Error loading listening history",
+  "surveyTitle": "Survey",
+  "surveyQuestion": "How was your listening experience?",
+  "surveyRatingLabel": "Rating",
+  "surveyCommentLabel": "Comment",
+  "surveySubmit": "Submit",
+  "surveyThankYou": "Thank you for your feedback!",
+  "genericError": "An error occurred."
 }    

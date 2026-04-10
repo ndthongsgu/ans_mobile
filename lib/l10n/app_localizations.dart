@@ -856,6 +856,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to exit?'**
   String get exitAppConfirm;
+
+  /// No description provided for @historyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Listening History'**
+  String get historyTitle;
+
+  /// No description provided for @noHistoryMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You have no listening history yet.'**
+  String get noHistoryMessage;
+
+  /// No description provided for @listenedAtLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Listened at'**
+  String get listenedAtLabel;
+
+  /// No description provided for @unknownStall.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown stall'**
+  String get unknownStall;
+
+  /// No description provided for @loadHistoryError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading listening history'**
+  String get loadHistoryError;
+
+  /// No description provided for @surveyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Survey'**
+  String get surveyTitle;
+
+  /// No description provided for @surveyQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'How was your listening experience?'**
+  String get surveyQuestion;
+
+  /// No description provided for @surveyRatingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get surveyRatingLabel;
+
+  /// No description provided for @surveyCommentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment'**
+  String get surveyCommentLabel;
+
+  /// No description provided for @surveySubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get surveySubmit;
+
+  /// No description provided for @surveyThankYou.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for your feedback!'**
+  String get surveyThankYou;
+
+  /// No description provided for @genericError.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred.'**
+  String get genericError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

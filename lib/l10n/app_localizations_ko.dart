@@ -347,7 +347,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String alreadyListenedRecently(Object count) {
-    return 'You\'ve already listened to $count stall(s) recently, please try again in 2 minutes.';
+    return '최근에 이미 $count개의 가게를 청취하셨습니다. 2분 후에 다시 시도하세요.';
   }
 
   @override
@@ -401,4 +401,40 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get exitAppConfirm => '정말로 종료하시겠습니까?';
+
+  @override
+  String get historyTitle => '청취 기록';
+
+  @override
+  String get noHistoryMessage => '청취 기록이 없습니다.';
+
+  @override
+  String get listenedAtLabel => '청취 시간';
+
+  @override
+  String get unknownStall => '알 수 없는 가게';
+
+  @override
+  String get loadHistoryError => '청취 기록 로드 오류';
+
+  @override
+  String get surveyTitle => '설문조사';
+
+  @override
+  String get surveyQuestion => '청취 경험은 어떠셨나요?';
+
+  @override
+  String get surveyRatingLabel => '평가';
+
+  @override
+  String get surveyCommentLabel => '댓글';
+
+  @override
+  String get surveySubmit => '제출';
+
+  @override
+  String get surveyThankYou => '피드백 감사합니다!';
+
+  @override
+  String get genericError => '오류가 발생했습니다.';
 }

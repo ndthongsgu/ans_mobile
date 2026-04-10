@@ -22,12 +22,14 @@ class ApiClient {
     int size = 20,
     int? fromTimestamp,
     int? toTimestamp,
+    String? languageCode,
   }) => AuthApi.instance.listListeningHistory(
         accessToken: accessToken,
         page: page,
         size: size,
         fromTimestamp: fromTimestamp,
         toTimestamp: toTimestamp,
+        languageCode: languageCode,
       );
 
   Future<Map<String, dynamic>> addListeningHistory({

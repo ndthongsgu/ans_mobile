@@ -401,4 +401,40 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get exitAppConfirm => 'Bạn có chắc chắn muốn thoát?';
+
+  @override
+  String get historyTitle => 'Lịch sử nghe';
+
+  @override
+  String get noHistoryMessage => 'Bạn chưa có lịch sử nghe.';
+
+  @override
+  String get listenedAtLabel => 'Nghe lúc';
+
+  @override
+  String get unknownStall => 'Quán không xác định';
+
+  @override
+  String get loadHistoryError => 'Lỗi khi tải lịch sử nghe';
+
+  @override
+  String get surveyTitle => 'Khảo sát';
+
+  @override
+  String get surveyQuestion => 'Trải nghiệm nghe của bạn như thế nào?';
+
+  @override
+  String get surveyRatingLabel => 'Đánh giá';
+
+  @override
+  String get surveyCommentLabel => 'Bình luận';
+
+  @override
+  String get surveySubmit => 'Gửi';
+
+  @override
+  String get surveyThankYou => 'Cảm ơn bạn đã góp ý!';
+
+  @override
+  String get genericError => 'Đã có lỗi xảy ra.';
 }

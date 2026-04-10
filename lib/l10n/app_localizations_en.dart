@@ -401,4 +401,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exitAppConfirm => 'Are you sure you want to exit?';
+
+  @override
+  String get historyTitle => 'Listening History';
+
+  @override
+  String get noHistoryMessage => 'You have no listening history yet.';
+
+  @override
+  String get listenedAtLabel => 'Listened at';
+
+  @override
+  String get unknownStall => 'Unknown stall';
+
+  @override
+  String get loadHistoryError => 'Error loading listening history';
+
+  @override
+  String get surveyTitle => 'Survey';
+
+  @override
+  String get surveyQuestion => 'How was your listening experience?';
+
+  @override
+  String get surveyRatingLabel => 'Rating';
+
+  @override
+  String get surveyCommentLabel => 'Comment';
+
+  @override
+  String get surveySubmit => 'Submit';
+
+  @override
+  String get surveyThankYou => 'Thank you for your feedback!';
+
+  @override
+  String get genericError => 'An error occurred.';
 }

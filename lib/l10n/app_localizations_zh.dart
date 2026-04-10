@@ -347,7 +347,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String alreadyListenedRecently(Object count) {
-    return 'You\'ve already listened to $count stall(s) recently, please try again in 2 minutes.';
+    return '您最近已经听了 $count 个摊位，请在 2 分钟后重试。';
   }
 
   @override
@@ -401,4 +401,40 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get exitAppConfirm => '您确定要退出吗？';
+
+  @override
+  String get historyTitle => '收听历史';
+
+  @override
+  String get noHistoryMessage => '您还没有收听历史。';
+
+  @override
+  String get listenedAtLabel => '收听时间';
+
+  @override
+  String get unknownStall => '未知摊位';
+
+  @override
+  String get loadHistoryError => '加载收听历史时出错';
+
+  @override
+  String get surveyTitle => '调查';
+
+  @override
+  String get surveyQuestion => '您的收听体验如何？';
+
+  @override
+  String get surveyRatingLabel => '评分';
+
+  @override
+  String get surveyCommentLabel => '评论';
+
+  @override
+  String get surveySubmit => '提交';
+
+  @override
+  String get surveyThankYou => '感谢您的反馈！';
+
+  @override
+  String get genericError => '发生了错误。';
 }

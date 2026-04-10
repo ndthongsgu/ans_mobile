@@ -347,7 +347,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String alreadyListenedRecently(Object count) {
-    return 'You\'ve already listened to $count stall(s) recently, please try again in 2 minutes.';
+    return '最近すでに $count 軒の屋台を聴きました。2分後に再試行してください。';
   }
 
   @override
@@ -401,4 +401,40 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get exitAppConfirm => '本当に終了してもよろしいですか？';
+
+  @override
+  String get historyTitle => '聴取履歴';
+
+  @override
+  String get noHistoryMessage => '聴取履歴がありません。';
+
+  @override
+  String get listenedAtLabel => '聴取時間';
+
+  @override
+  String get unknownStall => '不明な屋台';
+
+  @override
+  String get loadHistoryError => '聴取履歴の読み込みエラー';
+
+  @override
+  String get surveyTitle => 'アンケート';
+
+  @override
+  String get surveyQuestion => '聴取体験はいかがでしたか？';
+
+  @override
+  String get surveyRatingLabel => '評価';
+
+  @override
+  String get surveyCommentLabel => 'コメント';
+
+  @override
+  String get surveySubmit => '送信';
+
+  @override
+  String get surveyThankYou => 'フィードバックありがとうございます！';
+
+  @override
+  String get genericError => 'エラーが発生しました。';
 }

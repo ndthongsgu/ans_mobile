@@ -10,6 +10,7 @@ class ListeningHistoryService {
     required int size,
     int? fromTimestamp,
     int? toTimestamp,
+    String? languageCode,
   }) async {
     final access = AuthService.instance.accessToken;
     if (access == null) {
@@ -22,6 +23,7 @@ class ListeningHistoryService {
       size: size,
       fromTimestamp: fromTimestamp,
       toTimestamp: toTimestamp,
+      languageCode: languageCode,
     );
   }
 

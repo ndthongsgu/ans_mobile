@@ -157,5 +157,18 @@
   "cancelButton": "取消",
   "exitButton": "退出",
   "exitAppTitle": "退出应用",
-  "exitAppConfirm": "您确定要退出吗？"
+  "exitAppConfirm": "您确定要退出吗？",
+  "historyTitle": "收听历史",
+  "noHistoryMessage": "您还没有收听历史。",
+  "listenedAtLabel": "收听时间",
+  "unknownStall": "未知摊位",
+  "loadHistoryError": "加载收听历史时出错",
+  "alreadyListenedRecently": "您最近已经听了 {count} 个摊位，请在 2 分钟后重试。",
+  "surveyTitle": "调查",
+  "surveyQuestion": "您的收听体验如何？",
+  "surveyRatingLabel": "评分",
+  "surveyCommentLabel": "评论",
+  "surveySubmit": "提交",
+  "surveyThankYou": "感谢您的反馈！",
+  "genericError": "发生了错误。"
 }     

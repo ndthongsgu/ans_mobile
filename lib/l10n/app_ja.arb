@@ -152,5 +152,18 @@
   "cancelButton": "キャンセル",
   "exitButton": "終了",
   "exitAppTitle": "アプリを終了",
-  "exitAppConfirm": "本当に終了してもよろしいですか？"
+  "exitAppConfirm": "本当に終了してもよろしいですか？",
+  "historyTitle": "聴取履歴",
+  "noHistoryMessage": "聴取履歴がありません。",
+  "listenedAtLabel": "聴取時間",
+  "unknownStall": "不明な屋台",
+  "loadHistoryError": "聴取履歴の読み込みエラー",
+  "alreadyListenedRecently": "最近すでに {count} 軒の屋台を聴きました。2分後に再試行してください。",
+  "surveyTitle": "アンケート",
+  "surveyQuestion": "聴取体験はいかがでしたか？",
+  "surveyRatingLabel": "評価",
+  "surveyCommentLabel": "コメント",
+  "surveySubmit": "送信",
+  "surveyThankYou": "フィードバックありがとうございます！",
+  "genericError": "エラーが発生しました。"
 }

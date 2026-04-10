@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ans_mobile/l10n/app_localizations.dart';
 import 'package:ans_mobile/presentation/widgets/app_toast.dart';
 import '../widgets/app_bottom_nav.dart';
 import '../../core/services/listening_history_service.dart';
@@ -19,10 +20,20 @@ class _HistoryPageState extends State<HistoryPage> {
   int _size = 20;
   int _total = 0;
 
+  bool _hasLoadedHistory = false;
+
   @override
   void initState() {
     super.initState();
-    _loadHistory();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_hasLoadedHistory) {
+      _hasLoadedHistory = true;
+      _loadHistory();
+    }
   }
 
   Future<void> _loadHistory() async {
@@ -33,9 +44,11 @@ class _HistoryPageState extends State<HistoryPage> {
     });
 
     try {
+      final languageCode = Localizations.localeOf(context).languageCode;
       final result = await ListeningHistoryService.instance.fetchHistory(
         page: _page,
         size: _size,
+        languageCode: languageCode,
       );
       final data = result['data'] as Map<String, dynamic>?;
       if (data != null) {
@@ -54,7 +67,7 @@ class _HistoryPageState extends State<HistoryPage> {
         _error = true;
         _errorMessage = e.toString();
       });
-      AppToast.showError(context, _errorMessage ?? 'Lỗi khi tải lịch sử nghe');
+      AppToast.showError(context, AppLocalizations.of(context)!.loadHistoryError);
     } finally {
       if (mounted) {
         setState(() {
@@ -66,6 +79,7 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
@@ -73,29 +87,29 @@ class _HistoryPageState extends State<HistoryPage> {
         showDialog(
           context: context,
           builder: (_) => AlertDialog(
-            title: const Text('Thoát ứng dụng?'),
-            content: const Text('Bạn có chắc muốn thoát không?'),
+            title: Text(l10n.exitAppTitle),
+            content: Text(l10n.exitAppConfirm),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
-                child: const Text('Hủy'),
+                child: Text(l10n.cancelButton),
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(true),
-                child: const Text('Thoát'),
+                child: Text(l10n.exitButton),
               ),
             ],
           ),
         );
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('Lịch sử nghe'), automaticallyImplyLeading: false),
+        appBar: AppBar(title: Text(l10n.historyTitle), automaticallyImplyLeading: false),
         body: _loading
             ? const Center(child: CircularProgressIndicator())
             : _error
-                ? Center(child: Text(_errorMessage ?? 'Đã có lỗi xảy ra.'))
+                ? Center(child: Text(_errorMessage ?? l10n.genericError))
                 : _history.isEmpty
-                    ? const Center(child: Text('Bạn chưa có lịch sử nghe.'))
+                    ? Center(child: Text(l10n.noHistoryMessage))
                     : ListView.separated(
                         padding: const EdgeInsets.all(12),
                         itemCount: _history.length,
@@ -104,11 +118,11 @@ class _HistoryPageState extends State<HistoryPage> {
                           final item = _history[index];
                           final listenedAt = item['listened_at'];
                           final duration = item['listen_duration'];
-                          final stallName = item['stall_name'] ?? 'Unknown stall';
+                          final stallName = item['stall_name'] ?? l10n.unknownStall;
                           return ListTile(
                             leading: const CircleAvatar(child: Icon(Icons.music_note)),
                             title: Text(stallName),
-                            subtitle: Text('Nghe lúc ${DateTime.fromMillisecondsSinceEpoch((listenedAt ?? 0) * 1000)}'),
+                            subtitle: Text('${l10n.listenedAtLabel} ${DateTime.fromMillisecondsSinceEpoch((listenedAt ?? 0) * 1000)}'),
                             trailing: Text(duration != null ? '${duration}s' : '-'),
                           );
                         },

@@ -170,5 +170,6 @@
   "surveyCommentLabel": "댓글",
   "surveySubmit": "제출",
   "surveyThankYou": "피드백 감사합니다!",
-  "genericError": "오류가 발생했습니다."
+  "genericError": "오류가 발생했습니다.",
+  "selectPoiTitle": "가게 선택"
 }     

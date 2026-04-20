@@ -30,6 +30,9 @@ void main() async {
   await LocaleProvider.instance.init();
   // Init local auth service (loads persisted user if any)
   await AuthService.instance.init();
+  // Connect to online status tracking as soon as app opens
+  // This counts as "app access" - happens before login
+  await AuthService.instance.connectToAppOnlineStatus();
   runApp(const MyApp());
 }
 
@@ -40,20 +43,59 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
     LocaleProvider.instance.addListener(_onLocaleChanged);
+    // Add observer for app lifecycle
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
     LocaleProvider.instance.removeListener(_onLocaleChanged);
+    // Remove observer
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   void _onLocaleChanged() => setState(() {});
+  
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final authService = AuthService.instance;
+    
+    switch (state) {
+      case AppLifecycleState.resumed:
+        // App is in foreground - ensure WebSocket is connected
+        print('✓ App resumed - ensuring online status is active');
+        if (authService.onlineStatusService?.isConnected == false) {
+          authService.connectToAppOnlineStatus();
+        }
+        break;
+      
+      case AppLifecycleState.paused:
+        // App is paused/backgrounded - keep WebSocket connection active
+        print('⏸ App paused - keeping online status active');
+        break;
+      
+      case AppLifecycleState.detached:
+        // App is about to be terminated - disconnect gracefully
+        print('✗ App detached');
+        break;
+      
+      case AppLifecycleState.hidden:
+        // App is hidden
+        print('🔽 App hidden');
+        break;
+      
+      case AppLifecycleState.inactive:
+        // App is inactive
+        print('⚠ App inactive');
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

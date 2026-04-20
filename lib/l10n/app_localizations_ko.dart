@@ -437,4 +437,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get genericError => '오류가 발생했습니다.';
+
+  @override
+  String get selectPoiTitle => '가게 선택';
 }

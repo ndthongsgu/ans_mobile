@@ -437,4 +437,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get genericError => 'An error occurred.';
+
+  @override
+  String get selectPoiTitle => 'Select a stall';
 }

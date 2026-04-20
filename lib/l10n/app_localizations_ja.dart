@@ -436,5 +436,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get surveyThankYou => 'フィードバックありがとうございます！';
 
   @override
-  String get genericError => 'エラーが発生しました。';
+  String get genericError => 'エラーが発生しました.';
+
+  @override
+  String get selectPoiTitle => '屋台を選択';
 }

@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ans_mobile/data/remote/api_client.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:ans_mobile/core/services/online_status_service.dart';
 
 class UserProfile {
   final String id;
@@ -35,6 +36,8 @@ class AuthService extends ChangeNotifier {
   static const _kUserKey = 'auth_user';
   static const _kAccessTokenKey = 'auth_access_token';
   static const _kRefreshTokenKey = 'auth_refresh_token';
+  static const _kDeviceIdKey = 'auth_device_id';
+  static const _kApiBaseUrl = 'https://unsuccinctly-unadhering-zenaida.ngrok-free.dev';
 
   UserProfile? _user;
   UserProfile? get user => _user;
@@ -42,9 +45,22 @@ class AuthService extends ChangeNotifier {
   bool get isLoggedIn => _user != null;
 
   late SharedPreferences _prefs;
+  late String _deviceId;
+  OnlineStatusService? _onlineStatusService;
+  
+  OnlineStatusService? get onlineStatusService => _onlineStatusService;
+  bool get isOnlineConnected => _onlineStatusService?.isConnected ?? false;
+  int get onlineCount => _onlineStatusService?.onlineCount ?? 0;
 
   Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
+    
+    // Get or create device ID
+    _deviceId = _prefs.getString(_kDeviceIdKey) ?? '';
+    if (_deviceId.isEmpty) {
+      await _initDeviceId();
+    }
+    
     final s = _prefs.getString(_kUserKey);
     if (s != null) {
       try {
@@ -64,6 +80,10 @@ class AuthService extends ChangeNotifier {
         _me = me;
         _user = _profileFromMe(me);
         await _saveUserToPrefs();
+        // Connect to online status WebSocket if we have a device ID
+        if (_deviceId.isNotEmpty) {
+          _connectToOnlineStatus(userId: int.tryParse(me['id']?.toString() ?? ''));
+        }
       } catch (e) {
         // Try refresh if available
         if (refresh != null) {
@@ -79,6 +99,10 @@ class AuthService extends ChangeNotifier {
             _me = me2;
             _user = _profileFromMe(me2);
             await _saveUserToPrefs();
+            // Connect to online status WebSocket
+            if (_deviceId.isNotEmpty) {
+              _connectToOnlineStatus(userId: int.tryParse(me2['id']?.toString() ?? ''));
+            }
           } catch (_) {
             // ignore
           }
@@ -87,6 +111,88 @@ class AuthService extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+  
+  /// Initialize device ID on first run
+  Future<void> _initDeviceId() async {
+    try {
+      final deviceInfoPlugin = DeviceInfoPlugin();
+      String deviceId;
+
+      if (Platform.isAndroid) {
+        final androidInfo = await deviceInfoPlugin.androidInfo;
+        deviceId = androidInfo.id;
+      } else if (Platform.isIOS) {
+        final iosInfo = await deviceInfoPlugin.iosInfo;
+        deviceId = iosInfo.identifierForVendor ?? iosInfo.name;
+      } else {
+        deviceId = 'unknown_device';
+      }
+
+      _deviceId = deviceId;
+      await _prefs.setString(_kDeviceIdKey, deviceId);
+    } catch (e) {
+      print('Error initializing device ID: $e');
+      _deviceId = 'unknown_device';
+    }
+  }
+  
+  /// Public method: Connect to online status WebSocket when app opens
+  /// This counts as "app access" - called when app launches, before login
+  Future<void> connectToAppOnlineStatus() async {
+    if (_deviceId.isEmpty) return;
+    
+    // If already connected, skip
+    if (_onlineStatusService?.isConnected ?? false) return;
+    
+    try {
+      print('📱 Connecting to online status (app access)');
+      _onlineStatusService = OnlineStatusService(
+        baseUrl: _kApiBaseUrl,
+        deviceId: _deviceId,
+      );
+      _onlineStatusService!.addListener(() {
+        notifyListeners();
+      });
+      // Connect without user_id initially - counts as app access
+      await _onlineStatusService!.connect(userId: isLoggedIn ? int.tryParse(user?.id ?? '') : null);
+      print('✓ Connected to online status');
+      notifyListeners();
+    } catch (e) {
+      print('Error connecting to online status: $e');
+    }
+  }
+  
+  /// Private method: Connect to online status WebSocket (used during login)
+  void _connectToOnlineStatus({int? userId}) {
+    if (_deviceId.isEmpty) return;
+    
+    try {
+      // If not already connected, create new service
+      if (_onlineStatusService == null) {
+        _onlineStatusService = OnlineStatusService(
+          baseUrl: _kApiBaseUrl,
+          deviceId: _deviceId,
+        );
+        _onlineStatusService!.addListener(() {
+          notifyListeners();
+        });
+      }
+      
+      // Update user_id if logging in
+      _onlineStatusService!.connect(userId: userId);
+    } catch (e) {
+      print('Error connecting to online status: $e');
+    }
+  }
+  
+  /// Disconnect from online status WebSocket
+  Future<void> _disconnectFromOnlineStatus() async {
+    if (_onlineStatusService != null) {
+      _onlineStatusService!.removeListener(() {});
+      await _onlineStatusService!.disconnect();
+      _onlineStatusService = null;
+    }
   }
 
   /// Register via remote API. On success stores tokens and user profile.
@@ -127,6 +233,10 @@ class AuthService extends ChangeNotifier {
       _me = me;
       _user = _profileFromMe(me);
       await _saveUserToPrefs();
+      // Connect to online status
+      if (_deviceId.isNotEmpty) {
+        _connectToOnlineStatus(userId: int.tryParse(me['id']?.toString() ?? ''));
+      }
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -236,6 +346,10 @@ class AuthService extends ChangeNotifier {
       _me = me;
       _user = _profileFromMe(me);
       await _saveUserToPrefs();
+      // Connect to online status
+      if (_deviceId.isNotEmpty) {
+        _connectToOnlineStatus(userId: int.tryParse(me['id']?.toString() ?? ''));
+      }
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -316,6 +430,10 @@ class AuthService extends ChangeNotifier {
       _me = me;
       _user = _profileFromMe(me);
       await _saveUserToPrefs();
+      // Connect to online status
+      if (_deviceId.isNotEmpty) {
+        _connectToOnlineStatus(userId: int.tryParse(me['id']?.toString() ?? ''));
+      }
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -349,6 +467,16 @@ class AuthService extends ChangeNotifier {
       _me = me;
       _user = _profileFromMe(me);
       await _saveUserToPrefs();
+      
+      // Store device ID
+      _deviceId = deviceId;
+      await _prefs.setString(_kDeviceIdKey, deviceId);
+      
+      // Connect to online status
+      if (_deviceId.isNotEmpty) {
+        _connectToOnlineStatus(userId: int.tryParse(me['id']?.toString() ?? ''));
+      }
+      
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -356,6 +484,9 @@ class AuthService extends ChangeNotifier {
   }
 
   Future<void> signOut() async {
+    // Disconnect from online status before signing out
+    await _disconnectFromOnlineStatus();
+    
     _user = null;
     await _prefs.remove(_kUserKey);
     await _prefs.remove(_kAccessTokenKey);

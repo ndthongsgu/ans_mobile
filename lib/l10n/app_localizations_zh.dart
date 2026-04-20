@@ -437,4 +437,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get genericError => '发生了错误。';
+
+  @override
+  String get selectPoiTitle => '选择摊位';
 }

@@ -40,6 +40,10 @@ class _MapPageState extends State<MapPage> {
   List<Poi> _audioQueue = [];
   Timer? _audioQueueTimer;
   int _currentAudioIndex = 0;
+  
+  // Threshold for "equal distance" detection (in meters)
+  // Only show POI selection dialog if distances are within this threshold
+  static const double EQUAL_DISTANCE_THRESHOLD = 50.0;
 
   @override
   void initState() {
@@ -217,15 +221,38 @@ class _MapPageState extends State<MapPage> {
       _audioQueue = [];
     });
 
+    // Collect POIs within radius
+    List<Poi> poisInRange = [];
+    Map<Poi, double> poiDistances = {};
+    
     for (final poi in _nearbyPois) {
       if (poi.radius != null && poi.radius! > 0) {
         final poiCenter = ll.LatLng(poi.latitude, poi.longitude);
         final distance = const ll.Haversine().distance(point, poiCenter);
         if (distance <= poi.radius!) {
-          _audioQueue.add(poi);
+          poisInRange.add(poi);
+          poiDistances[poi] = distance;
         }
       }
     }
+
+    // If multiple POIs at equal distance, show selection dialog
+    if (poisInRange.length > 1) {
+      final distances = poiDistances.values.toList();
+      distances.sort();
+      
+      final minDist = distances.first;
+      final maxDist = distances.last;
+      
+      // Check if distances are equal (within threshold)
+      if ((maxDist - minDist) <= EQUAL_DISTANCE_THRESHOLD) {
+        await _showPoiSelectionDialog(poisInRange, poiDistances, point);
+        return;
+      }
+    }
+
+    // Original logic: filter and sort by distance
+    _audioQueue = poisInRange;
 
     final userLang = LocaleProvider.instance.locale?.languageCode ?? 'vi';
     final initialQueueCount = _audioQueue.length;
@@ -271,6 +298,97 @@ class _MapPageState extends State<MapPage> {
         context,
         AppLocalizations.of(context)!.pointNotInPoiZone,
       );
+    }
+
+    setState(() {});
+  }
+  
+  /// Show dialog for user to select which POI to listen to when distances are equal
+  Future<void> _showPoiSelectionDialog(
+    List<Poi> pois,
+    Map<Poi, double> distances,
+    ll.LatLng point,
+  ) async {
+    if (!mounted) return;
+
+    final selected = await showDialog<Poi>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.selectPoiTitle ?? 'Chọn quán'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: pois.map((poi) {
+              final distance = distances[poi] ?? 0;
+              final distanceText = distance < 1000
+                  ? '~${distance.toStringAsFixed(0)} m'
+                  : '~${(distance / 1000).toStringAsFixed(1)} km';
+              
+              return ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: CircleAvatar(
+                  backgroundColor: Colors.grey[300],
+                  backgroundImage:
+                      poi.coverImage != null && poi.coverImage!.isNotEmpty
+                          ? NetworkImage(poi.coverImage!)
+                          : null,
+                  child: poi.coverImage == null || poi.coverImage!.isEmpty
+                      ? Icon(Icons.store, color: Colors.grey[600])
+                      : null,
+                ),
+                title: Text(
+                  poi.name,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                subtitle: Row(
+                  children: [
+                    Icon(Icons.location_on, size: 12, color: Colors.grey),
+                    const SizedBox(width: 4),
+                    Text(distanceText),
+                  ],
+                ),
+                onTap: () => Navigator.pop(dialogContext, poi),
+              );
+            }).toList(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(AppLocalizations.of(context)!.cancelButton),
+          ),
+        ],
+      ),
+    );
+
+    if (selected != null) {
+      // User selected a POI, set it as the queue
+      _audioQueue = [selected];
+
+      final userLang = LocaleProvider.instance.locale?.languageCode ?? 'vi';
+      final skip = await _shouldSkipPoi(selected, userLang);
+
+      if (skip) {
+        AppToast.showInfo(
+          context,
+          AppLocalizations.of(context)!.alreadyListenedRecently('1'),
+        );
+      } else {
+        AppToast.showInfo(
+          context,
+          AppLocalizations.of(context)!.audioQueue(selected.name),
+        );
+
+        _audioQueueTimer = Timer(const Duration(seconds: 2), () {
+          _playAudioQueue();
+        });
+      }
+    } else {
+      // User cancelled - clear the tapped position
+      setState(() {
+        _tappedPos = null;
+      });
     }
 
     setState(() {});

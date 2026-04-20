@@ -437,4 +437,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get genericError => 'Đã có lỗi xảy ra.';
+
+  @override
+  String get selectPoiTitle => 'Chọn quán';
 }

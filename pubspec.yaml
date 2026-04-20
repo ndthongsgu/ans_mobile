@@ -55,6 +55,9 @@ dependencies:
 
   # QR Code scanner
   mobile_scanner: ^6.0.0
+  
+  # WebSocket for online status tracking
+  web_socket_channel: ^2.4.1
 
 dev_dependencies:
   flutter_test:

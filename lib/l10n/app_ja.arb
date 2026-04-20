@@ -165,5 +165,6 @@
   "surveyCommentLabel": "コメント",
   "surveySubmit": "送信",
   "surveyThankYou": "フィードバックありがとうございます！",
-  "genericError": "エラーが発生しました。"
+  "genericError": "エラーが発生しました.",
+  "selectPoiTitle": "屋台を選択"
 }

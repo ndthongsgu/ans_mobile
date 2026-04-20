@@ -928,6 +928,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An error occurred.'**
   String get genericError;
+
+  /// No description provided for @selectPoiTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a stall'**
+  String get selectPoiTitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

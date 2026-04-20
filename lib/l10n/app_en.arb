@@ -168,5 +168,6 @@
   "surveyCommentLabel": "Comment",
   "surveySubmit": "Submit",
   "surveyThankYou": "Thank you for your feedback!",
-  "genericError": "An error occurred."
+  "genericError": "An error occurred.",
+  "selectPoiTitle": "Select a stall"
 }    

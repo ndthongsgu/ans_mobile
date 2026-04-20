@@ -170,5 +170,6 @@
   "surveyCommentLabel": "评论",
   "surveySubmit": "提交",
   "surveyThankYou": "感谢您的反馈！",
-  "genericError": "发生了错误。"
+  "genericError": "发生了错误。",
+  "selectPoiTitle": "选择摊位"
 }     

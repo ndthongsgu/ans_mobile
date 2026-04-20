@@ -173,5 +173,6 @@
   "surveyCommentLabel": "Bình luận",
   "surveySubmit": "Gửi",
   "surveyThankYou": "Cảm ơn bạn đã góp ý!",
-  "genericError": "Đã có lỗi xảy ra."
+  "genericError": "Đã có lỗi xảy ra.",
+  "selectPoiTitle": "Chọn quán"
 }     

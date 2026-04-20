@@ -29,13 +29,19 @@
    flutter pub get
    ```
 
-3. Kiểm tra môi trường:
+3. Tạo file đa ngôn ngữ (i10n):
+
+   ```bash
+   flutter gen-l10n
+   ```
+
+4. Kiểm tra môi trường:
 
    ```bash
    flutter doctor -v
    ```
 
-4. (Nếu dùng Firebase/Google services) đặt `google-services.json` vào `android/app/` và `GoogleService-Info.plist` vào `ios/Runner/`.
+5. (Nếu dùng Firebase/Google services) đặt `google-services.json` vào `android/app/` và `GoogleService-Info.plist` vào `ios/Runner/`.
 
 ---
 
@@ -87,6 +93,17 @@
   ```bash
   flutter build ios --release
   ```
+
+---
+
+## 🌍 Cập nhật đa ngôn ngữ (i10n)
+Khi thêm hoặc chỉnh sửa chuỗi dịch trong file `.arb` (trong `lib/l10n/`), bạn cần tạo lại file localization:
+
+```bash
+flutter gen-l10n
+```
+
+Điều này sẽ tạo lại class `AppLocalizations` tự động từ các file `.arb`.
 
 ---
 
